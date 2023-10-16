@@ -9,12 +9,14 @@
     padding: 0;
 }
 
+
 html,
 body {
     /* min-height: 100%; */
     background-color: rgb(241, 241, 241);
     background-image: linear-g radient(to left, #2c021d 0%, #1f0442 100%);
     color: black;
+    font-size: 62,5%;
 }
 
 ul {

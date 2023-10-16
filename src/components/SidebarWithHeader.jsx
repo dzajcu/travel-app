@@ -35,21 +35,29 @@ import {
     FiBell,
     FiChevronDown,
     FiChevronUp,
+    FiUsers,
+    FiSearch,
+    FiCalendar,
 } from "react-icons/fi";
 import { divIcon } from "leaflet";
-
+import { MdOutlineTravelExplore } from "react-icons/md";
 const LinkItems = [
     { name: "Mapa", icon: FiMap },
+    { name: "Przeglądaj", icon: MdOutlineTravelExplore },
+    { name: "Planer", icon: FiCalendar },
     { name: "Statystyki", icon: FiTrendingUp },
-    { name: "Planer", icon: FiCompass },
+    { name: "Ulubione", icon: FiStar },
+    { name: "Grupy", icon: FiUsers },
     { name: "Ustawienia", icon: FiSettings },
 ];
 
-const SidebarContent = ({ onClose, ...rest }) => {
-    const [activeNavItem, setActiveNavItem] = useState(0);
-
+const SidebarContent = ({
+    onClose,
+    activeNavItem,
+    setActiveNavItem,
+    ...rest
+}) => {
     const handleNavItemClick = (index) => {
-        // Zmieniamy stan aktywnego elementu
         setActiveNavItem(index);
     };
 
@@ -77,19 +85,17 @@ const SidebarContent = ({ onClose, ...rest }) => {
                     onClick={onClose}
                 />
             </Flex>
-            <Divider my={3} />
-            <Box mt={10} pos={"relative"}>
+            {/* <Divider my={3} /> */}
+            <Box mt={10}>
                 {LinkItems.map((link, index) => (
-                    <>
-                        <NavItem
-                            key={link.name}
-                            icon={link.icon}
-                            isActive={activeNavItem === index}
-                            onClick={() => handleNavItemClick(index)}
-                        >
-                            {link.name}
-                        </NavItem>
-                    </>
+                    <NavItem
+                        key={link.name}
+                        icon={link.icon}
+                        isActive={activeNavItem === index}
+                        onClick={() => handleNavItemClick(index)}
+                    >
+                        {link.name}
+                    </NavItem>
                 ))}
             </Box>
 
@@ -115,10 +121,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
                                         spacing="1px"
                                         ml="2"
                                     >
-                                        <Text fontSize="sm">zajcu</Text>
-                                        <Text fontSize="xs" color="gray.600">
-                                            Admin
-                                        </Text>
+                                        <Text fontSize="md">zajcu</Text>
                                     </VStack>
                                     <Box display={{ base: "none", md: "flex" }}>
                                         <FiChevronUp />
@@ -151,14 +154,16 @@ const MobileNav = ({ onOpen, ...rest }) => {
     return (
         <Flex
             w={"100%"}
-            // pos={{ md: "absolute" }}
+            pos={{ md: "absolute" }}
             px={{ base: 4, md: 4 }}
-            height={{ base: 20, md: 0 }}
+            height={{ base: 20, md: 110 }}
             alignItems="center"
-            bg={{
-                base: useColorModeValue("white", "gray.900"),
-                md: useColorModeValue("white", "gray.900"),
-            }}
+            bg={
+                {
+                    // base: useColorModeValue("white", "gray.900"),
+                    // md: useColorModeValue("white", "gray.900"),
+                }
+            }
             boxShadow="md"
             justifyContent={{ base: "space-between", md: "flex-end" }}
             {...rest}
@@ -226,6 +231,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
 const SidebarWithHeader = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [activeNavItem, setActiveNavItem] = useState(0);
 
     return (
         <Box
@@ -235,6 +241,8 @@ const SidebarWithHeader = () => {
         >
             <SidebarContent
                 onClose={onClose}
+                activeNavItem={activeNavItem}
+                setActiveNavItem={setActiveNavItem}
                 display={{ base: "none", md: "block" }}
                 boxShadow="lg"
             />
@@ -247,13 +255,23 @@ const SidebarWithHeader = () => {
                 size="full"
             >
                 <DrawerContent>
-                    <SidebarContent onClose={onClose} />
+                    <SidebarContent
+                        onClose={onClose}
+                        activeNavItem={activeNavItem}
+                        setActiveNavItem={setActiveNavItem}
+                    />
                 </DrawerContent>
             </Drawer>
             <MobileNav onOpen={onOpen} />
 
             <Box display="flex" ml={{ base: 0, md: 200 }}>
-                <Box w="100%" flex="1" p="6">
+                <Box
+                    w="100%"
+                    flex="1"
+                    p="6"
+                    zIndex={10}
+                    display={{ base: "none", md: "block" }}
+                >
                     <Box
                         display="flex"
                         alignItems={"baseline"}
@@ -263,12 +281,19 @@ const SidebarWithHeader = () => {
                         <Text fontSize="xs" mr="5px">
                             Pages /
                         </Text>
-                        <Text fontSize="sm">Pages</Text>
+                        <Text fontSize="sm">
+                            {LinkItems[activeNavItem].name}
+                        </Text>
                     </Box>
-                    <Text mt="5px"fontSize="3xl">Pages</Text>
+                    <Text mt="5px" fontSize="3xl">
+                        {LinkItems[activeNavItem].name}
+                    </Text>
                 </Box>
-
-                <Box flex="1.5" p="4">
+                <Box
+                    display={activeNavItem === 0 ? "block" : "none"}
+                    flex="1.5"
+                    p="4"
+                >
                     <MainMap />
                 </Box>
             </Box>

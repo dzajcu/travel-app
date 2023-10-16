@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { Card } from "@chakra-ui/react";
 
 const MainMap = () => (
-    // <Card size={"lg"} p={3}>
+    <Card size={"lg"} p={2}>
         <MapContainer center={[51.505, 3.09]} zoom={4} scrollWheelZoom={true}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -15,7 +15,7 @@ const MainMap = () => (
                 </Popup>
             </Marker>
         </MapContainer>
-    /* </Card> */
+    </Card>
 );
 
 export default MainMap;

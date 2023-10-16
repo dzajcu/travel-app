@@ -1,14 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SidebarWithHeader from "./components/SidebarWithHeader";
-import Statistics from "./components/Statistics"
-import Planer from "./components/Planer" 
-import Settings from "./components/Settings"
-import {  extendBaseTheme, Button } from "@chakra-ui/react";
+import SignIn from "./auth/SignInScreen";
+import Register from "./auth/RegisterScreen";
+import Statistics from "./components/Statistics";
+import Planer from "./components/Planer";
+import Settings from "./components/Settings";
+// import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <SidebarWithHeader />,
+        element: <Register />,
     },
     {
         path: "/statistics",
@@ -22,11 +24,22 @@ const router = createBrowserRouter([
         path: "/settings",
         element: <Settings />,
     },
+    {
+        path: "/menu",
+        element: <SidebarWithHeader />,
+    },
+    {
+        path: "/sign-in",
+        element: <SignIn />,
+    },
+    {
+        path: "/register",
+        element: <Register />,
+    },
 ]);
 
-
 function App() {
-        return <RouterProvider router={router} />
+    return <RouterProvider router={router} />;
 }
 
 export default App;

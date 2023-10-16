@@ -2,10 +2,6 @@ import { Box, Flex, Icon } from "@chakra-ui/react";
 import { gridLayer } from "leaflet";
 import { useState } from "react";
 export const NavItem = ({ icon, children, isActive, onClick, ...rest }) => {
-    // const [isActive, setIsActive] = useState("false");
-    // const handleClick = () => {
-    //     setIsActive(!isActive);
-    // };
     return (
         <Box
             as="a"
@@ -13,7 +9,7 @@ export const NavItem = ({ icon, children, isActive, onClick, ...rest }) => {
             _focus={{ boxShadow: "none" }}
         >
             <Flex
-                pos={"relative"}
+                pos={"relative"} // relative dla pseudoelementu after
                 onClick={onClick}
                 align="center"
                 p="2"
@@ -41,9 +37,8 @@ export const NavItem = ({ icon, children, isActive, onClick, ...rest }) => {
                     color: "green.400",
                     transition: "0.2s ease-in-out", // Dodaj animację do właściwości height
                 }}
-                
-                /* Dodaj również styl, który wydłuża element od środka */
 
+                /* Dodaj również styl, który wydłuża element od środka */
             >
                 {icon && (
                     <Icon
