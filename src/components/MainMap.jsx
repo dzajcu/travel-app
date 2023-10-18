@@ -4,7 +4,7 @@ import { Card } from "@chakra-ui/react";
 
 const MainMap = () => (
     <Card size={"lg"} p={2}>
-        <MapContainer center={[51.505, 3.09]} zoom={4} scrollWheelZoom={true}>
+        <MapContainer center={[50.505, 7.09]} zoom={5} scrollWheelZoom={true}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

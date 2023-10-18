@@ -1,9 +1,17 @@
 import { Box, Flex, Icon } from "@chakra-ui/react";
-import { gridLayer } from "leaflet";
-import { useState } from "react";
-export const NavItem = ({ icon, children, isActive, onClick, ...rest }) => {
+import React from "react";
+import { NavLink } from "react-router-dom";
+export const NavItem = ({
+    icon,
+    children,
+    path,
+    isActive,
+    onClick,
+    ...rest
+}) => {
     return (
-        <Box
+        <NavLink
+            to={path}
             as="a"
             style={{ textDecoration: "none" }}
             _focus={{ boxShadow: "none" }}
@@ -30,26 +38,26 @@ export const NavItem = ({ icon, children, isActive, onClick, ...rest }) => {
                     content: '""',
                     w: isActive ? "3px" : "0px",
                     h: "100%",
-                    bg: "green.400",
+                    bg: "#808000",
                     position: "absolute",
                     top: "0",
                     right: "0",
-                    color: "green.400",
                     transition: "0.2s ease-in-out", // Dodaj animację do właściwości height
                 }}
 
                 /* Dodaj również styl, który wydłuża element od środka */
             >
-                {icon && (
-                    <Icon
-                        mr="4"
-                        fontSize="16"
-                        as={icon}
-                        color={isActive ? "green" : ""}
-                    />
-                )}
-                {children}
+                    {" "}
+                    {icon && (
+                        <Icon
+                            mr="4"
+                            fontSize="16"
+                            as={icon}
+                            color={isActive ? "#808000" : ""}
+                        />
+                    )}
+                    {children}
             </Flex>
-        </Box>
+        </NavLink>
     );
 };

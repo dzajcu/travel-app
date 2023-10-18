@@ -40,7 +40,7 @@ function RegisterScreen() {
         { bg: "whiteAlpha.300" }
     );
     const googleActive = useColorModeValue(
-        { bg: "green.300" },
+        { bg: "gray.300" },
         { bg: "whiteAlpha.200" }
     );
     const [show, setShow] = React.useState(false);
@@ -51,16 +51,16 @@ function RegisterScreen() {
         <AuthLayout illustrationBackground={illustration} image={illustration}>
             <Flex
                 maxW={{ base: "100%", md: "max-content" }}
+                flexDirection="column"
+                alignItems="start"
                 w="100%"
                 mx={{ base: "auto", lg: "0px" }}
                 me="auto"
-                // h="100vh"
-                alignItems="start"
-                // justifyContent="center"
-                // mb={{ base: "30px", md: "auto" }}
                 px={{ base: "25px", md: "0px" }}
+                // h="100%"
+                // justifyContent="center"
+                // mb={{ base: "30px", md: "60px" }}
                 // mt={{ base: "40px", md: "14vh" }}
-                flexDirection="column"
             >
                 <Box>
                     <Heading color={textColor} fontSize="36px" mb="10px">

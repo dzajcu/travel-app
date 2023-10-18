@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import MainMap from "./MainMap";
 import { NavItem } from "./NavItem";
+import { MainContent } from "./MainContent";
+import Statistics from "./Statistics";
+import Planer from "./Planer";
+import Settings from "./Planer";
+import { useRoutes } from "react-router-dom";
 import {
     IconButton,
     Image,
@@ -21,34 +25,26 @@ import {
     MenuDivider,
     MenuItem,
     MenuList,
-    Divider,
-    Card,
 } from "@chakra-ui/react";
 import {
-    FiHome,
     FiMap,
     FiTrendingUp,
-    FiCompass,
     FiStar,
     FiSettings,
     FiMenu,
-    FiBell,
-    FiChevronDown,
     FiChevronUp,
     FiUsers,
-    FiSearch,
     FiCalendar,
 } from "react-icons/fi";
-import { divIcon } from "leaflet";
 import { MdOutlineTravelExplore } from "react-icons/md";
 const LinkItems = [
-    { name: "Mapa", icon: FiMap },
-    { name: "Przeglądaj", icon: MdOutlineTravelExplore },
-    { name: "Planer", icon: FiCalendar },
-    { name: "Statystyki", icon: FiTrendingUp },
-    { name: "Ulubione", icon: FiStar },
-    { name: "Grupy", icon: FiUsers },
-    { name: "Ustawienia", icon: FiSettings },
+    { name: "Mapa", path: "/menu/map", icon: FiMap },
+    { name: "Przeglądaj", path: "/menu/explore", icon: MdOutlineTravelExplore },
+    { name: "Planer", path: "/menu/planer", icon: FiCalendar },
+    { name: "Statystyki", path: "/menu/statistics", icon: FiTrendingUp },
+    { name: "Ulubione", path: "/menu/favorites", icon: FiStar },
+    { name: "Grupy", path: "/menu/groups", icon: FiUsers },
+    { name: "Ustawienia", path: "/menu/settings", icon: FiSettings },
 ];
 
 const SidebarContent = ({
@@ -63,13 +59,15 @@ const SidebarContent = ({
 
     return (
         <Box
-            transition="3s ease"
+            transition="3s color ease"
             bg={useColorModeValue("gray.50", "gray.900")}
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
             w={{ base: "50%", md: 200 }}
             pos="fixed"
-            h="full"
+            h={{base: "full", md: "97%"}}
+            m={{ base: 0, md: 3 }}
             zIndex={10}
+            borderRadius={12}
             {...rest}
         >
             <Flex
@@ -89,6 +87,7 @@ const SidebarContent = ({
             <Box mt={10}>
                 {LinkItems.map((link, index) => (
                     <NavItem
+                        path={link.path}
                         key={link.name}
                         icon={link.icon}
                         isActive={activeNavItem === index}
@@ -232,13 +231,13 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const SidebarWithHeader = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [activeNavItem, setActiveNavItem] = useState(0);
-
+    const routes = useRoutes([
+        { path: "/menu/statistics", element: <Statistics /> },
+        { path: "/menu/planer", element: <Planer /> },
+        { path: "/menu/settings", element: <Settings /> },
+    ]);
     return (
-        <Box
-            minH="100vh"
-            bg={useColorModeValue("gray.100", "gray.900")}
-            boxShadow="lg"
-        >
+        <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
             <SidebarContent
                 onClose={onClose}
                 activeNavItem={activeNavItem}
@@ -266,10 +265,10 @@ const SidebarWithHeader = () => {
 
             <Box display="flex" ml={{ base: 0, md: 200 }}>
                 <Box
-                    w="100%"
+                    // w="max-content"
                     flex="1"
-                    p="6"
-                    zIndex={10}
+                    p={"4"}
+                    // zIndex={1}
                     display={{ base: "none", md: "block" }}
                 >
                     <Box
@@ -289,13 +288,7 @@ const SidebarWithHeader = () => {
                         {LinkItems[activeNavItem].name}
                     </Text>
                 </Box>
-                <Box
-                    display={activeNavItem === 0 ? "block" : "none"}
-                    flex="1.5"
-                    p="4"
-                >
-                    <MainMap />
-                </Box>
+                <MainContent activeNavItem={activeNavItem} />
             </Box>
         </Box>
     );

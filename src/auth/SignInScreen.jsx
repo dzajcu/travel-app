@@ -28,11 +28,11 @@ import { RiEyeCloseLine } from "react-icons/ri";
 
 function SignInScreen() {
     // Chakra color mode
-    const textColor = useColorModeValue("green.700", "white");
+    const textColor = useColorModeValue("#808000", "white");
     const textColorSecondary = "gray.400";
     const textColorDetails = useColorModeValue("green.700", "gray.600");
-    const textColorBrand = useColorModeValue("green.500", "white");
-    const brandStars = useColorModeValue("green.500", "green.400");
+    const textColorBrand = useColorModeValue("#808000", "white");
+    const brandStars = useColorModeValue("#808000", "green.400");
     const googleBg = useColorModeValue("gray.100", "white");
     const googleText = useColorModeValue("green.700", "white");
     const googleHover = useColorModeValue(
@@ -40,7 +40,7 @@ function SignInScreen() {
         { bg: "whiteAlpha.300" }
     );
     const googleActive = useColorModeValue(
-        { bg: "green.300" },
+        { bg: "gray.300" },
         { bg: "whiteAlpha.200" }
     );
     const [show, setShow] = React.useState(false);
@@ -49,16 +49,16 @@ function SignInScreen() {
         <DefaultAuth illustrationBackground={illustration} image={illustration}>
             <Flex
                 maxW={{ base: "100%", md: "max-content" }}
+                flexDirection="column"
+                alignItems="start"
                 w="100%"
                 mx={{ base: "auto", lg: "0px" }}
                 me="auto"
+                px={{ base: "25px", md: "0px" }}
                 // h="100%"
-                alignItems="start"
                 // justifyContent="center"
                 // mb={{ base: "30px", md: "60px" }}
-                px={{ base: "25px", md: "0px" }}
                 // mt={{ base: "40px", md: "14vh" }}
-                flexDirection="column"
             >
                 <Box>
                     <Heading color={textColor} fontSize="36px" mb="10px">
