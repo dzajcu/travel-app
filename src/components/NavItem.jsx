@@ -10,12 +10,7 @@ export const NavItem = ({
     ...rest
 }) => {
     return (
-        <NavLink
-            to={path}
-            as="a"
-            style={{ textDecoration: "none" }}
-            _focus={{ boxShadow: "none" }}
-        >
+        <NavLink to={path}>
             <Flex
                 pos={"relative"} // relative dla pseudoelementu after
                 onClick={onClick}
@@ -23,8 +18,6 @@ export const NavItem = ({
                 p="2"
                 pl="6"
                 w="100%"
-                // mx="5"
-                // borderRadius="lg"
                 role="group"
                 cursor="pointer"
                 transition="0.2s"
@@ -47,16 +40,15 @@ export const NavItem = ({
 
                 /* Dodaj również styl, który wydłuża element od środka */
             >
-                    {" "}
-                    {icon && (
-                        <Icon
-                            mr="4"
-                            fontSize="16"
-                            as={icon}
-                            color={isActive ? "#808000" : ""}
-                        />
-                    )}
-                    {children}
+                {icon && (
+                    <Icon
+                        mr="4"
+                        fontSize="20"
+                        as={icon}
+                        color={isActive ? "#808000" : ""}
+                    />
+                )}
+                {children}
             </Flex>
         </NavLink>
     );

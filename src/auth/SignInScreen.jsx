@@ -208,7 +208,7 @@ function SignInScreen() {
                                 </Text>
                             </NavLink>
                         </Flex>
-                        <NavLink to="/menu">
+                        <NavLink to="/menu/map">
                             <Button
                                 fontSize="sm"
                                 fontWeight="500"
@@ -237,7 +237,7 @@ function SignInScreen() {
                             fontSize="14px"
                         >
                             Nie masz konta?
-                            <NavLink to="/register">
+                            <NavLink to="/auth/register">
                                 <Text
                                     color={textColorBrand}
                                     as="span"

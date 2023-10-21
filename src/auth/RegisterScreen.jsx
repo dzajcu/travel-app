@@ -28,11 +28,11 @@ import { RiEyeCloseLine } from "react-icons/ri";
 
 function RegisterScreen() {
     // Chakra color mode
-    const textColor = useColorModeValue("green.700", "white");
+    const textColor = useColorModeValue("#808000", "white");
     const textColorSecondary = "gray.400";
-    const textColorDetails = useColorModeValue("green.700", "gray.600");
-    const textColorBrand = useColorModeValue("green.500", "white");
-    const brandStars = useColorModeValue("green.500", "green.400");
+    const textColorDetails = useColorModeValue("#808000", "gray.600");
+    const textColorBrand = useColorModeValue("#808000", "white");
+    const brandStars = useColorModeValue("#808000_", "green.400");
     const googleBg = useColorModeValue("gray.100", "white");
     const googleText = useColorModeValue("green.700", "white");
     const googleHover = useColorModeValue(
@@ -237,7 +237,7 @@ function RegisterScreen() {
                             </InputRightElement>
                         </InputGroup>
 
-                        <NavLink to="/menu">
+                        <NavLink to="/menu/map">
                             <Button
                                 fontSize="sm"
                                 fontWeight="500"
@@ -266,7 +266,7 @@ function RegisterScreen() {
                             fontSize="14px"
                         >
                             Masz już konto?
-                            <NavLink to="/sign-in">
+                            <NavLink to="/auth/sign-in">
                                 <Text
                                     color={textColorBrand}
                                     as="span"

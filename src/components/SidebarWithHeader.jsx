@@ -4,7 +4,7 @@ import { MainContent } from "./MainContent";
 import Statistics from "./Statistics";
 import Planer from "./Planer";
 import Settings from "./Planer";
-import { useRoutes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
     IconButton,
     Image,
@@ -64,7 +64,7 @@ const SidebarContent = ({
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
             w={{ base: "50%", md: 200 }}
             pos="fixed"
-            h={{base: "full", md: "97%"}}
+            h={{ base: "full", md: "97%" }}
             m={{ base: 0, md: 3 }}
             zIndex={10}
             borderRadius={12}
@@ -137,9 +137,11 @@ const SidebarContent = ({
                             >
                                 <MenuItem>Profil</MenuItem>
                                 <MenuDivider />
-                                <MenuItem color={"#F53B3B"}>
-                                    Wyloguj się
-                                </MenuItem>
+                                <NavLink to="/auth/sign-in">
+                                    <MenuItem color={"#F53B3B"}>
+                                        Wyloguj się
+                                    </MenuItem>
+                                </NavLink>
                             </MenuList>
                         </Menu>
                     </Flex>
@@ -231,11 +233,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const SidebarWithHeader = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [activeNavItem, setActiveNavItem] = useState(0);
-    const routes = useRoutes([
-        { path: "/menu/statistics", element: <Statistics /> },
-        { path: "/menu/planer", element: <Planer /> },
-        { path: "/menu/settings", element: <Settings /> },
-    ]);
+
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
             <SidebarContent
@@ -255,6 +253,7 @@ const SidebarWithHeader = () => {
             >
                 <DrawerContent>
                     <SidebarContent
+                        width="100%"
                         onClose={onClose}
                         activeNavItem={activeNavItem}
                         setActiveNavItem={setActiveNavItem}
@@ -264,17 +263,12 @@ const SidebarWithHeader = () => {
             <MobileNav onOpen={onOpen} />
 
             <Box display="flex" ml={{ base: 0, md: 200 }}>
-                <Box
-                    // w="max-content"
-                    flex="1"
-                    p={"4"}
-                    // zIndex={1}
-                    display={{ base: "none", md: "block" }}
-                >
+                <Box ml={4} p={"3"} display={{ base: "none", md: "block" }}>
                     <Box
                         display="flex"
                         alignItems={"baseline"}
                         color="gray.500"
+                        w="max-content"
                     >
                         {" "}
                         <Text fontSize="xs" mr="5px">

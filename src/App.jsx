@@ -51,18 +51,18 @@ const router = createBrowserRouter([
     {
         path: "/menu/*",
         element: <SidebarWithHeader />,
-        children: [
-            { path: "statistics", element: <Statistics /> },
-            { path: "planer", element: <Planer /> },
-            { path: "settings", element: <Settings /> },
-        ],
+        // children: [
+        //     { path: "statistics", element: <Statistics /> },
+        //     { path: "planer", element: <Planer /> },
+        //     { path: "settings", element: <Settings /> },
+        // ],
     },
     {
-        path: "/sign-in",
+        path: "/auth/sign-in",
         element: <SignInScreen />,
     },
     {
-        path: "/register",
+        path: "/auth/register",
         element: <Register />,
     },
 ]);

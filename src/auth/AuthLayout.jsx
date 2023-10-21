@@ -30,7 +30,7 @@ function AuthIllustration(props) {
                 direction="column"
             >
                 <NavLink
-                    to="/menu"
+                    to="/menu/map"
                     style={() => ({
                         width: "fit-content",
                         marginTop: "40px",
