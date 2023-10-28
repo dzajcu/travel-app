@@ -45,6 +45,15 @@ a {
 
 .leaflet-container {
     width: 100%;
-    height: 94vh;
-    border-radius: 12px;
+    height: 100vh;
+}
+
+
+.ant-picker-active-bar {
+    background-color: #808000 !important;
+}
+
+.ant-picker-range {
+    width: 100%;
+    height: 50px;
 }

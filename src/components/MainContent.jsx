@@ -6,7 +6,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 export const MainContent = () => {
     return (
-        <Box m="2" w="max-content">
+        <Box w="max-content">
             <Routes>
                 <Route path="/map" element={<MainMap />} />
                 <Route path="/statistics" element={<Statistics />} />

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { NavItem } from "./NavItem";
 import { MainContent } from "./MainContent";
-import Statistics from "./Statistics";
-import Planer from "./Planer";
-import Settings from "./Planer";
+import { SideForm } from "./SideForm";
 import { NavLink } from "react-router-dom";
 import {
     IconButton,
@@ -14,7 +12,6 @@ import {
     Flex,
     HStack,
     VStack,
-    Icon,
     useColorModeValue,
     Text,
     Drawer,
@@ -64,8 +61,8 @@ const SidebarContent = ({
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
             w={{ base: "50%", md: 200 }}
             pos="fixed"
-            h={{ base: "full", md: "97%" }}
-            m={{ base: 0, md: 3 }}
+            h={{ base: "full", md: "96%" }}
+            m={{ base: 0, md: 4 }}
             zIndex={10}
             borderRadius={12}
             {...rest}
@@ -242,6 +239,8 @@ const SidebarWithHeader = () => {
                 setActiveNavItem={setActiveNavItem}
                 display={{ base: "none", md: "block" }}
                 boxShadow="lg"
+                backgroundColor="#ffffff99"
+                backdropFilter="blur(20px)"
             />
             <Drawer
                 isOpen={isOpen}
@@ -270,7 +269,6 @@ const SidebarWithHeader = () => {
                         color="gray.500"
                         w="max-content"
                     >
-                        {" "}
                         <Text fontSize="xs" mr="5px">
                             Pages /
                         </Text>

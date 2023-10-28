@@ -186,16 +186,16 @@ function RegisterScreen() {
                                 display="flex"
                                 alignItems="center"
                                 mt="4px"
+                                onClick={handleClick}
+                                _hover={{ cursor: "pointer" }}
                             >
                                 <Icon
                                     color={textColorSecondary}
-                                    _hover={{ cursor: "pointer" }}
                                     as={
                                         show
                                             ? RiEyeCloseLine
                                             : MdOutlineRemoveRedEye
                                     }
-                                    onClick={handleClick}
                                 />
                             </InputRightElement>
                         </InputGroup>
@@ -223,16 +223,19 @@ function RegisterScreen() {
                                 display="flex"
                                 alignItems="center"
                                 mt="4px"
+                                // padding={"10px"}
+                                _hover={{ cursor: "pointer" }}
+                                onClick={handleClickValidated}
+                                color={textColorSecondary}
                             >
                                 <Icon
+                                    // padding={"6px"}
                                     color={textColorSecondary}
-                                    _hover={{ cursor: "pointer" }}
                                     as={
                                         showValidated
                                             ? RiEyeCloseLine
                                             : MdOutlineRemoveRedEye
                                     }
-                                    onClick={handleClickValidated}
                                 />
                             </InputRightElement>
                         </InputGroup>

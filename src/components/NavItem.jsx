@@ -1,6 +1,7 @@
 import { Box, Flex, Icon } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
+
 export const NavItem = ({
     icon,
     children,
@@ -24,7 +25,7 @@ export const NavItem = ({
                 _hover={{
                     bg: "gray.100",
                 }}
-                color={isActive ? "black" : "gray.400"}
+                color={isActive ? "black" : "gray.500"}
                 fontWeight={"500"}
                 {...rest}
                 _after={{

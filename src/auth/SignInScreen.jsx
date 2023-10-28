@@ -163,16 +163,16 @@ function SignInScreen() {
                                 display="flex"
                                 alignItems="center"
                                 mt="4px"
+                                _hover={{ cursor: "pointer" }}
+                                onClick={handleClick}
                             >
                                 <Icon
                                     color={textColorSecondary}
-                                    _hover={{ cursor: "pointer" }}
                                     as={
                                         show
                                             ? RiEyeCloseLine
                                             : MdOutlineRemoveRedEye
                                     }
-                                    onClick={handleClick}
                                 />
                             </InputRightElement>
                         </InputGroup>
