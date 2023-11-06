@@ -1,56 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Box,
     Button,
     FormControl,
-    FormLabel,
     Input,
     Flex,
     Heading,
     Text,
+    HStack,
+    CloseButton,
 } from "@chakra-ui/react";
 import { DropZone } from "./FileDropZone";
 import { DateRangePicker } from "./DatePicker";
 
-export const SideForm = ({ isFormOpen, setIsFormOpen }) => {
-    const [city, setCity] = useState("");
-    console.log("xxx");
-
-    const handleCityChange = (event) => {
-        setCity(event.target.value);
-    };
-
-    const handleSubmit = () => {
-        setIsFormOpen(!isFormOpen);
-    };
-
+export const SideForm = ({ isSideFormOpen, onSideFormClose, toggleForm }) => {
     return (
         <>
             <Flex
                 padding={{ base: "20px", md: "40px" }}
                 direction={"column"}
-                just
-                right={isFormOpen ? 0 : -600}
+                right={isSideFormOpen ? 0 : -600}
                 position="fixed"
                 top={"0%"}
                 height="100%"
                 width={{ base: "80%", md: "600px" }}
-                background="white"
-                transition="all 0.4s ease-in-out"
+                backgroundColor="#ffffff"
+                transition="all 0.5s cubic-bezier(0,1,.88,.99)"
                 zIndex={9999}
                 gap={6}
+                backdropFilter={"blur(5px)"}
             >
-                <Heading
-                    color="black"
-                    fontSize="32px"
-                    mb="10px"
-                    display={"flex"}
-                >
-                    Dodaj podróż
-                    <Text color={"#808000"} ml={1}>
-                        !
-                    </Text>
-                </Heading>
+                <HStack align={"center"} justify={"space-between"}>
+                    <Heading
+                        color="black"
+                        fontSize="32px"
+                        mb="10px"
+                        display={"flex"}
+                    >
+                        Dodaj podróż
+                        <Text color={"#808000"} ml={1}>
+                            !
+                        </Text>
+                    </Heading>
+                    <CloseButton onClick={onSideFormClose} />
+                </HStack>
                 <FormControl>
                     <Input
                         isRequired={true}
@@ -60,14 +53,14 @@ export const SideForm = ({ isFormOpen, setIsFormOpen }) => {
                         type="text"
                         placeholder="Wprowadź miejsce"
                         mb="24px"
-                        fontWeight="500"
+                        // fontWeight="500"
                         size="lg"
                     />
                 </FormControl>
                 <DateRangePicker />
                 <DropZone />
                 <Button
-                    onClick={handleSubmit}
+                    onClick={onSideFormClose}
                     fontSize="sm"
                     fontWeight="500"
                     w="100%"
@@ -83,17 +76,18 @@ export const SideForm = ({ isFormOpen, setIsFormOpen }) => {
             </Flex>
 
             <Box
-                onClick={() => setIsFormOpen(!isFormOpen)}
-                opacity={isFormOpen ? 1 : 0}
+                onClick={toggleForm}
+                opacity={isSideFormOpen ? 1 : 0}
                 transition={"0.3s ease-in-out"}
                 position="fixed"
-                top="0"
+                top={{ base: 20, md: 0 }}
                 left="0"
                 width="100%"
                 height="100%"
-                background="rgba(0, 0, 0, 0.5)" // Tło z półprzezroczystym cieniem
-                zIndex={isFormOpen ? 9998 : -1}
-            ></Box>
+                background="rgba(0, 0, 0, 0.3)"
+                zIndex={isSideFormOpen ? 9998 : -1}
+                backdropFilter="blur(5px)"
+            />
         </>
     );
 };

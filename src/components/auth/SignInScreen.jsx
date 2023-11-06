@@ -21,7 +21,7 @@ import {
 // Custom components
 import DefaultAuth from "./AuthLayout";
 // Assets
-import illustration from "../../public/auth-bg.jpg";
+import illustration from "../../../public/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
@@ -169,22 +169,16 @@ function SignInScreen() {
                                 <Icon
                                     color={textColorSecondary}
                                     as={
-                                        show
-                                            ? RiEyeCloseLine
-                                            : MdOutlineRemoveRedEye
+                                        show ? RiEyeCloseLine : MdOutlineRemoveRedEye
                                     }
                                 />
                             </InputRightElement>
                         </InputGroup>
-                        <Flex
-                            justifyContent="flex-end"
-                            align="center"
-                            mb="24px"
-                        >
+                        <Flex justifyContent="flex-end" align="center" mb="24px">
                             <FormControl display="flex" alignItems="center">
                                 <Checkbox
                                     id="remember-login"
-                                    colorScheme="green"
+                                    colorScheme="yellow"
                                     me="10px"
                                 />
                                 <FormLabel

@@ -21,7 +21,7 @@ import {
 // Custom components
 import AuthLayout from "./AuthLayout";
 // Assets
-import illustration from "../../public/auth-bg.jpg";
+import illustration from "../../../public/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";

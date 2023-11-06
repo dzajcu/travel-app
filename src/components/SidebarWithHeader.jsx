@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavItem } from "./NavItem";
-import { MainContent } from "./MainContent";
-import { SideForm } from "./SideForm";
+import { SideMenu } from "./SideMenu";
+import { MapTiler } from "./MapTiler";
 import { NavLink } from "react-router-dom";
 import {
     IconButton,
@@ -45,13 +45,18 @@ const LinkItems = [
 ];
 
 const SidebarContent = ({
-    onClose,
+    onMobileClose,
     activeNavItem,
     setActiveNavItem,
+    onSideMenuOpen,
+    isSideFormOpen,
+    onSideFormClose,
     ...rest
 }) => {
     const handleNavItemClick = (index) => {
         setActiveNavItem(index);
+        isSideFormOpen && onSideFormClose();
+        onSideMenuOpen();
     };
 
     return (
@@ -59,7 +64,7 @@ const SidebarContent = ({
             transition="3s color ease"
             bg={useColorModeValue("gray.50", "gray.900")}
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
-            w={{ base: "50%", md: 200 }}
+            w={{ base: "50%", md: 180 }}
             pos="fixed"
             h={{ base: "full", md: "96%" }}
             m={{ base: 0, md: 4 }}
@@ -77,10 +82,9 @@ const SidebarContent = ({
 
                 <CloseButton
                     display={{ base: "flex", md: "none" }}
-                    onClick={onClose}
+                    onClick={onMobileClose}
                 />
             </Flex>
-            {/* <Divider my={3} /> */}
             <Box mt={10}>
                 {LinkItems.map((link, index) => (
                     <NavItem
@@ -110,6 +114,8 @@ const SidebarContent = ({
                                         src={
                                             "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
                                         }
+                                        borderColor={"gray.200"}
+                                        borderWidth={1}
                                     />
                                     <VStack
                                         display={{ base: "none", md: "flex" }}
@@ -148,7 +154,7 @@ const SidebarContent = ({
     );
 };
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({ onMobileOpen, ...rest }) => {
     return (
         <Flex
             w={"100%"}
@@ -156,27 +162,16 @@ const MobileNav = ({ onOpen, ...rest }) => {
             px={{ base: 4, md: 4 }}
             height={{ base: 20, md: 110 }}
             alignItems="center"
-            bg={
-                {
-                    // base: useColorModeValue("white", "gray.900"),
-                    // md: useColorModeValue("white", "gray.900"),
-                }
-            }
-            boxShadow="md"
             justifyContent={{ base: "space-between", md: "flex-end" }}
             {...rest}
         >
             <IconButton
                 display={{ base: "flex", md: "none" }}
-                onClick={onOpen}
+                onClick={onMobileOpen}
                 aria-label="open menu"
                 icon={<FiMenu />}
             />
-            <Image
-                src="../../public/Logo.png"
-                w={"30%"}
-                display={{ md: "none" }}
-            />
+            <Image src="../../public/Logo.png" w={"30%"} display={{ md: "none" }} />
             <HStack spacing={{ base: "0", md: "6" }} display={{ md: "none" }}>
                 <Flex alignItems={"center"}>
                     <Menu>
@@ -211,13 +206,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
                         <MenuList
                             zIndex={9999}
                             bg={useColorModeValue("white", "gray.900")}
-                            borderColor={useColorModeValue(
-                                "gray.200",
-                                "gray.700"
-                            )}
+                            borderColor={useColorModeValue("gray.200", "gray.700")}
                         >
                             <MenuItem>Profil</MenuItem>
-                            <MenuDivider />
+                            <MenuDivider ml="10%" w={"80%"} />
                             <MenuItem color={"#F53B3B"}>Wyloguj się</MenuItem>
                         </MenuList>
                     </Menu>
@@ -228,60 +220,69 @@ const MobileNav = ({ onOpen, ...rest }) => {
 };
 
 const SidebarWithHeader = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        isOpen: isMobileOpen,
+        onOpen: onMobileOpen,
+        onClose: onMobileClose,
+    } = useDisclosure();
+
+    const {
+        isOpen: isSideMenuOpen,
+        onOpen: onSideMenuOpen,
+        onClose: onSideMenuClose,
+    } = useDisclosure();
+
+    const {
+        isOpen: isSideFormOpen,
+        onOpen: onSideFormOpen,
+        onClose: onSideFormClose,
+    } = useDisclosure();
+
     const [activeNavItem, setActiveNavItem] = useState(0);
 
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
             <SidebarContent
-                onClose={onClose}
+                onMobileClose={onMobileClose}
                 activeNavItem={activeNavItem}
                 setActiveNavItem={setActiveNavItem}
+                onSideMenuOpen={onSideMenuOpen}
+                isSideFormOpen={isSideFormOpen}
+                onSideFormClose={onSideFormClose}
                 display={{ base: "none", md: "block" }}
                 boxShadow="lg"
-                backgroundColor="#ffffff99"
+                backgroundColor="rgba(255, 255, 255, 0.7)"
                 backdropFilter="blur(20px)"
             />
             <Drawer
-                isOpen={isOpen}
+                isOpen={isMobileOpen}
                 placement="left"
-                onClose={onClose}
+                onMobileClose={onMobileClose}
                 returnFocusOnClose={false}
-                onOverlayClick={onClose}
+                onOverlayClick={onMobileClose}
                 size="full"
             >
                 <DrawerContent>
                     <SidebarContent
                         width="100%"
-                        onClose={onClose}
+                        onMobileClose={onMobileClose}
                         activeNavItem={activeNavItem}
                         setActiveNavItem={setActiveNavItem}
                     />
                 </DrawerContent>
             </Drawer>
-            <MobileNav onOpen={onOpen} />
-
-            <Box display="flex" ml={{ base: 0, md: 200 }}>
-                <Box ml={4} p={"3"} display={{ base: "none", md: "block" }}>
-                    <Box
-                        display="flex"
-                        alignItems={"baseline"}
-                        color="gray.500"
-                        w="max-content"
-                    >
-                        <Text fontSize="xs" mr="5px">
-                            Pages /
-                        </Text>
-                        <Text fontSize="sm">
-                            {LinkItems[activeNavItem].name}
-                        </Text>
-                    </Box>
-                    <Text mt="5px" fontSize="3xl">
-                        {LinkItems[activeNavItem].name}
-                    </Text>
-                </Box>
-                <MainContent activeNavItem={activeNavItem} />
-            </Box>
+            <MobileNav onMobileOpen={onMobileOpen} />
+            <MapTiler
+                onSideFormClose={onSideFormClose}
+                isSideFormOpen={isSideFormOpen}
+                onSideFormOpen={onSideFormOpen}
+            />
+            <SideMenu
+                isSideMenuOpen={isSideMenuOpen}
+                onSideMenuOpen={onSideMenuOpen}
+                onSideMenuClose={onSideMenuClose}
+                setActiveNavItem={setActiveNavItem}
+            />
         </Box>
     );
 };

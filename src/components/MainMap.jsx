@@ -43,12 +43,7 @@ export const MainMap = () => {
     }
 
     return (
-        <Box
-            pos="absolute"
-            w={"100%"}
-            right={0}
-            zIndex={1}
-        >
+        <Box pos="absolute" w={"100%"} right={0} zIndex={1}>
             <MapContainer
                 center={[50.505, 7.09]}
                 zoom={5}
@@ -66,8 +61,8 @@ export const MainMap = () => {
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     // url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=xWuUkuzOcmwmtiu8Pvoj"
-                    url="https://api.maptiler.com/maps/dataviz/{z}/{x}/{y}.png?key=7qa3ED9McsuZTcHZ23UI"
-                    // url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" //dark
+                    // url="https://api.maptiler.com/maps/dataviz/{z}/{x}/{y}.png?key=7qa3ED9McsuZTcHZ23UI"
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" //dark
 
                     // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />

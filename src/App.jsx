@@ -5,8 +5,8 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import SidebarWithHeader from "./components/SidebarWithHeader";
-import SignInScreen from "./auth/SignInScreen";
-import Register from "./auth/RegisterScreen";
+import SignInScreen from "./components/auth/SignInScreen";
+import Register from "./components/auth/RegisterScreen";
 import Statistics from "./components/Statistics";
 import Planer from "./components/Planer";
 import Settings from "./components/Settings";

@@ -26,7 +26,8 @@ export const NavItem = ({
                     bg: "gray.100",
                 }}
                 color={isActive ? "black" : "gray.500"}
-                fontWeight={"500"}
+                fontWeight={"400"}
+                fontSize={"md"}
                 {...rest}
                 _after={{
                     content: '""',
@@ -36,10 +37,9 @@ export const NavItem = ({
                     position: "absolute",
                     top: "0",
                     right: "0",
-                    transition: "0.2s ease-in-out", // Dodaj animację do właściwości height
+                    transition: "0.2s ease-in-out"
                 }}
 
-                /* Dodaj również styl, który wydłuża element od środka */
             >
                 {icon && (
                     <Icon
