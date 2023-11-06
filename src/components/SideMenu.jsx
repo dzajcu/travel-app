@@ -4,7 +4,6 @@ import { MainContent } from "./MainContent";
 import { useColorModeValue, CloseButton } from "@chakra-ui/react";
 
 export const SideMenu = ({ isSideMenuOpen, onSideMenuClose }) => {
-    const toggleMenu
     return (
         <>
             <Box
