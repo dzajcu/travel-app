@@ -18,7 +18,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
     maptilersdk.config.apiKey = "c0INjuLdY67UWNA3CrGB";
 
     useEffect(() => {
-        if (map.current) return; // stops map from intializing more than once
+        if (map.current) return;
 
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
@@ -27,6 +27,19 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
             zoom: zoom,
             pitch: pitch,
             logoPosition: "bottom-right",
+            scaleControl: true,
+        });
+
+        // Pobierz przyciski nawigacji z mapy
+        const navigationButtons = mapContainer.current.getElementsByClassName(
+            "maptiler-navigation-control-button"
+        );
+        console.log(navigationButtons);
+        // Dodaj obsługę zdarzeń do przycisków nawigacji
+        Array.from(navigationButtons).forEach((button) => {
+            button.addEventListener("click", (e) => {
+                e.stopPropagation(); // Zatrzymaj propagację zdarzenia
+            });
         });
     }, [center.lng, center.lat, zoom]);
 
