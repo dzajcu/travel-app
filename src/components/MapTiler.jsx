@@ -6,16 +6,23 @@ import { Box } from "@chakra-ui/react";
 import { SideForm } from "./SideForm";
 
 export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) => {
-    const toggleForm = () => {
-        isSideFormOpen ? onSideFormClose() : onSideFormOpen();
-    };
-
     const mapContainer = useRef(null);
     const map = useRef(null);
     const center = { lng: 0.09, lat: 35.505 };
     const [zoom] = useState(2);
     const [pitch] = useState(20);
     maptilersdk.config.apiKey = "c0INjuLdY67UWNA3CrGB";
+
+    const isChildOf = (child, parent) => {
+        let node = child;
+        while (node !== null) {
+            if (node === parent) {
+                return true;
+            }
+            node = node.parentNode;
+        }
+        return false;
+    };
 
     useEffect(() => {
         if (map.current) return;
@@ -30,26 +37,21 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
             scaleControl: true,
         });
 
-        // Pobierz przyciski nawigacji z mapy
-        const navigationButtons = mapContainer.current.getElementsByClassName(
-            "maptiler-navigation-control-button"
-        );
-        console.log(navigationButtons);
-        // Dodaj obsługę zdarzeń do przycisków nawigacji
-        Array.from(navigationButtons).forEach((button) => {
-            button.addEventListener("click", (e) => {
-                e.stopPropagation(); // Zatrzymaj propagację zdarzenia
-            });
+        mapContainer.current.addEventListener("click", (event) => {
+            const controls = map.current._controlContainer;
+
+            if (!isChildOf(event.target, controls)) {
+                onSideFormOpen();
+            }
         });
     }, [center.lng, center.lat, zoom]);
 
     return (
         <Box pos="absolute" zIndex="1">
-            <div ref={mapContainer} className="map" onClick={toggleForm} />
+            <div ref={mapContainer} className="map" />
             <SideForm
                 isSideFormOpen={isSideFormOpen}
                 onSideFormClose={onSideFormClose}
-                toggleForm={toggleForm}
             />
         </Box>
     );

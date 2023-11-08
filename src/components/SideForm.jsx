@@ -13,7 +13,7 @@ import {
 import { DropZone } from "./FileDropZone";
 import { DateRangePicker } from "./DatePicker";
 
-export const SideForm = ({ isSideFormOpen, onSideFormClose, toggleForm }) => {
+export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     return (
         <>
             <Flex
@@ -76,7 +76,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, toggleForm }) => {
             </Flex>
 
             <Box
-                onClick={toggleForm}
+                onClick={onSideFormClose}
                 opacity={isSideFormOpen ? 1 : 0}
                 transition={"0.3s ease-in-out"}
                 position="fixed"

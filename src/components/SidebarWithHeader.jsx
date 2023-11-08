@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavItem } from "./NavItem";
 import { SideMenu } from "./SideMenu";
 import { MapTiler } from "./MapTiler";
@@ -49,15 +49,19 @@ const SidebarContent = ({
     activeNavItem,
     setActiveNavItem,
     onSideMenuOpen,
+    onSideMenuClose,
     isSideFormOpen,
     onSideFormClose,
     ...rest
 }) => {
     const handleNavItemClick = (index) => {
-        setActiveNavItem(index);
         isSideFormOpen && onSideFormClose();
-        onSideMenuOpen();
+        setActiveNavItem(index);
     };
+
+    useEffect(() => {
+        activeNavItem === 0 ? onSideMenuClose() : onSideMenuOpen();
+    }, [activeNavItem, onSideMenuOpen]);
 
     return (
         <Box
@@ -247,6 +251,7 @@ const SidebarWithHeader = () => {
                 activeNavItem={activeNavItem}
                 setActiveNavItem={setActiveNavItem}
                 onSideMenuOpen={onSideMenuOpen}
+                onSideMenuClose={onSideMenuClose}
                 isSideFormOpen={isSideFormOpen}
                 onSideFormClose={onSideFormClose}
                 display={{ base: "none", md: "block" }}
