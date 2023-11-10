@@ -8,9 +8,9 @@ import { SideForm } from "./SideForm";
 export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const center = { lng: 0.09, lat: 35.505 };
-    const [zoom] = useState(2);
-    const [pitch] = useState(20);
+    const center = { lng: 0.09, lat: 15.505 };
+    const [zoom] = useState(1.85);
+    const [pitch] = useState(30);
     maptilersdk.config.apiKey = "c0INjuLdY67UWNA3CrGB";
 
     const isChildOf = (child, parent) => {
@@ -26,7 +26,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
 
     useEffect(() => {
         if (map.current) return;
-
+        console.log(zoom);
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
             style: maptilersdk.MapStyle.DATAVIZ,
@@ -35,14 +35,12 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
             pitch: pitch,
             logoPosition: "bottom-right",
             scaleControl: true,
+            maxPitch: 60,
         });
 
         mapContainer.current.addEventListener("click", (event) => {
             const controls = map.current._controlContainer;
-
-            if (!isChildOf(event.target, controls)) {
-                onSideFormOpen();
-            }
+            !isChildOf(event.target, controls) && onSideFormOpen();
         });
     }, [center.lng, center.lat, zoom]);
 

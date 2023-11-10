@@ -20,15 +20,15 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 // display={isSideMenuOpen ? { base: "none", md: "block" } : { base: "none", md: "none" }}
                 display={{ base: "none", md: "block" }}
                 m={{ base: 0, md: 4 }}
-                ml={{ base: 0, md: 175 }}
+                ml={{ base: 0, md: 157 }}
                 w={isSideMenuOpen ? "80%" : "0%"}
                 h={{ base: "full", md: "96%" }}
                 transition="0.5s cubic-bezier(0,1,.88,.99)"
                 bg={useColorModeValue("gray.50", "gray.900")}
-                backgroundColor="rgba(255, 255, 255, 0.8)"
-                backdropFilter="blur(20px)"
+                backgroundColor="rgba(255, 255, 255, 0.6)"
+                backdropFilter="blur(10px)"
                 zIndex={9}
-                borderRadius={12}
+                borderRadius={"3xl"}
                 boxShadow={"lg"}
             >
                 <MainContent />

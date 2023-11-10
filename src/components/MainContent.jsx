@@ -5,7 +5,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 export const MainContent = () => {
     return (
-        <Box w="max-content">
+        <Box w="max-content" ml={"60px"}>
             <Routes>
                 <Route path="/statistics" element={<Statistics />} />
             </Routes>
