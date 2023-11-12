@@ -11,7 +11,7 @@ import {
     Image,
 } from "@chakra-ui/react";
 
-export default function Statistics() {
+export default function Explore() {
     return (
         <Center py={6}>
             <Box

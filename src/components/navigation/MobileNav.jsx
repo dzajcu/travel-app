@@ -71,9 +71,9 @@ export const MobileNav = ({ onMobileOpen, ...rest }) => {
                             bg={useColorModeValue("white", "gray.900")}
                             borderColor={useColorModeValue("gray.200", "gray.700")}
                         >
-                            <MenuItem>Profil</MenuItem>
+                            <MenuItem>Profile</MenuItem>
                             <MenuDivider ml="10%" w={"80%"} />
-                            <MenuItem color={"#F53B3B"}>Wyloguj się</MenuItem>
+                            <MenuItem color={"#F53B3B"}>Log out</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>

@@ -58,7 +58,7 @@ function AuthIllustration(props) {
                             transition="transform 0.3s ease-in-out"
                         />
                         <Text ms="0px" fontSize="sm" color="gray.600">
-                            Powrót do strony głównej
+                            Back to Landing Page
                         </Text>
                     </Flex>
                 </NavLink>

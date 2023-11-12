@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SideMenu } from "./SideMenu";
-import { MapTiler } from "./MapTiler";
+import { MapTiler } from "../map/MapTiler";
 import { SidebarContent } from "./SidebarContent";
 import { MobileNav } from "./MobileNav";
 import {
@@ -11,7 +11,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 
-const SidebarWithHeader = () => {
+export default function SidebarOverlayWithMap() {
     const {
         isOpen: isMobileOpen,
         onOpen: onMobileOpen,
@@ -79,6 +79,4 @@ const SidebarWithHeader = () => {
             />
         </Box>
     );
-};
-
-export default SidebarWithHeader;
+}

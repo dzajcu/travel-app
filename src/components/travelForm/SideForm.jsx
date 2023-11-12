@@ -10,8 +10,8 @@ import {
     HStack,
     CloseButton,
 } from "@chakra-ui/react";
-import { DropZone } from "./FileDropZone";
-import { DateRangePicker } from "./DatePicker";
+import { DropZone } from "./components/FileDropZone";
+import { DateRangePicker } from "./components/DatePicker";
 
 export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     return (

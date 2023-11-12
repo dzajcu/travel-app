@@ -11,7 +11,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { Box, Button } from "@chakra-ui/react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { SideForm } from "./SideForm";
+import { SideForm } from "../SideForm";
 
 export const MainMap = () => {
     const [markers, setMarkers] = useState([]);

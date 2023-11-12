@@ -24,13 +24,13 @@ import DefaultAuth from "./AuthLayout";
 import illustration from "../../../public/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
+import { IoMdEyeOff } from "react-icons/io";
 
 function SignInScreen() {
     // Chakra color mode
     const textColor = useColorModeValue("#808000", "white");
     const textColorSecondary = "gray.400";
-    const textColorDetails = useColorModeValue("green.700", "gray.600");
+    const textColorDetails = useColorModeValue("gray.700", "gray.600");
     const textColorBrand = useColorModeValue("#808000", "white");
     const brandStars = useColorModeValue("#808000", "green.400");
     const googleBg = useColorModeValue("gray.100", "white");
@@ -62,7 +62,7 @@ function SignInScreen() {
             >
                 <Box>
                     <Heading color={textColor} fontSize="36px" mb="10px">
-                        Zaloguj się
+                        Sign In
                     </Heading>
                     <Text
                         mb="36px"
@@ -71,7 +71,7 @@ function SignInScreen() {
                         fontWeight="400"
                         fontSize="md"
                     >
-                        Wprowadź email i hasło żeby się zalogować!
+                        Enter your email and password to Sign in!
                     </Text>
                 </Box>
                 <Flex
@@ -80,7 +80,7 @@ function SignInScreen() {
                     w={{ base: "100%", md: "420px" }}
                     maxW="100%"
                     background="transparent"
-                    borderRadius="15px"
+                    borderRadius="2xl"
                     mx={{ base: "auto", lg: "unset" }}
                     me="auto"
                     mb={{ base: "20px", md: "auto" }}
@@ -91,7 +91,7 @@ function SignInScreen() {
                         mb="26px"
                         py="15px"
                         h="50px"
-                        borderRadius="16px"
+                        borderRadius="2xl"
                         bg={googleBg}
                         color={googleText}
                         fontWeight="500"
@@ -100,7 +100,7 @@ function SignInScreen() {
                         _focus={googleActive}
                     >
                         <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-                        Zaloguj się za pomocą Google
+                        Sign in with Google
                     </Button>
                     <Box position="relative" padding="6">
                         <Divider />
@@ -113,7 +113,7 @@ function SignInScreen() {
                             bg="white"
                             px="4"
                         >
-                            lub
+                            or
                         </AbsoluteCenter>
                     </Box>
                     {/* <Flex align="center" mb="25px"></Flex> */}
@@ -126,7 +126,7 @@ function SignInScreen() {
                             color={textColor}
                             mb="8px"
                         >
-                            Email<Text color={brandStars}>*</Text>
+                            Email or username<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <Input
                             isRequired={true}
@@ -138,6 +138,7 @@ function SignInScreen() {
                             mb="24px"
                             fontWeight="500"
                             size="lg"
+                            borderRadius="2xl"
                         />
                         <FormLabel
                             ms="4px"
@@ -146,7 +147,7 @@ function SignInScreen() {
                             color={textColor}
                             display="flex"
                         >
-                            Hasło<Text color={brandStars}>*</Text>
+                            Password<Text color={brandStars}>*</Text>
                         </FormLabel>
                         <InputGroup size="md">
                             <Input
@@ -158,6 +159,7 @@ function SignInScreen() {
                                 size="lg"
                                 type={show ? "text" : "password"}
                                 autoComplete="off"
+                                borderRadius="2xl"
                             />
                             <InputRightElement
                                 display="flex"
@@ -169,7 +171,7 @@ function SignInScreen() {
                                 <Icon
                                     color={textColorSecondary}
                                     as={
-                                        show ? RiEyeCloseLine : MdOutlineRemoveRedEye
+                                        show ? IoMdEyeOff : MdOutlineRemoveRedEye
                                     }
                                 />
                             </InputRightElement>
@@ -188,7 +190,7 @@ function SignInScreen() {
                                     color={textColor}
                                     fontSize="sm"
                                 >
-                                    Zapamiętaj mnie
+                                    Remember me
                                 </FormLabel>
                             </FormControl>
                             <NavLink to="/auth/forgot-password">
@@ -198,7 +200,7 @@ function SignInScreen() {
                                     w="124px"
                                     fontWeight="500"
                                 >
-                                    Zapomniałeś hasła?
+                                    Forgot password?
                                 </Text>
                             </NavLink>
                         </Flex>
@@ -209,12 +211,12 @@ function SignInScreen() {
                                 w="100%"
                                 h="50"
                                 mb="16px"
-                                borderRadius="16px"
+                                borderRadius="2xl"
                                 bgColor={textColorBrand}
                                 color="white"
                                 _hover={{ bg: "green.600" }}
                             >
-                                Zaloguj się
+                                Sign in
                             </Button>
                         </NavLink>
                     </FormControl>
@@ -230,7 +232,7 @@ function SignInScreen() {
                             fontWeight="400"
                             fontSize="14px"
                         >
-                            Nie masz konta?
+                            Not registered yet?
                             <NavLink to="/auth/register">
                                 <Text
                                     color={textColorBrand}
@@ -238,7 +240,7 @@ function SignInScreen() {
                                     ms="5px"
                                     fontWeight="500"
                                 >
-                                    Zarejestruj się
+                                    Create an account
                                 </Text>
                             </NavLink>
                         </Text>

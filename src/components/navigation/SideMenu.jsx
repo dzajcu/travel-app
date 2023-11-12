@@ -1,16 +1,16 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { MainContent } from "./MainContent";
+import { MainContent } from "../routes/NavRoutes";
 import { useColorModeValue, CloseButton } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSideMenuClose = () => {
         setActiveNavItem(0);
         onSideMenuClose();
-        navigate("/menu/map"); 
+        navigate("/menu/map");
     };
 
     return (

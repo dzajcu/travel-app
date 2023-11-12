@@ -3,7 +3,7 @@ import * as maptilersdk from "@maptiler/sdk";
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import "./map.css";
 import { Box } from "@chakra-ui/react";
-import { SideForm } from "./SideForm";
+import { SideForm } from "../travelForm/SideForm";
 
 export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) => {
     const mapContainer = useRef(null);

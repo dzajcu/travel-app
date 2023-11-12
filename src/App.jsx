@@ -1,16 +1,11 @@
 import {
     createBrowserRouter,
-    createRoutesFromElements,
-    Route,
     RouterProvider,
 } from "react-router-dom";
-import SidebarWithHeader from "./components/SidebarWithHeader";
+import SidebarOverlayWithMap from "./components/navigation/SidebarOverlayWithMap";
 import SignInScreen from "./components/auth/SignInScreen";
 import Register from "./components/auth/RegisterScreen";
-import Statistics from "./components/Statistics";
-import Planer from "./components/Planer";
-import Settings from "./components/Settings";
-import { MainContent } from "./components/MainContent";
+
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
 // const router = createBrowserRouter([
@@ -50,7 +45,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/menu/*",
-        element: <SidebarWithHeader />,
+        element: <SidebarOverlayWithMap />,
         // children: [
         //     { path: "statistics", element: <Statistics /> },
         //     { path: "planer", element: <Planer /> },

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { NavItem } from "./NavItem";
-
 import { NavLink } from "react-router-dom";
+import LinkItems from "../routes/LinkItems";
 import {
     Image,
     Avatar,
@@ -18,25 +18,7 @@ import {
     MenuItem,
     MenuList,
 } from "@chakra-ui/react";
-import {
-    FiMap,
-    FiTrendingUp,
-    FiStar,
-    FiSettings,
-    FiChevronUp,
-    FiUsers,
-    FiCalendar,
-} from "react-icons/fi";
-import { MdOutlineTravelExplore } from "react-icons/md";
-const LinkItems = [
-    { name: "Mapa", path: "/menu/map", icon: FiMap },
-    { name: "Przeglądaj", path: "/menu/explore", icon: MdOutlineTravelExplore },
-    { name: "Planer", path: "/menu/planer", icon: FiCalendar },
-    { name: "Statystyki", path: "/menu/statistics", icon: FiTrendingUp },
-    { name: "Ulubione", path: "/menu/favorites", icon: FiStar },
-    { name: "Grupy", path: "/menu/groups", icon: FiUsers },
-    { name: "Ustawienia", path: "/menu/settings", icon: FiSettings },
-];
+import { FiChevronUp } from "react-icons/fi";
 
 export const SidebarContent = ({
     onMobileClose,
@@ -59,7 +41,6 @@ export const SidebarContent = ({
 
     return (
         <Box
-            transition="3s color ease"
             bg={useColorModeValue("gray.50", "gray.900")}
             borderRightColor={useColorModeValue("gray.200", "gray.700")}
             w={{ base: "50%", md: 180 }}
@@ -136,12 +117,10 @@ export const SidebarContent = ({
                                     "gray.700"
                                 )}
                             >
-                                <MenuItem>Profil</MenuItem>
+                                <MenuItem>Profile</MenuItem>
                                 <MenuDivider />
                                 <NavLink to="/auth/sign-in">
-                                    <MenuItem color={"#F53B3B"}>
-                                        Wyloguj się
-                                    </MenuItem>
+                                    <MenuItem color={"#F53B3B"}>Log out</MenuItem>
                                 </NavLink>
                             </MenuList>
                         </Menu>
