@@ -37,7 +37,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                 backgroundColor="rgba(255, 255, 255, 0.7)"
                 // backdropFilter={"blur(5px)"}
             >
-                <Image
+                {/* <Image
                     left={{ base: "20%", md: "37%" }}
                     top={{ base: -8, md: -1 }}
                     position={"absolute"}
@@ -46,10 +46,10 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     src="../../public/dotted-line-plane.png"
                     alt="Dotted line with paper plane flying along it"
                     transform={{ base: "rotate(8deg)", md: "rotate(0deg)" }}
-                />
+                /> */}
                 <HStack align={"center"} justify={"space-between"} mt="10px">
                     <Heading color="black" fontSize="32px" display={"flex"}>
-                        Add Journey
+                        Add Trip
                         <Text color={"#808000"} ml={1}>
                             !
                         </Text>
@@ -67,6 +67,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                         bgColor={"white"}
                         borderRadius={"2xl"}
                         _placeholder={{ color: "gray.400" }}
+                        fontWeight={300}
                     />
                 </FormControl>
                 <DateRangePicker />
@@ -74,6 +75,8 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     maxHeight={"200px"}
                     placeholder="Enter a description..."
                     _placeholder={{ color: "gray.400" }}
+                    bgColor={"white"}
+                    paddingTop={"16px"}
                 />
                 <DropZone />
                 <Button

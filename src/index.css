@@ -56,6 +56,10 @@ a {
     }
 }
 
+.ant-picker {
+    font-family: "DM Sans", sans-serif;
+}
+
 .ant-picker-active-bar {
     background-color: #808000 !important;
 }
@@ -70,6 +74,6 @@ a {
     padding: 6px 6px;
 }
 
-.ant-picker-input>input::placeholder {
-    color: #A0AEC0 !important;
- }
+.ant-picker-input > input::placeholder {
+    color: #a0aec0 !important;
+}
