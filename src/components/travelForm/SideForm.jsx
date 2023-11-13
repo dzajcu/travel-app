@@ -9,6 +9,8 @@ import {
     Text,
     HStack,
     CloseButton,
+    Textarea,
+    Image,
 } from "@chakra-ui/react";
 import { DropZone } from "./components/FileDropZone";
 import { DateRangePicker } from "./components/DatePicker";
@@ -17,27 +19,37 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     return (
         <>
             <Flex
-                padding={{ base: "20px", md: "40px" }}
+                padding={{ base: "30px", md: 3 }}
+                paddingLeft={{ md: 7 }}
+                paddingRight={{ md: 7 }}
                 direction={"column"}
                 right={isSideFormOpen ? 0 : -600}
                 position="fixed"
-                top={"0%"}
-                height="100%"
+                // height="100%"
+                bottom={{ base: 0, md: "auto" }}
+                top={{ md: 0 }}
                 width={{ base: "80%", md: "600px" }}
-                backgroundColor="#ffffff"
                 transition="all 0.5s cubic-bezier(0,1,.88,.99)"
                 zIndex={9999}
-                gap={6}
-                backdropFilter={"blur(5px)"}
+                gap={5}
+                borderBottomLeftRadius={{ base: "0", md: "3xl" }}
+                borderTopLeftRadius={{ base: "3xl", md: "0" }}
+                backgroundColor="rgba(255, 255, 255, 0.7)"
+                // backdropFilter={"blur(5px)"}
             >
-                <HStack align={"center"} justify={"space-between"}>
-                    <Heading
-                        color="black"
-                        fontSize="32px"
-                        mb="10px"
-                        display={"flex"}
-                    >
-                        Dodaj podróż
+                <Image
+                    left={{ base: "20%", md: "37%" }}
+                    top={{ base: -8, md: -1 }}
+                    position={"absolute"}
+                    width="300px"
+                    objectFit="cover"
+                    src="../../public/dotted-line-plane.png"
+                    alt="Dotted line with paper plane flying along it"
+                    transform={{ base: "rotate(8deg)", md: "rotate(0deg)" }}
+                />
+                <HStack align={"center"} justify={"space-between"} mt="10px">
+                    <Heading color="black" fontSize="32px" display={"flex"}>
+                        Add Journey
                         <Text color={"#808000"} ml={1}>
                             !
                         </Text>
@@ -49,15 +61,20 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                         isRequired={true}
                         id="place"
                         fontSize="sm"
-                        ms={{ base: "0px", md: "0px" }}
                         type="text"
-                        placeholder="Wprowadź miejsce"
-                        mb="24px"
-                        // fontWeight="500"
+                        placeholder="Enter place"
                         size="lg"
+                        bgColor={"white"}
+                        borderRadius={"2xl"}
+                        _placeholder={{ color: "gray.400" }}
                     />
                 </FormControl>
                 <DateRangePicker />
+                <Textarea
+                    maxHeight={"200px"}
+                    placeholder="Enter a description..."
+                    _placeholder={{ color: "gray.400" }}
+                />
                 <DropZone />
                 <Button
                     onClick={onSideFormClose}
@@ -66,12 +83,12 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     w="100%"
                     h="50"
                     mb="16px"
-                    borderRadius="16px"
+                    borderRadius="2xl"
                     bgColor="#808000"
                     color="white"
                     _hover={{ bg: "green.600" }}
                 >
-                    Dodaj do mapy
+                    Add to Map
                 </Button>
             </Flex>
 

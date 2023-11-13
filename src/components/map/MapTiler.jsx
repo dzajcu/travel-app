@@ -26,7 +26,6 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
 
     useEffect(() => {
         if (map.current) return;
-        console.log(zoom);
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
             style: maptilersdk.MapStyle.DATAVIZ,

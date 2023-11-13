@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { useDropzone } from "react-dropzone";
-import { Box } from "@chakra-ui/react";
-
+import { Box, Icon } from "@chakra-ui/react";
+import { IoCloudUploadSharp } from "react-icons/io5";
 const baseStyle = {
     flex: 1,
     display: "flex",
@@ -75,15 +75,16 @@ export const DropZone = (props) => {
         <Box width={"100%"}>
             <div {...getRootProps({ style })}>
                 <input {...getInputProps()} />
-                <p>Przeciągnij i upuść pliki lub kliknij aby wybrać</p>
-                <em>(Max 5 plików *.jpeg i *.png)</em>
+                <Icon as={IoCloudUploadSharp} fontSize="2xl" marginBottom={"10px"} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+                <em>(Max 5 files *.jpeg i *.png)</em>
             </div>
-            <aside>
+            {/* <aside>
                 <h4>Accepted files</h4>
                 <ul>{acceptedFileItems}</ul>
                 <h4>Rejected files</h4>
                 <ul>{fileRejectionItems}</ul>
-            </aside>
+            </aside> */}
         </Box>
     );
 };

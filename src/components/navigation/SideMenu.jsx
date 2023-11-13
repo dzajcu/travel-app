@@ -28,7 +28,7 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 backgroundColor="rgba(255, 255, 255, 0.6)"
                 backdropFilter="blur(10px)"
                 zIndex={9}
-                borderRadius={"3xl"}
+                borderRadius={"2xl"}
                 boxShadow={"lg"}
             >
                 <MainContent />

@@ -48,7 +48,7 @@ export const SidebarContent = ({
             h={{ base: "full", md: "96%" }}
             m={{ base: 0, md: 4 }}
             zIndex={10}
-            borderRadius={"3xl"}
+            borderRadius={"2xl"}
             {...rest}
         >
             <Flex

@@ -56,7 +56,6 @@ a {
     }
 }
 
-
 .ant-picker-active-bar {
     background-color: #808000 !important;
 }
@@ -64,13 +63,13 @@ a {
 .ant-picker-range {
     width: 100%;
     height: 50px;
+    padding: 0 16px;
+    border: 1px solid #e2e8f0;
+}
+.anticon-close-circle {
+    padding: 6px 6px;
 }
 
-:where(.css-dev-only-do-not-override-1oxs0gu)[class^="ant-picker"],
-:where(.css-dev-only-do-not-override-1oxs0gu)[class*=" ant-picker"] {
-    font-family: "DM Sans", sans-serif;
-    font-size: 16px;
-    box-sizing: border-box;
-    padding: 4px 16px 4px;
-}
-
+.ant-picker-input>input::placeholder {
+    color: #A0AEC0 !important;
+ }

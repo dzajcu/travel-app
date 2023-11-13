@@ -15,17 +15,19 @@ export const DateRangePicker = () => {
                 components: {
                     DatePicker: {
                         activeBorderColor: "#808000",
-                        hoverBorderColor: "#808000",
+                        hoverBorderColor: "#CBD5E0",
                         activeShadow: "0 0 0 2px rgba(148, 146, 7, 0.1)",
+                        borderRadius: "16px",
+
                     },
                 },
             }}
         >
-            <Space direction="vertical" size={12}>
+            <Space direction="vertical" size={20}>
                 <RangePicker
                     format={dateFormat}
                     style={datePickerStyle}
-                    placeholder={["Data wyjazdu", "Data powrotu"]}
+                    placeholder={["Start date", "End date"]}
                 />
             </Space>
         </ConfigProvider>

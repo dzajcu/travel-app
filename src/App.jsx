@@ -1,10 +1,9 @@
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SidebarOverlayWithMap from "./components/navigation/SidebarOverlayWithMap";
 import SignInScreen from "./components/auth/SignInScreen";
 import Register from "./components/auth/RegisterScreen";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme";
 
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
@@ -63,7 +62,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+    return (
+        <ChakraProvider theme={theme}>
+            <RouterProvider router={router} />
+        </ChakraProvider>
+    );
 }
 
 export default App;
