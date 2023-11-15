@@ -11,7 +11,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
     const center = { lng: 0.09, lat: 15.505 };
     const [zoom] = useState(1.85);
     const [pitch] = useState(30);
-    maptilersdk.config.apiKey = process.env.MAPTILER_API_KEY;
+    maptilersdk.config.apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
 
     const isChildOf = (child, parent) => {
         let node = child;
