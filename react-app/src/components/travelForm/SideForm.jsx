@@ -25,7 +25,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                 direction={"column"}
                 right={isSideFormOpen ? 0 : -600}
                 position="fixed"
-                // height="100%"
+                // height="100  %"
                 bottom={{ base: 0, md: "auto" }}
                 top={{ md: 0 }}
                 width={{ base: "80%", md: "600px" }}
