@@ -1,0 +1,34 @@
+# Pliki konfiguracyjne
+*.env
+
+# Katalogi
+node_modules/
+dist/
+coverage/
+
+# Pliki tymczasowe
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Systemy plików
+.DS_Store
+Thumbs.db
+
+# Pliki konfiguracyjne VSCode
+.vscode/
+
+# Pliki wygenerowane automatycznie
+*.log
+*.pid
+*.lock
+
+# Pliki do debugowania
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Pliki konfiguracyjne npm
+package-lock.json
+yarn.lock
