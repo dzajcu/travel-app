@@ -1,13 +1,12 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const app = require("./app");
+import { connect } from "mongoose";
+import { config } from "dotenv";
+import app from "./app.js";
 
-dotenv.config({ path: "./config.env" });
+config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
 
-mongoose
-    .connect(DB)
+connect(DB)
     .then((con) => {
         console.log("DB connection successful!");
     })

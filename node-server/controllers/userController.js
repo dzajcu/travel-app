@@ -1,6 +1,6 @@
-const User = require("../models/userModel");
+import User from "../models/userModel.js";
 
-exports.getAllUsers = async (req, res) => {
+export async function getAllUsers(req, res) {
     try {
         const users = await User.find();
 
@@ -17,9 +17,9 @@ exports.getAllUsers = async (req, res) => {
             message: err.message,
         });
     }
-};
+}
 
-exports.getUser = async (req, res) => {
+export async function getUser(req, res) {
     try {
         const user = await User.findById(req.params.id); // User.findOne({ _id: req.params.id })
         res.status(200).json({
@@ -34,8 +34,8 @@ exports.getUser = async (req, res) => {
             message: err.message,
         });
     }
-};
-exports.createUser = async (req, res) => {
+}
+export async function createUser(req, res) {
     try {
         const newUser = await User.create(req.body);
 
@@ -51,9 +51,9 @@ exports.createUser = async (req, res) => {
             message: err.message,
         });
     }
-};
+}
 
-exports.updateUser = async (req, res) => {
+export async function updateUser(req, res) {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -72,9 +72,9 @@ exports.updateUser = async (req, res) => {
             message: err.message,
         });
     }
-};
+}
 
-exports.deleteUser = async (req, res) => {
+export async function deleteUser(req, res) {
     try {
         const user = await User.findByIdAndDelete(req.params.id, req.body, {
             new: true,
@@ -93,4 +93,4 @@ exports.deleteUser = async (req, res) => {
             message: err.message,
         });
     }
-};
+}
