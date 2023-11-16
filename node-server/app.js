@@ -3,6 +3,7 @@ import morgan from "morgan";
 
 import globalErrorController from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
+import tourRouter from "./routes/tourRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
 const app = express();
@@ -12,7 +13,7 @@ app.use(morgan("dev"));
 
 app.use(json());
 // ROUTES
-
+app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
 
 app.all("*", (req, res, next) => {
