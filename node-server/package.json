@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "start": "nodemon server.mjs"
+        "start": "nodemon server.js",
+        "start:prod": "set NODE_ENV=production&&nodemon server.js"
     },
     "author": "Dawid Zając",
     "license": "ISC",
