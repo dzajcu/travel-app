@@ -1,7 +1,11 @@
 import { Schema, model } from "mongoose";
-import validator from "validator";
 
 const tourSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "A tour must be associated with a user"],
+    },
     place: {
         type: String,
         required: [true, "A tour must have a place"],
@@ -26,6 +30,7 @@ const tourSchema = new Schema({
         default: Date.now(),
     },
 });
+
 const Tour = model("Tour", tourSchema);
 
 export default Tour;

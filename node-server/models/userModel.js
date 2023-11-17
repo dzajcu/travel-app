@@ -34,6 +34,12 @@ const userSchema = new Schema({
     photo: {
         type: String,
     },
+    tours: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Tour",
+        },
+    ],
 });
 
 userSchema.pre("save", async function (next) {
