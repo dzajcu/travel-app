@@ -1,5 +1,6 @@
 import Tour from "../models/tourModel.js";
 import catchAsync from "../utils/catchAsync.js";
+import { updateUserTours } from "./userController.js";
 
 export const getAllTours = catchAsync(async (req, res) => {
     const tours = await Tour.find();
@@ -29,10 +30,13 @@ export const getTour = catchAsync(async (req, res) => {
 export const createTour = catchAsync(async (req, res) => {
     const newTour = await Tour.create(req.body);
 
+    const updatedUser = updateUserTours(req.body.user, newTour._id);
+
     res.status(201).json({
         status: "success",
         data: {
             tour: newTour,
+            user: updatedUser,
         },
     });
 });
