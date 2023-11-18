@@ -1,10 +1,11 @@
 import { Router } from "express";
 import {
     getAllUsers,
-    createUser,
     getUser,
+    updateMe,
     updateUser,
     deleteUser,
+    deleteMe,
 } from "../controllers/userController.js";
 import {
     protect,
@@ -21,6 +22,8 @@ router.post("/forgotPassword", forgotPassword);
 router.patch("/resetPassword/:token", resetPassword);
 
 router.patch("/updatePassword", protect, updatePassword);
+router.patch("/updateMe", protect, updateMe);
+router.delete("/deleteMe", protect, deleteMe);
 
 router.post("/signup", signup);
 router.post("/login", login);

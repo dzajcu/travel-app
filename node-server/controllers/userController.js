@@ -1,6 +1,44 @@
 import User from "../models/userModel.js";
 import catchAsync from "../utils/catchAsync.js";
 
+export const updateUserTours = catchAsync(async (userId, tourId) => {
+    const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $push: { tours: tourId } },
+        { new: true, runValidators: true }
+    );
+
+    return updatedUser;
+});
+
+export const updateMe = catchAsync(async (req, res) => {
+    console.log(req.user._id);
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            username: req.body.username,
+            email: req.body.email,
+        },
+        { new: true, runValidators: true }
+    );
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            user: updatedUser,
+        },
+    });
+});
+
+export const deleteMe = catchAsync(async (req, res) => {
+    await User.findByIdAndUpdate(req.user._id, { active: false });
+
+    res.status(204).json({
+        status: "success",
+        data: null,
+    });
+});
+
 export const getAllUsers = catchAsync(async (req, res) => {
     const users = await User.find();
 
@@ -46,16 +84,6 @@ export const updateUser = catchAsync(async (req, res) => {
             user,
         },
     });
-});
-
-export const updateUserTours = catchAsync(async (userId, tourId) => {
-    const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $push: { tours: tourId } },
-        { new: true, runValidators: true }
-    );
-
-    return updatedUser;
 });
 
 export const deleteUser = catchAsync(async (req, res) => {
