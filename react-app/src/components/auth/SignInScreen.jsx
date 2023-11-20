@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-// Chakra imports
+import React, { useState } from "react";
+import { NavLink, useNavigate, Form } from "react-router-dom";
+import handleSignIn from "./handleSignIn";
 import {
     Box,
     Button,
@@ -18,9 +18,7 @@ import {
     Divider,
     AbsoluteCenter,
 } from "@chakra-ui/react";
-// Custom components
 import DefaultAuth from "./AuthLayout";
-// Assets
 import illustration from "../../../public/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -45,6 +43,20 @@ function SignInScreen() {
     );
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
+
+    const [usernameOrEmail, setUsernameOrEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        console.log("Submitting form...");
+        e.preventDefault();
+        setIsLoading(true);
+        console.log()
+        await handleSignIn(usernameOrEmail, password, setIsLoading, navigate);
+    };
+
     return (
         <DefaultAuth illustrationBackground={illustration} image={illustration}>
             <Flex
@@ -117,94 +129,96 @@ function SignInScreen() {
                         </AbsoluteCenter>
                     </Box>
                     {/* <Flex align="center" mb="25px"></Flex> */}
-                    <FormControl>
-                        <FormLabel
-                            display="flex"
-                            ms="4px"
-                            fontSize="sm"
-                            fontWeight="500"
-                            color={textColor}
-                            mb="8px"
-                        >
-                            Email or username<Text color={brandStars}>*</Text>
-                        </FormLabel>
-                        <Input
-                            isRequired={true}
-                            id="email"
-                            fontSize="sm"
-                            ms={{ base: "0px", md: "0px" }}
-                            type="email"
-                            placeholder="travel@map.com"
-                            mb="24px"
-                            fontWeight="500"
-                            size="lg"
-                            borderRadius="2xl"
-                        />
-                        <FormLabel
-                            ms="4px"
-                            fontSize="sm"
-                            fontWeight="500"
-                            color={textColor}
-                            display="flex"
-                        >
-                            Password<Text color={brandStars}>*</Text>
-                        </FormLabel>
-                        <InputGroup size="md">
-                            <Input
-                                id="password"
-                                isRequired={true}
-                                fontSize="sm"
-                                placeholder="*************"
-                                mb="24px"
-                                size="lg"
-                                type={show ? "text" : "password"}
-                                autoComplete="off"
-                                borderRadius="2xl"
-                            />
-                            <InputRightElement
+                    <Form onSubmit={handleSubmit}>
+                        <FormControl>
+                            <FormLabel
                                 display="flex"
-                                alignItems="center"
-                                mt="4px"
-                                _hover={{ cursor: "pointer" }}
-                                onClick={handleClick}
+                                ms="4px"
+                                fontSize="sm"
+                                fontWeight="500"
+                                color={textColor}
+                                mb="8px"
                             >
-                                <Icon
-                                    color={textColorSecondary}
-                                    as={
-                                        show ? IoMdEyeOff : MdOutlineRemoveRedEye
-                                    }
-                                />
-                            </InputRightElement>
-                        </InputGroup>
-                        <Flex justifyContent="flex-end" align="center" mb="24px">
-                            <FormControl display="flex" alignItems="center">
-                                <Checkbox
-                                    id="remember-login"
-                                    colorScheme="yellow"
-                                    me="10px"
-                                />
-                                <FormLabel
-                                    htmlFor="remember-login"
-                                    mb="0"
-                                    fontWeight="normal"
-                                    color={textColor}
+                                Email or username<Text color={brandStars}>*</Text>
+                            </FormLabel>
+                            <Input
+                                isRequired={true}
+                                id="email"
+                                fontSize="sm"
+                                ms={{ base: "0px", md: "0px" }}
+                                type="text"
+                                placeholder="travel@map.com"
+                                mb="24px"
+                                fontWeight="500"
+                                size="lg"
+                                borderRadius="2xl"
+                                onChange={(e) => setUsernameOrEmail(e.target.value)}
+                            />
+                            <FormLabel
+                                ms="4px"
+                                fontSize="sm"
+                                fontWeight="500"
+                                color={textColor}
+                                display="flex"
+                            >
+                                Password<Text color={brandStars}>*</Text>
+                            </FormLabel>
+                            <InputGroup size="md">
+                                <Input
+                                    id="password"
+                                    isRequired={true}
                                     fontSize="sm"
+                                    placeholder="*************"
+                                    mb="24px"
+                                    size="lg"
+                                    type={show ? "text" : "password"}
+                                    autoComplete="off"
+                                    borderRadius="2xl"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <InputRightElement
+                                    display="flex"
+                                    alignItems="center"
+                                    mt="4px"
+                                    _hover={{ cursor: "pointer" }}
+                                    onClick={handleClick}
                                 >
-                                    Remember me
-                                </FormLabel>
-                            </FormControl>
-                            <NavLink to="/auth/forgot-password">
-                                <Text
-                                    color={textColorBrand}
-                                    fontSize="sm"
-                                    w="124px"
-                                    fontWeight="500"
-                                >
-                                    Forgot password?
-                                </Text>
-                            </NavLink>
-                        </Flex>
-                        <NavLink to="/menu/map">
+                                    <Icon
+                                        color={textColorSecondary}
+                                        as={
+                                            show ? IoMdEyeOff : MdOutlineRemoveRedEye
+                                        }
+                                    />
+                                </InputRightElement>
+                            </InputGroup>
+                            <Flex justifyContent="flex-end" align="center" mb="24px">
+                                <FormControl display="flex" alignItems="center">
+                                    <Checkbox
+                                        id="remember-login"
+                                        colorScheme="yellow"
+                                        me="10px"
+                                    />
+                                    <FormLabel
+                                        htmlFor="remember-login"
+                                        mb="0"
+                                        fontWeight="normal"
+                                        color={textColor}
+                                        fontSize="sm"
+                                    >
+                                        Remember me
+                                    </FormLabel>
+                                </FormControl>
+                                <NavLink to="/auth/forgot-password">
+                                    <Text
+                                        color={textColorBrand}
+                                        fontSize="sm"
+                                        w="124px"
+                                        fontWeight="500"
+                                    >
+                                        Forgot password?
+                                    </Text>
+                                </NavLink>
+                            </Flex>
                             <Button
                                 fontSize="sm"
                                 fontWeight="500"
@@ -215,11 +229,13 @@ function SignInScreen() {
                                 bgColor={textColorBrand}
                                 color="white"
                                 _hover={{ bg: "green.600" }}
+                                isLoading={isLoading}
+                                type="submit"
                             >
                                 Sign in
                             </Button>
-                        </NavLink>
-                    </FormControl>
+                        </FormControl>
+                    </Form>
                     <Flex
                         flexDirection="column"
                         justifyContent="center"
