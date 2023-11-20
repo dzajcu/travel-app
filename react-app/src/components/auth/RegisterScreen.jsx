@@ -55,6 +55,7 @@ function RegisterScreen() {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -112,7 +113,7 @@ function RegisterScreen() {
                     <Button
                         fontSize="sm"
                         me="0px"
-                        mb="26px"
+                        mb="12px"
                         py="15px"
                         h="50px"
                         borderRadius="2xl"
@@ -165,6 +166,7 @@ function RegisterScreen() {
                                 fontWeight="500"
                                 size="lg"
                                 borderRadius="2xl"
+                                borderColor={error ? "red.500" : "gray.300"}
                             />
                             <FormLabel
                                 display="flex"

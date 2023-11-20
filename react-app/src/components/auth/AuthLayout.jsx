@@ -28,6 +28,7 @@ function AuthIllustration(props) {
                 ps={{ xl: "70px" }}
                 justifyContent="start"
                 direction="column"
+                
             >
                 <NavLink
                     to="/menu/map"

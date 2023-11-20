@@ -100,7 +100,7 @@ function SignInScreen() {
                     <Button
                         fontSize="sm"
                         me="0px"
-                        mb="26px"
+                        mb="12px"
                         py="15px"
                         h="50px"
                         borderRadius="2xl"
@@ -248,15 +248,15 @@ function SignInScreen() {
                             fontWeight="400"
                             fontSize="14px"
                         >
-                            Not registered yet?
-                            <NavLink to="/auth/register">
+                            Don't have an account?
+                            <NavLink to="/auth/sign-up">
                                 <Text
                                     color={textColorBrand}
                                     as="span"
                                     ms="5px"
                                     fontWeight="500"
                                 >
-                                    Create an account
+                                    Sign up now!
                                 </Text>
                             </NavLink>
                         </Text>

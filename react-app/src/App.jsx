@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SidebarOverlayWithMap from "./components/navigation/SidebarOverlayWithMap";
 import SignInScreen from "./components/auth/SignInScreen";
+import ForgotPassword from "./components/auth/ForgotPassword";
 import Register from "./components/auth/RegisterScreen";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme";
-
 
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <SignInScreen />,
     },
     {
-        path: "/menu/*",
+        path: "/menu/map/*",
         element: <SidebarOverlayWithMap />,
         // children: [
         //     { path: "statistics", element: <Statistics /> },
@@ -57,8 +57,12 @@ const router = createBrowserRouter([
         element: <SignInScreen />,
     },
     {
-        path: "/auth/register",
+        path: "/auth/sign-up",
         element: <Register />,
+    },
+    {
+        path: "/auth/forgot-password",
+        element: <ForgotPassword />,
     },
 ]);
 
@@ -66,6 +70,7 @@ function App() {
     return (
         <ChakraProvider theme={theme}>
             <RouterProvider router={router} />
+            {/* <ForgotPassword /> */}
         </ChakraProvider>
     );
 }
