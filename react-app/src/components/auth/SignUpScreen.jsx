@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm";
+
 import {
     Box,
     Button,
@@ -12,17 +13,16 @@ import {
     AbsoluteCenter,
     useColorModeValue,
 } from "@chakra-ui/react";
-import DefaultAuth from "./AuthLayout";
+import AuthLayout from "./AuthLayout";
 import illustration from "../../../public/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 
-function SignInScreen() {
+function RegisterScreen() {
     // Chakra color mode
     const textColor = useColorModeValue("#808000", "white");
     const textColorSecondary = "gray.400";
     const textColorDetails = useColorModeValue("gray.700", "gray.600");
     const textColorBrand = useColorModeValue("#808000", "white");
-    const brandStars = useColorModeValue("#808000", "green.400");
     const googleBg = useColorModeValue("gray.100", "white");
     const googleText = useColorModeValue("green.700", "white");
     const googleHover = useColorModeValue(
@@ -35,7 +35,7 @@ function SignInScreen() {
     );
 
     return (
-        <DefaultAuth illustrationBackground={illustration} image={illustration}>
+        <AuthLayout illustrationBackground={illustration} image={illustration}>
             <Flex
                 maxW={{ base: "100%", md: "max-content" }}
                 flexDirection="column"
@@ -50,8 +50,8 @@ function SignInScreen() {
                 // mt={{ base: "40px", md: "14vh" }}
             >
                 <Box>
-                    <Heading color={textColor} fontSize="36px" mb="10px">
-                        Sign In
+                    <Heading color={textColorBrand} fontSize="36px" mb="10px">
+                        Sign Up
                     </Heading>
                     <Text
                         mb="36px"
@@ -60,7 +60,7 @@ function SignInScreen() {
                         fontWeight="400"
                         fontSize="md"
                     >
-                        Enter your email and password to Sign in!
+                        Start your Journey - enter your credentials to Sign up!
                     </Text>
                 </Box>
                 <Flex
@@ -89,7 +89,7 @@ function SignInScreen() {
                         _focus={googleActive}
                     >
                         <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-                        Sign in with Google
+                        Sign up with Google
                     </Button>
                     <Box position="relative" padding="6">
                         <Divider />
@@ -105,7 +105,7 @@ function SignInScreen() {
                             or
                         </AbsoluteCenter>
                     </Box>
-                    <SignInForm />
+                    <SignUpForm />
                     <Flex
                         flexDirection="column"
                         justifyContent="center"
@@ -118,23 +118,23 @@ function SignInScreen() {
                             fontWeight="400"
                             fontSize="14px"
                         >
-                            Don't have an account?
-                            <NavLink to="/auth/sign-up">
+                            Already have an account?
+                            <NavLink to="/auth/sign-in">
                                 <Text
                                     color={textColorBrand}
                                     as="span"
                                     ms="5px"
                                     fontWeight="500"
                                 >
-                                    Sign up now!
+                                    Sign in
                                 </Text>
                             </NavLink>
                         </Text>
                     </Flex>
                 </Flex>
             </Flex>
-        </DefaultAuth>
+        </AuthLayout>
     );
 }
 
-export default SignInScreen;
+export default RegisterScreen;

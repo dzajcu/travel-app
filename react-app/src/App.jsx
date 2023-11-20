@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SidebarOverlayWithMap from "./components/navigation/SidebarOverlayWithMap";
 import SignInScreen from "./components/auth/SignInScreen";
+import SignUpScreen from "./components/auth/SignUpScreen";
 import ForgotPassword from "./components/auth/ForgotPassword";
-import Register from "./components/auth/RegisterScreen";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme, { toastOptions } from "./theme";
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <SignInScreen />,
     },
     {
-        path: "/menu/map/*",
+        path: "/menu/*",
         element: <SidebarOverlayWithMap />,
         // children: [
         //     { path: "statistics", element: <Statistics /> },
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/auth/sign-up",
-        element: <Register />,
+        element: <SignUpScreen />,
     },
     {
         path: "/auth/forgot-password",
@@ -73,7 +73,6 @@ function App() {
             toastOptions={{ defaultOptions: toastOptions }}
         >
             <RouterProvider router={router} />
-            {/* <ForgotPassword /> */}
         </ChakraProvider>
     );
 }
