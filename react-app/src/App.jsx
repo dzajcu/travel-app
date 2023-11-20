@@ -4,7 +4,7 @@ import SignInScreen from "./components/auth/SignInScreen";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import Register from "./components/auth/RegisterScreen";
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./theme";
+import theme, { toastOptions } from "./theme";
 
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
@@ -68,7 +68,10 @@ const router = createBrowserRouter([
 
 function App() {
     return (
-        <ChakraProvider theme={theme}>
+        <ChakraProvider
+            theme={theme}
+            toastOptions={{ defaultOptions: toastOptions }}
+        >
             <RouterProvider router={router} />
             {/* <ForgotPassword /> */}
         </ChakraProvider>

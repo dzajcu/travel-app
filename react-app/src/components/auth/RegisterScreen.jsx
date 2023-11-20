@@ -16,9 +16,10 @@ import {
     InputGroup,
     InputRightElement,
     Text,
-    useColorModeValue,
     Divider,
     AbsoluteCenter,
+    useColorModeValue,
+    useToast,
 } from "@chakra-ui/react";
 import AuthLayout from "./AuthLayout";
 import illustration from "../../../public/auth-bg.jpg";
@@ -48,7 +49,7 @@ function RegisterScreen() {
     const handleClick = () => setShow(!show);
     const handleClickPasswordConfirm = () =>
         setShowPasswordConfirm(!showPasswordConfirm);
-
+    const toast = useToast();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -66,7 +67,8 @@ function RegisterScreen() {
             password,
             passwordConfirm,
             setIsLoading,
-            navigate
+            navigate,
+            toast
         );
     };
 
@@ -166,7 +168,7 @@ function RegisterScreen() {
                                 fontWeight="500"
                                 size="lg"
                                 borderRadius="2xl"
-                                borderColor={error ? "red.500" : "gray.300"}
+                                borderColor={error ? "red.500" : "gray.200"}
                             />
                             <FormLabel
                                 display="flex"

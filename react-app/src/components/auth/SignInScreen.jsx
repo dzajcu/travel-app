@@ -14,9 +14,10 @@ import {
     InputGroup,
     InputRightElement,
     Text,
-    useColorModeValue,
     Divider,
     AbsoluteCenter,
+    useColorModeValue,
+    useToast,
 } from "@chakra-ui/react";
 import DefaultAuth from "./AuthLayout";
 import illustration from "../../../public/auth-bg.jpg";
@@ -43,7 +44,7 @@ function SignInScreen() {
     );
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
-
+    const toast = useToast();
     const [usernameOrEmail, setUsernameOrEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -53,8 +54,8 @@ function SignInScreen() {
         console.log("Submitting form...");
         e.preventDefault();
         setIsLoading(true);
-        console.log()
-        await handleSignIn(usernameOrEmail, password, setIsLoading, navigate);
+        console.log();
+        await handleSignIn(usernameOrEmail, password, setIsLoading, navigate, toast);
     };
 
     return (

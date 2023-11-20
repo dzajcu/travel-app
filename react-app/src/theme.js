@@ -45,5 +45,10 @@ const theme = extendTheme({
         Textarea: textareaTheme,
     },
 });
-
+export const toastOptions = {
+    position: "top",
+    duration: 5000,
+    isClosable: true,
+    variant: "subtle",
+}
 export default theme;

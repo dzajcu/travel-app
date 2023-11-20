@@ -5,6 +5,7 @@ const handleSignUp = async (
     passwordConfirm,
     setIsLoading,
     navigate,
+    toast
 ) => {
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/signup", {
@@ -24,8 +25,16 @@ const handleSignUp = async (
         if (response.ok) {
             console.log("Registration successful!", await response.json());
             navigate("/auth/sign-in");
+            toast({
+                title: "Registraion successful!",
+                status: "success",
+            });
         } else {
-            console.error("Registration failed:", await response.json());
+            console.error("Error during registration:", await response.json());
+            toast({
+                title: "Error during registration!",
+                status: "error",
+            });
         }
     } catch (error) {
         console.error("Error during registration:", error);

@@ -1,4 +1,10 @@
-const handleSignIn = async (usernameOrEmail, password, setIsLoading, navigate) => {
+const handleSignIn = async (
+    usernameOrEmail,
+    password,
+    setIsLoading,
+    navigate,
+    toast
+) => {
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/login", {
             method: "POST",
@@ -13,13 +19,21 @@ const handleSignIn = async (usernameOrEmail, password, setIsLoading, navigate) =
         });
 
         if (response.ok) {
-            console.log("Registration successful!", await response.json());
+            console.log("Login successful!", await response.json());
+            toast({
+                title: "Login successful!",
+                status: "success",
+            });
             navigate("/menu/map");
         } else {
-            console.error("Registration failed:", await response.json());
+            console.error("Login failed:", await response.json());
+            toast({
+                title: "Login failed!",
+                status: "error",
+            });
         }
     } catch (error) {
-        console.error("Error during registration:", error);
+        console.error("Error during login:", error);
     } finally {
         setIsLoading(false);
     }

@@ -11,8 +11,9 @@ import {
     Heading,
     Input,
     Text,
-    useColorModeValue,
     Divider,
+    useColorModeValue,
+    useToast,
 } from "@chakra-ui/react";
 import AuthLayout from "./AuthLayout";
 import illustration from "../../../public/auth-bg.jpg";
@@ -37,11 +38,11 @@ function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
-
+    const toast = useToast();
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        await handlePasswordReset(email, setIsLoading, navigate);
+        await handlePasswordReset(email, setIsLoading, navigate, toast);
     };
 
     return (
@@ -155,6 +156,7 @@ function ForgotPassword() {
                                 >
                                     Sign up now!
                                 </Text>
+
                             </NavLink>
                         </Text>
                     </Flex>
