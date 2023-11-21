@@ -34,6 +34,10 @@ const handleSignIn = async (
         }
     } catch (error) {
         console.error("Error during login:", error);
+        toast({
+            title: "Login failed, Server error!",
+            status: "error",
+        });
     } finally {
         setIsLoading(false);
     }

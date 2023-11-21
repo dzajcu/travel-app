@@ -28,6 +28,7 @@ const handleSignUp = async (
             toast({
                 title: "Registraion successful!",
                 status: "success",
+                variant: "solid",
             });
         } else {
             console.error("Error during registration:", await response.json());
@@ -38,6 +39,11 @@ const handleSignUp = async (
         }
     } catch (error) {
         console.error("Error during registration:", error);
+        toast({
+            title: "Registration failed, Server error!",
+            status: "error",
+            variant: "solid",
+        });
     } finally {
         setIsLoading(false);
     }

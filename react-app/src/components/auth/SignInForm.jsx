@@ -37,7 +37,6 @@ function SignInForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        console.log();
         await handleSignIn(usernameOrEmail, password, setIsLoading, navigate, toast);
     };
 

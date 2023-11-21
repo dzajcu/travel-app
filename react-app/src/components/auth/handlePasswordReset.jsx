@@ -30,6 +30,10 @@ const handlePasswordReset = async (email, setIsLoading, navigate, toast) => {
         }
     } catch (error) {
         console.error("Error during registration:", error);
+        toast({
+            title: "Sending email failed, Server error!",
+            status: "error",
+        });
     } finally {
         setIsLoading(false);
     }

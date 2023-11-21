@@ -50,5 +50,6 @@ export const toastOptions = {
     duration: 5000,
     isClosable: true,
     variant: "subtle",
+    backgroundColor: "gray.700",
 }
 export default theme;

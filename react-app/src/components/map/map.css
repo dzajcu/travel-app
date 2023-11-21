@@ -11,3 +11,25 @@
     width: 100vw;
     height: 100vh;
 }
+
+.input-group {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 40px;
+    width: 300px;
+    /* background-color: red; */
+    /* border: 1px solid ; */
+    border-radius: 100px !important;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    font-family: "DM Sans", sans-serif;
+
+    &:hover {
+        border-color: olive
+    }
+
+    
+    
+}

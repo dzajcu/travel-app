@@ -49,6 +49,12 @@ a {
     height: calc(100vh - 80px);
 }
 
+.geocoding {
+    position: absolute;
+    top: 55px;
+    left: 10px;
+  }
+
 /* Tryb medium (md) - 100vh */
 @media (min-width: 768px) {
     .leaflet-container {

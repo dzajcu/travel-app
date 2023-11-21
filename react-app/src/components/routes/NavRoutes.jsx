@@ -5,9 +5,10 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 export const MainContent = () => {
     return (
-        <Box w="max-content" ml={"60px"}>
+        <Box pl={"60px"} h="100%" w="100%" pt={"10"}>
             <Routes>
                 <Route path="/explore" element={<Explore />} />
+                
             </Routes>
         </Box>
     );
