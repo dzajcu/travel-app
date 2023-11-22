@@ -17,6 +17,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
     const [pitch] = useState(30);
     maptilersdk.config.apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
     const [mapController, setMapController] = useState();
+    const [markers, setMarkers] = useState([]);
 
     const isChildOf = (child, parent) => {
         let node = child;
@@ -56,27 +57,6 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                 console.error("Error fetching results:", error);
             });
     };
-    const handleGeocodeSearch = (results) => {
-        // Odczytaj pierwszy kliknięty wynik
-        const firstResult = results[0];
-        if (firstResult) {
-            console.log("Pierwszy kliknięty wynik:", firstResult);
-            // Tutaj możesz dodać kod obsługi dla pierwszego wyniku
-        }
-    };
-
-    useEffect(() => {
-        if (mapController) {
-            // Ustawienie obsługi zdarzenia geokodowania na mapController
-            mapController.setEventHandler((event) => {
-                if (event.type === "markerClick") {
-                    // Tutaj możesz obsługiwać kliknięcia w markery
-                    console.log("Marker kliknięty:", event.id);
-                }
-                // Dodaj inne przypadki zdarzeń, które chcesz obsłużyć
-            });
-        }
-    }, [mapController]);
 
     useEffect(() => {
         if (map.current) return;
@@ -100,6 +80,43 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
     const handleGeocodingResultSelected = (result) => {
         console.log(result);
     };
+
+    useEffect(() => {
+        if (map.current) {
+            // Usuń wszystkie istniejące markery z mapy przed dodaniem nowych
+            if (map.current.getLayer("markers")) {
+                map.current.removeLayer("markers");
+            }
+
+            // Dodaj nowe markery do mapy
+            markers.forEach((markerData) => {
+                const marker = new maptilersdk.Marker({ color: "#FF0000" })
+                    .setLngLat([markerData.lng, markerData.lat])
+                    .addTo(map.current);
+
+                // Dodaj niestandardową ikonę do markera
+                marker.getElement().innerHTML = createCustomMarkerElement(
+                    markerData.imageUrl
+                );
+            });
+        }
+    }, [markers]);
+    const handleAddMarker = () => {
+        // Dodaj nowy marker do stanu
+        setMarkers((prevMarkers) => [
+            ...prevMarkers,
+            {
+                lng: Math.random() * 360 - 180,
+                lat: Math.random() * 180 - 90,
+                imageUrl:
+                    "https://cdn.pixabay.com/photo/2023/11/04/04/45/woman-8364265_1280.jpg",
+            },
+        ]);
+    };
+    const createCustomMarkerElement = (imageUrl) => {
+        return `<img src="${imageUrl}" alt="Custom Marker" style="width: 64px; height: 64px;" />`;
+    };
+
     return (
         <Box pos="absolute" zIndex="1">
             <Box pos="absolute" zIndex="9999" top={"16px"} left={"220"}>
@@ -117,7 +134,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                     ]}
                     onPick={handleGeocodingResultSelected}
                 />
-                <Button onClick={handleClick} ml="300" />
+                <Button onClick={handleAddMarker} ml="300" />
             </Box>
 
             <div ref={mapContainer} className="map" />
