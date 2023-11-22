@@ -13,23 +13,55 @@
 }
 
 .input-group {
+    padding: 0 16px !important;
     position: absolute;
-    top: 10px;
-    left: 10px;
     height: 40px;
-    width: 300px;
+    width: 150px;
     /* background-color: red; */
     /* border: 1px solid ; */
     border-radius: 100px !important;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
-    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
     font-family: "DM Sans", sans-serif;
+    /* border-color: red; */
+    transition: width 0.5s ease-in-out;
+}
 
-    &:hover {
-        border-color: olive
-    }
+.input-group > input {
+    letter-spacing: -0.5px !important;
+    font-size: 16px !important;
+} 
 
-    
-    
+.input-group:focus-within {
+    width: 300px;
+    outline: #808000 solid 1px !important;
+}
+
+ul {
+    margin-top: 40px !important;
+    width: 300px !important;
+    border-radius: 16px !important;
+    font-weight: lighter !important;
+}
+.no-results,
+.error {
+    margin-top: 40px !important;
+    width: 300px !important;
+    font-family: "DM Sans", sans-serif;
+    letter-spacing: -0.5px !important;
+    font-size: 12px !important;
+    border-radius: 16px !important;
+}
+ul > li {
+    font-family: "DM Sans", sans-serif;
+    letter-spacing: -0.5px !important;
+    font-size: 16px !important;
+}
+
+.maplibregl-ctrl {
+    border-radius: 12px !important;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
 }
