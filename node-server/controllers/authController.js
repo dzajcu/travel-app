@@ -21,7 +21,7 @@ const createSendToken = (user, statusCode, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV.trim() === "production",
     };
-    
+
     res.cookie("jwt", token, cookieOptions);
 
     res.status(statusCode).json({
@@ -70,16 +70,20 @@ export const signup = catchAsync(async (req, res) => {
 });
 
 export const login = catchAsync(async (req, res, next) => {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-        return next(new appError("Please provide email and password!", 400));
+    const { usernameOrEmail, password } = req.body;
+    console.log(password);
+    if (!usernameOrEmail || !password) {
+        return next(
+            new appError("Please provide username or email and password!", 400)
+        );
     }
 
-    const user = await User.findOne({ username }).select("+password");
+    const user = await User.findOne({
+        $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    }).select("+password");
 
     if (!user || !(await user.correctPassword(password, user.password))) {
-        return next(new appError("Incorrect email or password", 401));
+        return next(new appError("Incorrect username or email or password", 401));
     }
 
     createSendToken(user, 200, res);
@@ -99,7 +103,7 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
     )}/api/v1/users/resetPassword/${resetToken}`;
 
     const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\n
-    If you didn't forget your password, please ignore this email!`;
+    If you didn't forget your password, please ignore this email!\n`;
 
     try {
         await sendEmail({

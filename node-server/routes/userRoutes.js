@@ -3,6 +3,7 @@ import {
     getAllUsers,
     getUser,
     updateMe,
+    getMe,
     updateUser,
     deleteUser,
     deleteMe,
@@ -21,6 +22,7 @@ const router = Router();
 router.post("/forgotPassword", forgotPassword);
 router.patch("/resetPassword/:token", resetPassword);
 
+router.get("/me", protect, getMe, getUser);
 router.patch("/updatePassword", protect, updatePassword);
 router.patch("/updateMe", protect, updateMe);
 router.delete("/deleteMe", protect, deleteMe);

@@ -11,6 +11,11 @@ export const updateUserTours = catchAsync(async (userId, tourId) => {
     return updatedUser;
 });
 
+export const getMe = (req, res, next) => {
+    req.params.id = req.user._id;
+    next();
+};
+
 export const updateMe = catchAsync(async (req, res) => {
     console.log(req.user._id);
     const updatedUser = await User.findByIdAndUpdate(

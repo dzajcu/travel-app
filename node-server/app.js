@@ -8,6 +8,7 @@ import globalErrorController from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
 import tourRouter from "./routes/tourRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import cors from "cors";
 
 const app = express();
 
@@ -15,10 +16,11 @@ const app = express();
 app.use(helmet());
 
 // MIDDLEWARES
+app.use(cors()); // Access-Control-Allow-Origin *
 app.use(morgan("dev"));
 
 const limiter = rateLimit({
-    max: 100,
+    max: 1000,
     windowMs: 15 * 60 * 1000,
     message: "Too many requests from this IP, please try again in 15 minutes!",
 });
