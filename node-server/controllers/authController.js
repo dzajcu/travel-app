@@ -89,6 +89,17 @@ export const login = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res);
 });
 
+export const logout = (req, res) => {
+    const cookieOptions = {
+        expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
+        httpOnly: true,
+    };
+
+    res.cookie("jwt", "loggedout", cookieOptions);
+
+    res.status(200).json({ status: "success" });
+};
+
 export const forgotPassword = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
 
