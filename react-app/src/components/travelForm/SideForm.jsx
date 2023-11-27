@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -10,12 +10,14 @@ import {
     HStack,
     CloseButton,
     Textarea,
-    Image,
 } from "@chakra-ui/react";
 import { DropZone } from "./components/FileDropZone";
 import { DateRangePicker } from "./components/DatePicker";
 
 export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
+    const [acceptedFiles, setAcceptedFiles] = useState([]);
+    const [selectedDate, setSelectedDate] = useState([null, null]);
+    console.log(selectedDate, acceptedFiles);
     return (
         <>
             <Flex
@@ -70,7 +72,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                         fontWeight={300}
                     />
                 </FormControl>
-                <DateRangePicker />
+                <DateRangePicker setSelectedDate={setSelectedDate} />
                 <Textarea
                     maxHeight={"200px"}
                     placeholder="Enter a description..."
@@ -78,7 +80,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     bgColor={"white"}
                     paddingTop={"16px"}
                 />
-                <DropZone />
+                <DropZone setAcceptedFiles={setAcceptedFiles} />
                 <Button
                     onClick={onSideFormClose}
                     fontSize="sm"

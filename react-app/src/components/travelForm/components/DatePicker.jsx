@@ -8,7 +8,11 @@ const datePickerStyle = {
         borderColor: "#808000",
     },
 };
-export const DateRangePicker = () => {
+export const DateRangePicker = ({ setSelectedDate }) => {
+    const handleDateChange = (_, dateString) => {
+        setSelectedDate(dateString);
+    };
+
     return (
         <ConfigProvider
             theme={{
@@ -18,7 +22,6 @@ export const DateRangePicker = () => {
                         hoverBorderColor: "#CBD5E0",
                         activeShadow: "0 0 0 2px rgba(148, 146, 7, 0.1)",
                         borderRadius: "16px",
-
                     },
                 },
             }}
@@ -28,6 +31,7 @@ export const DateRangePicker = () => {
                     format={dateFormat}
                     style={datePickerStyle}
                     placeholder={["Start date", "End date"]}
+                    onChange={handleDateChange}
                 />
             </Space>
         </ConfigProvider>

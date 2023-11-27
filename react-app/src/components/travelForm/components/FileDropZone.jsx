@@ -28,7 +28,7 @@ const acceptStyle = {
 const rejectStyle = {
     borderColor: "#ff1744",
 };
-export const DropZone = (props) => {
+export const DropZone = ({ setAcceptedFiles }) => {
     const {
         acceptedFiles,
         fileRejections,
@@ -42,6 +42,9 @@ export const DropZone = (props) => {
         accept: {
             "image/jpeg": [],
             "image/png": [],
+        },
+        onDrop: (acceptedFiles) => {
+            setAcceptedFiles(acceptedFiles);
         },
     });
 

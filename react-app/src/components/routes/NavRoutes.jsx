@@ -5,10 +5,23 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 export const MainContent = () => {
     return (
-        <Box pl={"60px"} h="100%" w="100%" pt={"10"}>
+        <Box
+            backgroundColor={"red"}
+            ml={"60px"}
+            h="100%"
+            w="90%"
+            
+            // p={"10"}
+            flexWrap="wrap"
+            overflowY="auto"
+            css={{
+                "&::-webkit-scrollbar": {
+                    width: "0.4em",
+                },
+            }}
+        >
             <Routes>
                 <Route path="/explore" element={<Explore />} />
-                
             </Routes>
         </Box>
     );

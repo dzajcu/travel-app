@@ -9,6 +9,7 @@ import { createMapLibreGlMapController } from "@maptiler/geocoding-control/mapli
 import maplibregl from "maplibre-gl";
 // import "maplibre-gl/dist/maplibre-gl.css";
 import { Button } from "@chakra-ui/react";
+import { SearchBarControl } from "./SearchBarControl";
 export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
@@ -114,7 +115,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         ]);
     };
     const createCustomMarkerElement = (imageUrl) => {
-        return `<img src="${imageUrl}" alt="Custom Marker" style="width: 64px; height: 64px;" />`;
+        return `<img src="${imageUrl}" alt="Custom Marker" style="width: 32px; height: 32px;" />`;
     };
 
     return (
@@ -124,18 +125,20 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                     apiKey={maptilersdk.config.apiKey}
                     mapController={mapController}
                     language="en"
-                    types={[
-                        "country",
-                        "region",
-                        "subregion",
-                        "county",
-                        "municipality",
-                        "locality",
-                    ]}
+                    // types={[
+                    //     "country",
+                    //     "region",
+                    //     "subregion",
+                    //     "county",
+                    //     "municipality",
+                    //     "locality",
+                    // ]}
                     onPick={handleGeocodingResultSelected}
+                    // iconsBaseUrl="/icons" // Ustawienie ścieżki do lokalnych ikon
                 />
                 <Button onClick={handleAddMarker} ml="300" />
             </Box>
+            <SearchBarControl mapCurrent={map.current}/>
 
             <div ref={mapContainer} className="map" />
             <SideForm

@@ -21,7 +21,10 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 display={{ base: "none", md: "block" }}
                 m={{ base: 0, md: 4 }}
                 ml={{ base: 0, md: 157 }}
-                w={isSideMenuOpen ? "55%" : "0%"}
+                // p={{ base: 0, md: 4 }}
+                pt={{ base: 0, md: 10 }}
+                pb={{ base: 0, md: 10 }}
+                w={isSideMenuOpen ? "60%" : "0%"}
                 h={{ base: "full", md: "96%" }}
                 transition="0.5s cubic-bezier(0,1,.88,.99)"
                 bg={useColorModeValue("gray.50", "gray.900")}
@@ -30,6 +33,11 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 zIndex={9}
                 borderRadius={"2xl"}
                 boxShadow={"lg"}
+                css={{
+                    "&::-webkit-scrollbar": {
+                        width: "0.4em",
+                    },
+                }}
             >
                 <MainContent />
                 <CloseButton
@@ -50,7 +58,7 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 height="100%"
                 background="rgba(0, 0, 0, 0.2)"
                 zIndex={isSideMenuOpen ? 8 : -1}
-                backdropFilter="blur(5px)"
+                backdropFilter="blur(1px)"
             />
         </>
     );

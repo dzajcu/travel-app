@@ -5,7 +5,13 @@ import SearchBar from "../map/SearchBar";
 
 export default function Explore() {
     return (
-        <Flex gap={"4"} overflow={"hidden"} width="max-content">
+        <Flex gap={"4"} overflow={"hidden"} width="100%" flexWrap="wrap">
+            <ExploreCard />
+            <ExploreCard />
+            <ExploreCard />
+            <ExploreCard />
+            <ExploreCard />
+            <ExploreCard />
             <ExploreCard />
             <ExploreCard />
         </Flex>
