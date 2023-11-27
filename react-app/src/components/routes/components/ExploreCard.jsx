@@ -46,6 +46,11 @@ export default function ExploreCard() {
             backgroundImage={`url(${randomImage})`}
             backgroundSize="cover"
             borderRadius="xl"
+            _hover={{
+                transform: "translate(12px)",
+            }}
+            transition={"transform 0.3s ease"}
+            cursor={"pointer"}
         >
             <Box
                 backgroundImage={`linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 100%);

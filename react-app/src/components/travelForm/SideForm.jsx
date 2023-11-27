@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { DropZone } from "./components/FileDropZone";
 import { DateRangePicker } from "./components/DatePicker";
+import { SearchBarControl } from "../map/SearchBarControl";
 
-export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
+export const SideForm = ({ isSideFormOpen, onSideFormClose, mapController }) => {
     const [acceptedFiles, setAcceptedFiles] = useState([]);
     const [selectedDate, setSelectedDate] = useState([null, null]);
-    console.log(selectedDate, acceptedFiles);
     return (
         <>
             <Flex
@@ -36,7 +36,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                 gap={5}
                 borderBottomLeftRadius={{ base: "0", md: "3xl" }}
                 borderTopLeftRadius={{ base: "3xl", md: "0" }}
-                backgroundColor="rgba(255, 255, 255, 0.7)"
+                backgroundColor="rgba(255, 255, 255, 1)"
                 // backdropFilter={"blur(5px)"}
             >
                 {/* <Image
@@ -58,7 +58,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     </Heading>
                     <CloseButton onClick={onSideFormClose} />
                 </HStack>
-                <FormControl>
+                {/* <FormControl>
                     <Input
                         isRequired={true}
                         id="place"
@@ -71,7 +71,8 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                         _placeholder={{ color: "gray.400" }}
                         fontWeight={300}
                     />
-                </FormControl>
+                </FormControl> */}
+                <SearchBarControl />
                 <DateRangePicker setSelectedDate={setSelectedDate} />
                 <Textarea
                     maxHeight={"200px"}
@@ -96,7 +97,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                     Add to Map
                 </Button>
             </Flex>
-
+{/* 
             <Box
                 onClick={onSideFormClose}
                 opacity={isSideFormOpen ? 1 : 0}
@@ -109,7 +110,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                 background="rgba(0, 0, 0, 0.3)"
                 zIndex={isSideFormOpen ? 9998 : -1}
                 backdropFilter="blur(5px)"
-            />
+            /> */}
         </>
     );
 };

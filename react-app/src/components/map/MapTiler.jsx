@@ -63,7 +63,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         if (map.current) return;
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
-            style: maptilersdk.MapStyle.DATAVIZ,
+            style: maptilersdk.MapStyle.BRIGHT.PASTEL,
             center: [center.lng, center.lat],
             zoom: zoom,
             pitch: pitch,
@@ -78,9 +78,6 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         });
         setMapController(createMapLibreGlMapController(map.current, maplibregl));
     }, [center.lng, center.lat, zoom]);
-    const handleGeocodingResultSelected = (result) => {
-        console.log(result);
-    };
 
     useEffect(() => {
         if (map.current) {
@@ -118,32 +115,45 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         return `<img src="${imageUrl}" alt="Custom Marker" style="width: 32px; height: 32px;" />`;
     };
 
+    const handleGeocodingResultSelected = (result) => {
+        console.log(result);
+    };
     return (
         <Box pos="absolute" zIndex="1">
-            <Box pos="absolute" zIndex="9999" top={"16px"} left={"220"}>
+            <Box
+                className="geocoding-control-map"
+                pos="absolute"
+                top="16px"
+                left="220px"
+            >
                 <GeocodingControl
                     apiKey={maptilersdk.config.apiKey}
                     mapController={mapController}
                     language="en"
-                    // types={[
-                    //     "country",
-                    //     "region",
-                    //     "subregion",
-                    //     "county",
-                    //     "municipality",
-                    //     "locality",
-                    // ]}
+                    types={[
+                        "country",
+                        "region",
+                        "subregion",
+                        "county",
+                        "municipality",
+                        "municipal_district",
+                        "locality",
+                    ]}
                     onPick={handleGeocodingResultSelected}
                     // iconsBaseUrl="/icons" // Ustawienie ścieżki do lokalnych ikon
                 />
                 <Button onClick={handleAddMarker} ml="300" />
             </Box>
-            <SearchBarControl mapCurrent={map.current}/>
+            {/* <SearchBarControl
+                mapController={mapController}
+                apiKey={maptilersdk.config.apiKey}
+            /> */}
 
             <div ref={mapContainer} className="map" />
             <SideForm
                 isSideFormOpen={isSideFormOpen}
                 onSideFormClose={onSideFormClose}
+                mapController={mapController}
             />
         </Box>
     );

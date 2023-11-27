@@ -6,7 +6,6 @@ import { Route, Routes, useLocation } from "react-router-dom";
 export const MainContent = () => {
     return (
         <Box
-            backgroundColor={"red"}
             ml={"60px"}
             h="100%"
             w="90%"

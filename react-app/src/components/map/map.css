@@ -12,9 +12,11 @@
     height: 100vh;
 }
 
-.input-group {
+.geocoding-control-map .input-group {
     padding: 0 16px !important;
-    position: absolute;
+    position: absolute !important;
+    z-index: 9999 !important;
+
     height: 40px;
     width: 150px;
     /* background-color: red; */
@@ -25,20 +27,23 @@
     backdrop-filter: blur(10px);
     font-family: "DM Sans", sans-serif;
     /* border-color: red; */
-    transition: width 0.5s cubic-bezier(0,1,.88,.99);
+    transition: width 0.5s cubic-bezier(0, 1, 0.88, 0.99);
+}
+form.svelte-1r7dvt7.svelte-1r7dvt7 {
+    --color-icon-button: #a1a2a4;
 }
 
 .input-group > input {
     letter-spacing: -0.5px !important;
-    font-size: 16px !important;
-} 
+    /* font-size: 16px !important; */
+}
 
-.input-group:focus-within {
+.geocoding-control-map .input-group:focus-within {
     width: 300px;
     outline: #808000 solid 1px !important;
 }
 
-ul {
+.geocoding-control-map ul {
     margin-top: 40px !important;
     width: 300px !important;
     border-radius: 16px !important;
@@ -57,6 +62,14 @@ ul > li {
     font-family: "DM Sans", sans-serif;
     letter-spacing: -0.5px !important;
     font-size: 16px !important;
+    --color-text: #808080;
+}
+
+ul > li:hover {
+    --color-text: #00ff00; /* Zielony kolor tekstu po najechaniu */
+    color: var(
+        --color-text
+    ); /* Ustawiamy kolor tekstu w stanie hover z wykorzystaniem niestandardowej właściwości */
 }
 
 .maplibregl-ctrl {
@@ -64,4 +77,36 @@ ul > li {
     box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
     background-color: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(10px);
+}
+
+.geocoding-control-form .input-group {
+    font-family: "DM Sans", sans-serif;
+    padding: 0 16px !important;
+    /* position:  !important; */
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 48px;
+    border-radius: 16px !important;
+    color: #bdbdbd !important;
+    transition: 0.2s cubic-bezier(0, 1, 0.88, 0.99);
+}
+.geocoding-control-form form {
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+    box-shadow: none !important;
+}
+
+.geocoding-control-form .input-group:focus-within {
+    outline: #808000 solid 1px !important;
+}
+
+.geocoding-control-form ul {
+    top: 15px !important;
+    height: max-content !important;
+    margin-top: 40px !important;
+    width: 60% !important;
+    border-radius: 16px !important;
+    font-weight: lighter !important;
 }
