@@ -9,14 +9,30 @@ import AppError from "./utils/appError.js";
 import tourRouter from "./routes/tourRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 // Set security HTTP headers
 app.use(helmet());
+app.use(cookieParser());
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,UPDATE,OPTIONS");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+    );
+    next();
+});
 // MIDDLEWARES
-app.use(cors()); // Access-Control-Allow-Origin *
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
 app.use(morgan("dev"));
 
 const limiter = rateLimit({
