@@ -21,6 +21,7 @@ export const SearchBarControl = ({ mapController }) => {
                 apiKey={apiKey}
                 mapController={mapController}
                 language="en"
+                placeholder="Enter place"
                 // types={[
                 //     "country",
                 //     "region",

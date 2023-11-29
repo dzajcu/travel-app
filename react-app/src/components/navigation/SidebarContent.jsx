@@ -21,6 +21,7 @@ import {
 import { FiChevronUp } from "react-icons/fi";
 
 export const SidebarContent = ({
+    username,
     onMobileClose,
     activeNavItem,
     setActiveNavItem,
@@ -90,9 +91,9 @@ export const SidebarContent = ({
                                 <HStack>
                                     <Avatar
                                         size={"sm"}
-                                        src={
-                                            "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                                        }
+                                        // src={
+                                        //     "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                                        // }
                                         borderColor={"gray.200"}
                                         borderWidth={1}
                                     />
@@ -102,7 +103,7 @@ export const SidebarContent = ({
                                         spacing="1px"
                                         ml="2"
                                     >
-                                        <Text fontSize="md">zajcu</Text>
+                                        <Text fontSize="md">{username}</Text>
                                     </VStack>
                                     <Box display={{ base: "none", md: "flex" }}>
                                         <FiChevronUp />

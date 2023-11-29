@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SideMenu } from "./SideMenu";
 import { MapTiler } from "../map/MapTiler";
 import { SidebarContent } from "./SidebarContent";
@@ -10,7 +10,7 @@ import {
     DrawerContent,
     useDisclosure,
 } from "@chakra-ui/react";
-
+import getUser from "./getUser";
 export default function SidebarOverlayWithMap() {
     const {
         isOpen: isMobileOpen,
@@ -31,10 +31,19 @@ export default function SidebarOverlayWithMap() {
     } = useDisclosure();
 
     const [activeNavItem, setActiveNavItem] = useState(0);
+    const [username, setUsername] = useState("");
+
+    const getCurrentUser = async () => {
+        await getUser(setUsername);
+    };
+    useEffect(() => {
+        getCurrentUser(); // Wywołaj funkcję getCurrentUser za każdym razem, gdy komponent jest renderowany
+    }, []); // Dodaj username do zależności useEffect
 
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
             <SidebarContent
+                username={username}
                 onMobileClose={onMobileClose}
                 activeNavItem={activeNavItem}
                 setActiveNavItem={setActiveNavItem}

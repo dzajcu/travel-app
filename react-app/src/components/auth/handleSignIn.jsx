@@ -8,6 +8,7 @@ const handleSignIn = async (
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/login", {
             method: "POST",
+            credentials: "include",
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",

@@ -17,8 +17,8 @@
     position: absolute !important;
     z-index: 9999 !important;
 
-    height: 40px;
-    width: 150px;
+    height: 50px;
+    width: 180px;
     /* background-color: red; */
     /* border: 1px solid ; */
     border-radius: 100px !important;
@@ -44,14 +44,14 @@ form.svelte-1r7dvt7.svelte-1r7dvt7 {
 }
 
 .geocoding-control-map ul {
-    margin-top: 40px !important;
+    margin-top: 50px !important;
     width: 300px !important;
     border-radius: 16px !important;
     font-weight: lighter !important;
 }
-.no-results,
+.geocoding-control-map .no-results,
 .error {
-    margin-top: 40px !important;
+    margin-top: 50px !important;
     width: 300px !important;
     font-family: "DM Sans", sans-serif;
     letter-spacing: -0.5px !important;
@@ -62,14 +62,11 @@ ul > li {
     font-family: "DM Sans", sans-serif;
     letter-spacing: -0.5px !important;
     font-size: 16px !important;
-    --color-text: #808080;
+    --color-text: #808000;
 }
 
-ul > li:hover {
-    --color-text: #00ff00; /* Zielony kolor tekstu po najechaniu */
-    color: var(
-        --color-text
-    ); /* Ustawiamy kolor tekstu w stanie hover z wykorzystaniem niestandardowej właściwości */
+.svelte-1r7dvt7 ul > li:active {
+    background-color: red;
 }
 
 .maplibregl-ctrl {
@@ -89,7 +86,14 @@ ul > li:hover {
     border-radius: 16px !important;
     color: #bdbdbd !important;
     transition: 0.2s cubic-bezier(0, 1, 0.88, 0.99);
+    outline: 1px solid #e2e8f0;
 }
+
+button.svelte-1r7dvt7:hover svg,
+button.svelte-1r7dvt7:active svg {
+    fill: #808000;
+}
+
 .geocoding-control-form form {
     border-radius: 16px !important;
     width: 100% !important;

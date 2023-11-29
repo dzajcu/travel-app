@@ -64,6 +64,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
             style: maptilersdk.MapStyle.BRIGHT.PASTEL,
+            language: "en",
             center: [center.lng, center.lat],
             zoom: zoom,
             pitch: pitch,
@@ -124,7 +125,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                 className="geocoding-control-map"
                 pos="absolute"
                 top="16px"
-                left="220px"
+                left={{ base: "16px", md: "220px" }}
             >
                 <GeocodingControl
                     apiKey={maptilersdk.config.apiKey}
@@ -139,10 +140,11 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                         "municipal_district",
                         "locality",
                     ]}
+                    placeholder="Search for a place..."
                     onPick={handleGeocodingResultSelected}
                     // iconsBaseUrl="/icons" // Ustawienie ścieżki do lokalnych ikon
                 />
-                <Button onClick={handleAddMarker} ml="300" />
+                {/*<Button onClick={handleAddMarker} ml="300" />*/}
             </Box>
             {/* <SearchBarControl
                 mapController={mapController}
