@@ -2,11 +2,12 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import { NavRoutes } from "../routes/NavRoutes";
 import { useColorModeValue, CloseButton } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) => {
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const isProfile = "/menu/profile" === location.pathname;
     const handleSideMenuClose = () => {
         setActiveNavItem(0);
         onSideMenuClose();
@@ -24,7 +25,7 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                 // p={{ base: 0, md: 4 }}
                 pt={{ base: 0, md: 10 }}
                 pb={{ base: 0, md: 10 }}
-                w={isSideMenuOpen ? "60%" : "0%"}
+                w={isSideMenuOpen ? (isProfile ? "500px" : "60%") : "0%"}
                 h={{ base: "full", md: "96%" }}
                 transition="0.5s cubic-bezier(0,1,.88,.99)"
                 bg={useColorModeValue("gray.50", "gray.900")}

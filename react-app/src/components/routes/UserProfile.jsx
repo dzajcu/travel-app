@@ -1,84 +1,297 @@
-import React from "react";
+"use client";
 
 import {
-    Box,
     Button,
-    Flex,
-    Heading,
+    FormControl,
+    FormLabel,
     Icon,
+    Input,
+    InputGroup,
+    InputRightElement,
     Text,
-    Divider,
-    AbsoluteCenter,
     useColorModeValue,
-    HStack
+    useToast,
+    Box,
+    Stack,
+    Center,
+    Avatar,
+    AvatarBadge,
+    IconButton,
+    Flex,
+    Switch,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Form } from "react-router-dom";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { IoMdEyeOff, IoMdClose } from "react-icons/io";
 
 export default function UserProfile() {
-    return (
-        <Flex
-            padding={{ base: "30px", md: 3 }}
-            paddingLeft={{ md: 7 }}
-            paddingRight={{ md: 7 }}
-            direction={"column"}
-            position="fixed"
-            // height="100  %"
-            bottom={{ base: 0, md: "auto" }}
-            top={{ md: 0 }}
-            width={{ base: "80%", md: "80%" }}
-            transition="all 0.5s cubic-bezier(0,1,.88,.99)"
-            zIndex={9999}
-            gap={5}
-            borderBottomLeftRadius={{ base: "0", md: "3xl" }}
-            borderTopLeftRadius={{ base: "3xl", md: "0" }}
-            backgroundColor="rgba(255, 255, 255, 1)"
-            // backdropFilter={"blur(5px)"}
-        >
-            {/* <Image
-                    left={{ base: "20%", md: "37%" }}
-                    top={{ base: -8, md: -1 }}
-                    position={"absolute"}
-                    width="300px"
-                    objectFit="cover"
-                    src="../../public/dotted-line-plane.png"
-                    alt="Dotted line with paper plane flying along it"
-                    transform={{ base: "rotate(8deg)", md: "rotate(0deg)" }}
-                /> */}
-            <HStack align={"center"} justify={"space-between"} mt="10px">
-                <Heading color="black" fontSize="32px" display={"flex"}>
-                    Add Trip
-                    <Text color={"#808000"} ml={1}>
-                        !
-                    </Text>
-                </Heading>
-            </HStack>
-            {/* <FormControl>
-                    <Input
-                        isRequired={true}
-                        id="place"
-                        fontSize="sm"
-                        type="text"
-                        placeholder="Enter place"
-                        size="lg"
-                        bgColor={"white"}
-                        borderRadius={"2xl"}
-                        _placeholder={{ color: "gray.400" }}
-                        fontWeight={300}
-                    />
-                </FormControl> */}
+    const textColor = useColorModeValue("#808000", "white");
+    const textColorSecondary = "gray.400";
+    const textColorDetails = useColorModeValue("gray.700", "gray.600");
+    const textColorBrand = useColorModeValue("#808000", "white");
+    const brandStars = useColorModeValue("#808000", "green.400");
 
-            <Button
-                fontSize="sm"
-                fontWeight="500"
-                w="100%"
-                h="50"
-                mb="16px"
-                borderRadius="2xl"
-                bgColor="#808000"
-                color="white"
-                _hover={{ bg: "green.600" }}
-            >
-                Add to Map
-            </Button>
-        </Flex>
+    const [show, setShow] = useState(false);
+    const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+    const handleClick = () => setShow(!show);
+    const handleClickPasswordConfirm = () =>
+        setShowPasswordConfirm(!showPasswordConfirm);
+    const toast = useToast();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+    const [username, setUsername] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        await handleEditProfile(
+            email,
+            username,
+            password,
+            passwordConfirm,
+            setIsLoading,
+            navigate,
+            toast
+        );
+    };
+
+    return (
+        <Box width="400px" mt="12px" mx="10px">
+            <Flex align="center" gap="30px">
+                <Stack>
+                    <Center justifyContent="flex-start" mb="10px">
+                        <Avatar size="xl" src="o" bg="olive">
+                            <AvatarBadge
+                                as={IconButton}
+                                size="sm"
+                                rounded="full"
+                                top="-10px"
+                                colorScheme="red"
+                                aria-label="remove Image"
+                                icon={<IoMdClose />}
+                            />
+                        </Avatar>
+                    </Center>
+                </Stack>
+                <Button
+                    width="150px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    h="40px"
+                    mb="16px"
+                    borderRadius="2xl"
+                    bgColor={"gray.300"}
+                    color="gray.700"
+                    _hover={{ bg: "gray.400", color: "white" }}
+                    type="submit"
+                    isLoading={isLoading}
+                >
+                    Change Icon
+                </Button>
+            </Flex>
+            <FormControl>
+                <FormLabel
+                    display="flex"
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={textColorDetails}
+                    mb="8px"
+                >
+                    Email<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    isRequired={true}
+                    id="email"
+                    fontSize="sm"
+                    ms={{ base: "0px", md: "0px" }}
+                    type="email"
+                    mb="12px"
+                    fontWeight="500"
+                    placeholder="travel@map.com"
+                    size="md"
+                    borderRadius="2xl"
+                    borderColor={error ? "red.500" : "gray.200"}
+                    backgroundColor="white"
+                />
+                <FormLabel
+                    display="flex"
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={textColorDetails}
+                    mb="8px"
+                >
+                    Username<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <Input
+                    onChange={(e) => setUsername(e.target.value)}
+                    isRequired={true}
+                    id="username"
+                    fontSize="sm"
+                    ms={{ base: "0px", md: "0px" }}
+                    type="text"
+                    placeholder="traveller123"
+                    mb="12px"
+                    fontWeight="500"
+                    size="md"
+                    borderRadius="2xl"
+                    backgroundColor="white"
+                />
+
+                <FormLabel
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={"textColorDetails"}
+                    display="flex"
+                    placement="right"
+                >
+                    Current Password<Text color={brandStars}>*</Text>
+                </FormLabel>
+
+                <InputGroup size="md" mb="12px">
+                    <Input
+                        onChange={(e) => setPassword(e.target.value)}
+                        id="password"
+                        isRequired={true}
+                        fontSize="sm"
+                        placeholder="*************"
+                        size="md"
+                        type={show ? "text" : "password"}
+                        autoComplete="off"
+                        borderRadius="2xl"
+                        backgroundColor="white"
+                    />
+                    <InputRightElement
+                        display="flex"
+                        alignItems="center"
+                        onClick={handleClick}
+                        _hover={{ cursor: "pointer" }}
+                    >
+                        <Icon
+                            color={textColorSecondary}
+                            as={show ? IoMdEyeOff : MdOutlineRemoveRedEye}
+                        />
+                    </InputRightElement>
+                </InputGroup>
+                <FormLabel
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={textColorDetails}
+                    display="flex"
+                >
+                    New Password<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <InputGroup size="md" mb="12px">
+                    <Input
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        id="password-validated"
+                        isRequired={true}
+                        fontSize="sm"
+                        placeholder="*************"
+                        size="md"
+                        type={showPasswordConfirm ? "text" : "password"}
+                        autoComplete="off"
+                        borderRadius="2xl"
+                        backgroundColor="white"
+                    />
+                    <InputRightElement
+                        display="flex"
+                        alignItems="center"
+                        _hover={{ cursor: "pointer" }}
+                        onClick={handleClickPasswordConfirm}
+                        color={textColorSecondary}
+                    >
+                        <Icon
+                            color={textColorSecondary}
+                            as={
+                                showPasswordConfirm
+                                    ? IoMdEyeOff
+                                    : MdOutlineRemoveRedEye
+                            }
+                        />
+                    </InputRightElement>
+                </InputGroup>
+                <FormLabel
+                    ms="4px"
+                    fontSize="sm"
+                    fontWeight="500"
+                    color={textColorDetails}
+                    display="flex"
+                >
+                    New Password Confirm<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <InputGroup size="md">
+                    <Input
+                        onChange={(e) => setNewPasswordConfirm(e.target.value)}
+                        id="password-validated"
+                        isRequired={true}
+                        fontSize="sm"
+                        placeholder="*************"
+                        mb="12px"
+                        size="md"
+                        type={showPasswordConfirm ? "text" : "password"}
+                        autoComplete="off"
+                        borderRadius="2xl"
+                        backgroundColor="white"
+                    />
+                    <InputRightElement
+                        display="flex"
+                        alignItems="center"
+                        _hover={{ cursor: "pointer" }}
+                        onClick={handleClickPasswordConfirm}
+                        color={textColorSecondary}
+                    >
+                        <Icon
+                            color={textColorSecondary}
+                            as={
+                                showPasswordConfirm
+                                    ? IoMdEyeOff
+                                    : MdOutlineRemoveRedEye
+                            }
+                        />
+                    </InputRightElement>
+                </InputGroup>
+
+                <Stack direction="row" mt="10px">
+                    <FormLabel
+                        ms="4px"
+                        fontSize="sm"
+                        fontWeight="500"
+                        color={textColorDetails}
+                        display="flex"
+                    >
+                        Do u want to make your map public?
+                        <Text color={brandStars}>*</Text>
+                    </FormLabel>
+                    <Switch size="md" colorScheme="teal" />
+                </Stack>
+                <Flex justify="flex-end">
+                    <Button
+                        mt="50px"
+                        fontSize="sm"
+                        fontWeight="500"
+                        w="35%"
+                        h="40px"
+                        borderRadius="2xl"
+                        bgColor={textColorBrand}
+                        color="white"
+                        _hover={{ bg: "green.600" }}
+                        type="submit"
+                        isLoading={isLoading}
+                    >
+                        Save Changes
+                    </Button>
+                </Flex>
+            </FormControl>
+        </Box>
     );
 }

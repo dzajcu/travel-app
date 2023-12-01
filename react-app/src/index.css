@@ -53,7 +53,7 @@ a {
     position: absolute;
     top: 55px;
     left: 10px;
-  }
+}
 
 /* Tryb medium (md) - 100vh */
 @media (min-width: 768px) {
@@ -82,4 +82,9 @@ a {
 
 .ant-picker-input > input::placeholder {
     color: #a0aec0 !important;
+}
+
+.css-1sibkpi[aria-checked="true"],
+.css-1sibkpi[data-checked] {
+    --switch-bg: #808000 !important;
 }

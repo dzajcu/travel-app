@@ -64,7 +64,8 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
         if (map.current) return;
         map.current = new maptilersdk.Map({
             container: mapContainer.current,
-            style: maptilersdk.MapStyle.BRIGHT.PASTEL,
+            // style: maptilersdk.MapStyle.BRIGHT.PASTEL
+            style: maptilersdk.MapStyle.TOPO,
             language: "en",
             center: [center.lng, center.lat],
             zoom: zoom,

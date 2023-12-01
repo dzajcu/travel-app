@@ -19,6 +19,7 @@ import {
     MenuList,
 } from "@chakra-ui/react";
 import { FiChevronUp } from "react-icons/fi";
+import { MdFormatTextdirectionLToR } from "react-icons/md";
 
 export const SidebarContent = ({
     username,
@@ -79,55 +80,59 @@ export const SidebarContent = ({
                 ))}
             </Box>
 
-            <Box  pos="absolute" bottom="4" width="100%" mb={{ base: "50%", md: 2}}>
-                <HStack>
-                    <Flex>
-                        <Menu>
-                            <MenuButton
-                                py={2}
-                                transition="all 0.3s"
-                                _focus={{ boxShadow: "none" }}
+            <Flex pos="absolute" bottom="4" width="100%" mb={{ base: "50%", md: 2 }}>
+                <Flex width="100%" justifyContent="space-around">
+                    <Menu>
+                        <MenuButton
+                            py={2}
+                            transition="all 0.3s"
+                            _focus={{ boxShadow: "none" }}
+                            width="100%"
+                        >
+                            <Flex
+                                pl="4"
+                                pr="4"
+                                align="center"
+                                gap={2}
+                                justifyContent="space-around"
                             >
-                                <Flex align="center" gap={3}>
-                                    <Avatar
-                                        size={"sm"}
-                                        // src={
-                                        //     "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                                        // }
-                                        borderColor={"gray.200"}
-                                        borderWidth={1}
-                                    />
-                                    <VStack
-                                        display={{ base: "flex", md: "flex" }}
-                                        alignItems="flex-start"
-                                    >
-                                        <Text fontSize="md">{username}</Text>
-                                    </VStack>
-                                    <Box display={{ base: "none", md: "flex" }}>
-                                        <FiChevronUp />
-                                    </Box>
-                                </Flex>
-                            </MenuButton>
-                            <MenuList
-                                zIndex={9999}
-                                bg={useColorModeValue("white", "gray.200")}
-                                borderColor={useColorModeValue(
-                                    "gray.200",
-                                    "gray.700"
-                                )}
-                            >
-                                <NavLink to="/menu/profile" onClick={onSideMenuOpen}>
-                                    <MenuItem>Profile</MenuItem>
-                                </NavLink>
-                                <MenuDivider />
-                                <NavLink to="/auth/sign-in">
-                                    <MenuItem color={"#F53B3B"}>Log out</MenuItem>
-                                </NavLink>
-                            </MenuList>
-                        </Menu>
-                    </Flex>
-                </HStack>
-            </Box>
+                                <Avatar
+                                    bg={"olive"}
+                                    size={"sm"}
+                                    // src={
+                                    //     "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                                    // }
+                                    borderColor={"gray.200"}
+                                    borderWidth={1}
+                                />
+                                <VStack
+                                    display={{ base: "flex", md: "flex" }}
+                                    alignItems="flex-start"
+                                >
+                                    <Text fontSize="md">{username}</Text>
+                                </VStack>
+                                <Box display={{ base: "none", md: "flex" }}>
+                                    <FiChevronUp />
+                                </Box>
+                            </Flex>
+                        </MenuButton>
+                        <MenuList
+                            ml="10"
+                            zIndex={9999}
+                            bg={useColorModeValue("white", "gray.200")}
+                            borderColor={useColorModeValue("gray.200", "gray.700")}
+                        >
+                            <NavLink to="/menu/profile" onClick={onSideMenuOpen}>
+                                <MenuItem>Profile</MenuItem>
+                            </NavLink>
+                            <MenuDivider />
+                            <NavLink to="/auth/sign-in">
+                                <MenuItem color={"#F53B3B"}>Log out</MenuItem>
+                            </NavLink>
+                        </MenuList>
+                    </Menu>
+                </Flex>
+            </Flex>
         </Box>
     );
 };
