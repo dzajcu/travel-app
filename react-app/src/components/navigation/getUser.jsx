@@ -1,4 +1,4 @@
-const getUser = async (setUsername) => {
+const getUser = async (setUsername, navigate, toast) => {
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/me", {
             method: "GET",
@@ -14,9 +14,19 @@ const getUser = async (setUsername) => {
             console.log("User data fetched successfully:", userData);
         } else {
             console.error("Error during user data fetch:", await response.json());
+            navigate("/auth/sign-in");
+            toast({
+                title: "You're not logged in! Please sign in to continue.",
+                status: "error",
+            });
         }
     } catch (error) {
         console.error("Error during user data fetch:", error);
+        navigate("/auth/sign-in");
+        toast({
+            title: "You're not logged in! Please sign in to continue.",
+            status: "error",
+        });
     }
 };
 

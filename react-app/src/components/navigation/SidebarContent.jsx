@@ -79,16 +79,16 @@ export const SidebarContent = ({
                 ))}
             </Box>
 
-            <Box position="absolute" bottom="8" left="20%" right="0">
-                <HStack spacing={{ base: "0", md: "6" }}>
-                    <Flex alignItems={"center"}>
+            <Box  pos="absolute" bottom="4" width="100%" mb={{ base: "50%", md: 2}}>
+                <HStack>
+                    <Flex>
                         <Menu>
                             <MenuButton
                                 py={2}
                                 transition="all 0.3s"
                                 _focus={{ boxShadow: "none" }}
                             >
-                                <HStack>
+                                <Flex align="center" gap={3}>
                                     <Avatar
                                         size={"sm"}
                                         // src={
@@ -98,17 +98,15 @@ export const SidebarContent = ({
                                         borderWidth={1}
                                     />
                                     <VStack
-                                        display={{ base: "none", md: "flex" }}
+                                        display={{ base: "flex", md: "flex" }}
                                         alignItems="flex-start"
-                                        spacing="1px"
-                                        ml="2"
                                     >
                                         <Text fontSize="md">{username}</Text>
                                     </VStack>
                                     <Box display={{ base: "none", md: "flex" }}>
                                         <FiChevronUp />
                                     </Box>
-                                </HStack>
+                                </Flex>
                             </MenuButton>
                             <MenuList
                                 zIndex={9999}
@@ -118,7 +116,9 @@ export const SidebarContent = ({
                                     "gray.700"
                                 )}
                             >
-                                <MenuItem>Profile</MenuItem>
+                                <NavLink to="/menu/profile" onClick={onSideMenuOpen}>
+                                    <MenuItem>Profile</MenuItem>
+                                </NavLink>
                                 <MenuDivider />
                                 <NavLink to="/auth/sign-in">
                                     <MenuItem color={"#F53B3B"}>Log out</MenuItem>

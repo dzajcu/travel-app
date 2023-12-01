@@ -5,6 +5,7 @@ import SignUpScreen from "./components/auth/SignUpScreen";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme, { toastOptions } from "./theme";
+import { NavRoutes } from "./components/routes/NavRoutes";
 
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
@@ -44,13 +45,11 @@ const router = createBrowserRouter([
         element: <SignInScreen />,
     },
     {
-        path: "/menu/*",
+        path: "/menu",
         element: <SidebarOverlayWithMap />,
-        // children: [
-        //     { path: "statistics", element: <Statistics /> },
-        //     { path: "planer", element: <Planer /> },
-        //     { path: "settings", element: <Settings /> },
-        // ],
+        children: [
+            { path: "/menu/*", element: <NavRoutes /> },
+        ],
     },
     {
         path: "/auth/sign-in",

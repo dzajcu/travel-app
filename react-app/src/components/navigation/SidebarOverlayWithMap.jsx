@@ -9,9 +9,12 @@ import {
     Drawer,
     DrawerContent,
     useDisclosure,
+    useToast,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import getUser from "./getUser";
 export default function SidebarOverlayWithMap() {
+    const toast = useToast();
     const {
         isOpen: isMobileOpen,
         onOpen: onMobileOpen,
@@ -32,9 +35,9 @@ export default function SidebarOverlayWithMap() {
 
     const [activeNavItem, setActiveNavItem] = useState(0);
     const [username, setUsername] = useState("");
-
+    const navigate = useNavigate();
     const getCurrentUser = async () => {
-        await getUser(setUsername);
+        await getUser(setUsername, navigate, toast);
     };
     useEffect(() => {
         getCurrentUser(); // Wywołaj funkcję getCurrentUser za każdym razem, gdy komponent jest renderowany
@@ -71,6 +74,7 @@ export default function SidebarOverlayWithMap() {
                         activeNavItem={activeNavItem}
                         setActiveNavItem={setActiveNavItem}
                         onSideMenuClose={onSideMenuClose}
+                        onSideMenuOpen={onSideMenuOpen}
                     />
                 </DrawerContent>
             </Drawer>

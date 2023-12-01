@@ -1,15 +1,15 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Explore from "./Explore";
-import { Route, Routes, useLocation } from "react-router-dom";
+import UserProfile from "./UserProfile";
+import { Route, Routes } from "react-router-dom";
 
-export const MainContent = () => {
+export const NavRoutes = () => {
     return (
         <Box
             ml={"60px"}
             h="100%"
             w="90%"
-            
             // p={"10"}
             flexWrap="wrap"
             overflowY="auto"
@@ -21,6 +21,7 @@ export const MainContent = () => {
         >
             <Routes>
                 <Route path="/explore" element={<Explore />} />
+                <Route path="/profile" element={<UserProfile />} />
             </Routes>
         </Box>
     );

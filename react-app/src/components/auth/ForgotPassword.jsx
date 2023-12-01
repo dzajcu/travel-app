@@ -16,7 +16,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import AuthLayout from "./AuthLayout";
-import illustration from "../../../public/auth-bg.jpg";
+import illustration from "../../assets/auth-bg.jpg";
 
 function ForgotPassword() {
     // Chakra color mode

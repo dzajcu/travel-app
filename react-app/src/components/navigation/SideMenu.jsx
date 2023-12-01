@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { MainContent } from "../routes/NavRoutes";
+import { NavRoutes } from "../routes/NavRoutes";
 import { useColorModeValue, CloseButton } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                     },
                 }}
             >
-                <MainContent />
+                <NavRoutes />
                 <CloseButton
                     onClick={handleSideMenuClose}
                     pos={"absolute"}

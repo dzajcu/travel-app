@@ -14,7 +14,8 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
     const mapContainer = useRef(null);
     const map = useRef(null);
     const center = { lng: 0.09, lat: 15.505 };
-    const [zoom] = useState(1.85);
+    // const [zoom] = useState(1.85);
+    const [zoom] = useState(3);
     const [pitch] = useState(30);
     maptilersdk.config.apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
     const [mapController, setMapController] = useState();

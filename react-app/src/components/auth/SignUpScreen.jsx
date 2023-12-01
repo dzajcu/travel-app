@@ -14,7 +14,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import AuthLayout from "./AuthLayout";
-import illustration from "../../../public/auth-bg.jpg";
+import illustration from "../../assets/auth-bg.jpg";
 import { FcGoogle } from "react-icons/fc";
 
 function RegisterScreen() {
