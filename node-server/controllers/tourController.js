@@ -29,11 +29,9 @@ export const getTour = catchAsync(async (req, res) => {
 
 export const createTour = catchAsync(async (req, res) => {
     const [startDateStr, endDateStr] = req.body.date.split(",");
-
     const startDate = new Date(startDateStr);
     const endDate = new Date(endDateStr);
-
-    console.log(startDate, endDate);
+    const imageUrls = req.files.map(file => file.location);
 
     const newTour = await Tour.create({
         user: req.user._id,
@@ -41,6 +39,7 @@ export const createTour = catchAsync(async (req, res) => {
         startDate: startDate,
         endDate: endDate,
         description: req.body.description,
+        images: imageUrls,
     });
 
     // Update user tours
