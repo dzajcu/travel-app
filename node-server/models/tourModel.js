@@ -10,6 +10,9 @@ const tourSchema = new Schema({
         type: String,
         required: [true, "A tour must have a place"],
     },
+    coordinates : {
+        type: [Number],
+    },
     startDate: {
         type: Date,
     },
