@@ -2,7 +2,7 @@ import React from "react";
 import { DatePicker, Space, ConfigProvider } from "antd";
 const { RangePicker } = DatePicker;
 
-const dateFormat = "DD.MM.YYYY";
+const dateFormat = "YYYY-MM-DD";
 const datePickerStyle = {
     "&.antPickedFocused": {
         borderColor: "#808000",

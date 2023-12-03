@@ -8,11 +8,12 @@ import { createMapLibreGlMapController } from "@maptiler/geocoding-control/mapli
 import maplibregl from "maplibre-gl";
 // import "maplibre-gl/dist/maplibre-gl.css";
 
-export const SearchBarControl = ({ mapController }) => {
+export const SearchBarControl = ({ mapController, setPlace, setPlaceCoordinates }) => {
     const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
 
     const handleGeocodingResultSelected = (result) => {
-        console.log(result);
+        setPlace(result?.place_name_en);
+        setPlaceCoordinates(result?.geometry.center);
     };
 
     return (

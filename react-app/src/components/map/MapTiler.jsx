@@ -10,7 +10,7 @@ import maplibregl from "maplibre-gl";
 // import "maplibre-gl/dist/maplibre-gl.css";
 import { Button } from "@chakra-ui/react";
 import { SearchBarControl } from "./SearchBarControl";
-export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) => {
+export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose, username }) => {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const center = { lng: 0.09, lat: 15.505 };
@@ -158,6 +158,7 @@ export const MapTiler = ({ isSideFormOpen, onSideFormOpen, onSideFormClose }) =>
                 isSideFormOpen={isSideFormOpen}
                 onSideFormClose={onSideFormClose}
                 mapController={mapController}
+                username={username}
             />
         </Box>
     );

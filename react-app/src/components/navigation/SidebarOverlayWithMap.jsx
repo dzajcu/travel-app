@@ -83,6 +83,7 @@ export default function SidebarOverlayWithMap() {
                 onSideFormClose={onSideFormClose}
                 isSideFormOpen={isSideFormOpen}
                 onSideFormOpen={onSideFormOpen}
+                username={username}
             />
             <SideMenu
                 isSideMenuOpen={isSideMenuOpen}

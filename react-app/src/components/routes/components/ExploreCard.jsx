@@ -39,9 +39,8 @@ export default function ExploreCard() {
 
     return (
         <Card
-            maxW={{ base: "100%", md: "50%" }}
             h={"350px"}
-            w={"48%"}
+            w={{ md: "95%", xl: "46%" }}
             overflow="hidden"
             backgroundImage={`url(${randomImage})`}
             backgroundSize="cover"

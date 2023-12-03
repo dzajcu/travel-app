@@ -10,14 +10,32 @@ import {
     HStack,
     CloseButton,
     Textarea,
+    useToast,
 } from "@chakra-ui/react";
 import { DropZone } from "./components/FileDropZone";
 import { DateRangePicker } from "./components/DatePicker";
 import { SearchBarControl } from "../map/SearchBarControl";
+import handleSubmitForm from "./components/handleSubmitForm";
 
-export const SideForm = ({ isSideFormOpen, onSideFormClose, mapController }) => {
-    const [acceptedFiles, setAcceptedFiles] = useState([]);
+export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
+    const toast = useToast();
+    const [uploadedFiles, setUploadedFiles] = useState([]);
     const [selectedDate, setSelectedDate] = useState([null, null]);
+    const [description, setDescription] = useState("");
+    const [place, setPlace] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await handleSubmitForm(
+            place,
+            username,
+            uploadedFiles,
+            selectedDate,
+            description,
+            toast,
+            onSideFormClose
+        );
+    };
     return (
         <>
             <Flex
@@ -72,18 +90,19 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, mapController }) => 
                         fontWeight={300}
                     />
                 </FormControl> */}
-                <SearchBarControl />
+                <SearchBarControl setPlace={setPlace} />
                 <DateRangePicker setSelectedDate={setSelectedDate} />
                 <Textarea
+                    onChange={(e) => setDescription(e.target.value)}
                     maxHeight={"200px"}
                     placeholder="Enter a description..."
                     _placeholder={{ color: "gray.400" }}
                     bgColor={"white"}
                     paddingTop={"16px"}
                 />
-                <DropZone setAcceptedFiles={setAcceptedFiles} />
+                <DropZone setUploadedFiles={setUploadedFiles} />
                 <Button
-                    onClick={onSideFormClose}
+                    onClick={handleSubmit}
                     fontSize="sm"
                     fontWeight="500"
                     w="100%"
@@ -97,7 +116,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, mapController }) => 
                     Add to Map
                 </Button>
             </Flex>
-{/* 
+            {/* 
             <Box
                 onClick={onSideFormClose}
                 opacity={isSideFormOpen ? 1 : 0}

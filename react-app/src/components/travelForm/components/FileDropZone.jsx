@@ -28,7 +28,7 @@ const acceptStyle = {
 const rejectStyle = {
     borderColor: "#ff1744",
 };
-export const DropZone = ({ setAcceptedFiles }) => {
+export const DropZone = ({ setUploadedFiles }) => {
     const {
         acceptedFiles,
         fileRejections,
@@ -43,8 +43,10 @@ export const DropZone = ({ setAcceptedFiles }) => {
             "image/jpeg": [],
             "image/png": [],
         },
+        name: "images",
+
         onDrop: (acceptedFiles) => {
-            setAcceptedFiles(acceptedFiles);
+            setUploadedFiles(acceptedFiles);
         },
     });
 
@@ -77,7 +79,7 @@ export const DropZone = ({ setAcceptedFiles }) => {
     return (
         <Box width={"100%"}>
             <div {...getRootProps({ style })}>
-                <input {...getInputProps()} />
+                <input {...getInputProps({ name: "images" })} />
                 <Icon as={IoCloudUploadSharp} fontSize="2xl" marginBottom={"10px"} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
                 <em>(Max 5 files *.jpeg i *.png)</em>
