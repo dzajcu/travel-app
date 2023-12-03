@@ -28,10 +28,22 @@ export const getTour = catchAsync(async (req, res) => {
 });
 
 export const createTour = catchAsync(async (req, res) => {
-    const newTour = await Tour.create(req.body);
+    // Get start and end dates
+    const startDate = new Date(req.body.startDate);
+    const endDate = new Date(req.body.endDate);
+    
+    const newTour = await Tour.create({
+        user: req.user._id,
+        place: req.body.place,
+        startDate: startDate,
+        endDate: endDate,
+        description: req.body.description,
+    });
 
-    const updatedUser = updateUserTours(req.body.user, newTour._id);
+    // Update user tours
+    const updatedUser = await updateUserTours(req.body.user, newTour._id);
 
+    // Respond with the created tour and updated user
     res.status(201).json({
         status: "success",
         data: {

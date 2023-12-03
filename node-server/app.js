@@ -11,7 +11,11 @@ import userRouter from "./routes/userRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+import { config } from "dotenv";
+config({ path: "./config.env" });
 const app = express();
+
+
 
 // Set security HTTP headers
 app.use(helmet());
@@ -56,5 +60,4 @@ app.all("*", (req, res, next) => {
 });
 
 app.use(globalErrorController);
-
 export default app;

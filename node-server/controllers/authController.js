@@ -20,7 +20,7 @@ const createSendToken = (user, statusCode, res) => {
         // ),
         httpOnly: true,
         secure: process.env.NODE_ENV.trim() === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 30, // would expire after 1 month
+        // maxAge: 1000 * 60 * 60 * 24 * 30, // would expire after 1 month
     };
 
     res.cookie("jwt", token, cookieOptions);
@@ -35,7 +35,6 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 export const protect = catchAsync(async (req, res, next) => {
-    console.log(req.cookies);
     let token = req.cookies.jwt;
 
     if (!token)
@@ -89,7 +88,7 @@ export const login = catchAsync(async (req, res, next) => {
     createSendToken(user, 200, res);
 });
 
-export const logout = (req, res) => {
+export const logout = catchAsync(async (req, res) => {
     const cookieOptions = {
         expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
         httpOnly: true,
@@ -98,7 +97,7 @@ export const logout = (req, res) => {
     res.cookie("jwt", "loggedout", cookieOptions);
 
     res.status(200).json({ status: "success" });
-};
+});
 
 export const forgotPassword = catchAsync(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
