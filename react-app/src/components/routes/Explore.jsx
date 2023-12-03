@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
-import ExploreCard from "./components/ExploreCard";
+import { useState, useEffect } from "react";
+import "@maptiler/geocoding-control/style.css";
 import { Box } from "@chakra-ui/react";
-import { useEffect } from "react";
-import handleGetAllTours from "./handleGetAllTours";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import ExploreCard from "./components/ExploreCard";
+import handleGetAllTours from "./handleGetAllTours";
 
 export default function Explore() {
     const [tours, setTours] = useState([]);
