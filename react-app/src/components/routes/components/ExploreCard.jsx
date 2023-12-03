@@ -3,50 +3,56 @@
 import {
     Avatar,
     Box,
-    Button,
     Card,
-    CardBody,
     CardFooter,
-    CardHeader,
     Flex,
     Heading,
     IconButton,
-    Image,
     Text,
+    Icon,
+    HStack,
 } from "@chakra-ui/react";
-import { BiChat, BiLike, BiShare } from "react-icons/bi";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
-export default function ExploreCard() {
+import { useState } from "react";
+
+export default function ExploreCard({ username, place, images, photo }) {
     const [randomImage, setRandomImage] = useState("");
-
+    const areImages = images.length > 0;
     // Funkcja pobierająca losowe zdjęcie z Unsplash
-    const fetchRandomImage = async () => {
-        try {
-            const response = await fetch(
-                "https://source.unsplash.com/random/300x300" // Ustaw rozmiar zdjęcia
-            );
-            setRandomImage(response.url);
-        } catch (error) {
-            console.error("Error fetching random image:", error);
-        }
-    };
+    // const fetchRandomImage = async () => {
+    //     try {
+    //         const response = await fetch(
+    //             "https://source.unsplash.com/random/300x300" // Ustaw rozmiar zdjęcia
+    //         );
+    //         setRandomImage(response.url);
+    //     } catch (error) {
+    //         console.error("Error fetching random image:", error);
+    //     }
+    // };
 
-    useEffect(() => {
-        fetchRandomImage();
-    }, []); // Uruchom tylko raz po zamontowaniu komponentu
+    // useEffect(() => {
+    //     fetchRandomImage();
+    // }, []); // Uruchom tylko raz po zamontowaniu komponentu
 
     return (
         <Card
-            h={"350px"}
-            w={{ md: "95%", xl: "46%" }}
+            display="inline-block"
+            h={areImages ? "350px" : "100px"}
+            w={"100%"}
             overflow="hidden"
-            backgroundImage={`url(${randomImage})`}
+            // backgroundImage={`url(${randomImage})`}
+            backgroundImage={
+                areImages
+                    ? `url(${images[0]})`
+                    : `https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701634278178-Designer.jpeg`
+            }
             backgroundSize="cover"
             borderRadius="xl"
             _hover={{
-                transform: "translate(12px)",
+                transform: "translate(15px)",
+                boxShadow: "sm",
+                zIndex: 2,
             }}
             transition={"transform 0.3s ease"}
             cursor={"pointer"}
@@ -61,23 +67,23 @@ export default function ExploreCard() {
                 h="100%"
                 zIndex={1}
             />
-            <CardFooter color="white" pos="absolute" bottom="0" zIndex={2} m={2}>
+            <CardFooter color="white" pos="absolute" bottom="0" zIndex={2}>
                 <Flex spacing="4">
                     <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-                        <Avatar name="Segu" src="https://bit.ly/sage-adebayo" />
+                        <Avatar name={username} src={photo} size="sm" />
 
                         <Box>
-                            <Heading size="sm">Segun Adebayo</Heading>
-                            <Text color="gray.300">Creator, Chakra UI</Text>
+                            <Heading ml={0} size="sm" fontWeight="400">
+                                {username}
+                            </Heading>
+                            <HStack>
+                                <Icon as={FaMapMarkerAlt} boxSize={3} />
+                                <Text fontSize="sm" color="gray.400">
+                                    {place}
+                                </Text>
+                            </HStack>
                         </Box>
                     </Flex>
-                    <IconButton
-                        variant="ghost"
-                        colorScheme="whiteAlpha"
-                        color="white"
-                        aria-label="See menu"
-                        icon={<BsThreeDotsVertical />}
-                    />
                 </Flex>
             </CardFooter>
             {/* <CardBody>

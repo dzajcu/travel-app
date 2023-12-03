@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import {
-    Box,
     Button,
-    FormControl,
-    Input,
     Flex,
     Heading,
     Text,
@@ -23,17 +20,17 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
     const [selectedDate, setSelectedDate] = useState([null, null]);
     const [description, setDescription] = useState("");
     const [place, setPlace] = useState("");
-
+    const [placeCoordinates, setPlaceCoordinates] = useState([0, 0]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         await handleSubmitForm(
             place,
-            username,
+            placeCoordinates,
             uploadedFiles,
             selectedDate,
             description,
-            toast,
-            onSideFormClose
+            // toast,
+            onSideFormClose,
         );
     };
     return (
@@ -90,7 +87,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
                         fontWeight={300}
                     />
                 </FormControl> */}
-                <SearchBarControl setPlace={setPlace} />
+                <SearchBarControl setPlace={setPlace} setPlaceCoordinates={setPlaceCoordinates}/>
                 <DateRangePicker setSelectedDate={setSelectedDate} />
                 <Textarea
                     onChange={(e) => setDescription(e.target.value)}

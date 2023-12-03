@@ -4,16 +4,19 @@ import "@maptiler/sdk/dist/maptiler-sdk.css";
 import "./map.css";
 import { Box } from "@chakra-ui/react";
 import { GeocodingControl } from "@maptiler/geocoding-control/react";
-import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
-import maplibregl from "maplibre-gl";
-// import "maplibre-gl/dist/maplibre-gl.css";
 
-export const SearchBarControl = ({ mapController, setPlace, setPlaceCoordinates }) => {
+
+export const SearchBarControl = ({
+    mapController,
+    setPlace,
+    setPlaceCoordinates,
+}) => {
     const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
 
     const handleGeocodingResultSelected = (result) => {
         setPlace(result?.place_name_en);
         setPlaceCoordinates(result?.geometry.center);
+        console.log(result);
     };
 
     return (

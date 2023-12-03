@@ -1,10 +1,9 @@
 const handleAddTrip = async (
     place,
-    username,
+    placeCoordinates,
     uploadedFiles,
     selectedDate,
     description,
-    toast,
     onSideFormClose
 ) => {
     try {
@@ -16,7 +15,6 @@ const handleAddTrip = async (
         uploadedFiles.forEach((file) => {
             formData.append(`images`, file);
         });
-        console.log(selectedDate, place, description, uploadedFiles)
         const response = await fetch(
             "http://localhost:8000/api/v1/tours/createTour",
             {
@@ -24,30 +22,18 @@ const handleAddTrip = async (
                 credentials: "include",
                 mode: "cors",
                 body: formData,
-
             }
         );
 
         if (response.ok) {
             console.log("Trip added successfully!", await response.json());
-            toast({
-                title: "Trip added successfully!",
-                status: "success",
-            });
             onSideFormClose();
+            console.log("Trip added successfully!!!!!!!!!!!!!!!");
         } else {
             console.error("Failed to add trip:", await response.json());
-            // toast({
-            //     title: "Failed to add trip!",
-            //     status: "error",
-            // });
         }
     } catch (error) {
         console.error("Error during trip addition:", error);
-        // toast({
-        //     title: "Failed to add trip, Server error!",
-        //     status: "error",
-        // });
     }
 };
 
