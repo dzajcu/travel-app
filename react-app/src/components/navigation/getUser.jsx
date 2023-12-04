@@ -1,4 +1,4 @@
-const getUser = async (setUsername, navigate, toast) => {
+const getUser = async (setUsername,  setTours, navigate, toast) => {
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/me", {
             method: "GET",
@@ -11,6 +11,7 @@ const getUser = async (setUsername, navigate, toast) => {
         if (response.ok) {
             const userData = await response.json();
             setUsername(userData.data.user.username);
+            setTours(userData.data.user.tours)
             console.log("User data fetched successfully:", userData);
         } else {
             console.error("Error during user data fetch:", await response.json());

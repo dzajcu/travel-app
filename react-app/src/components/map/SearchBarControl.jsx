@@ -5,18 +5,16 @@ import "./map.css";
 import { Box } from "@chakra-ui/react";
 import { GeocodingControl } from "@maptiler/geocoding-control/react";
 
-
 export const SearchBarControl = ({
     mapController,
     setPlace,
-    setPlaceCoordinates,
+    setCoordinates,
 }) => {
     const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
 
     const handleGeocodingResultSelected = (result) => {
-        setPlace(result?.place_name_en);
-        setPlaceCoordinates(result?.geometry.center);
-        console.log(result);
+        if (result?.place_name_en.includes(",")) setPlace(result?.place_name_en);
+        setCoordinates(result?.center);
     };
 
     return (

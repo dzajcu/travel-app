@@ -10,8 +10,8 @@ const handleAddTrip = async (
         const formData = new FormData();
         formData.append("date", selectedDate);
         formData.append("place", place);
+        formData.append("coordinates", placeCoordinates);
         formData.append("description", description);
-
         uploadedFiles.forEach((file) => {
             formData.append(`images`, file);
         });
@@ -26,9 +26,8 @@ const handleAddTrip = async (
         );
 
         if (response.ok) {
-            console.log("Trip added successfully!", await response.json());
+            console.log("Trip added successfully!");
             onSideFormClose();
-            console.log("Trip added successfully!!!!!!!!!!!!!!!");
         } else {
             console.error("Failed to add trip:", await response.json());
         }

@@ -35,9 +35,10 @@ export default function SidebarOverlayWithMap() {
 
     const [activeNavItem, setActiveNavItem] = useState(0);
     const [username, setUsername] = useState("");
+    const [tours, setTours] = useState([]);
     const navigate = useNavigate();
     const getCurrentUser = async () => {
-        await getUser(setUsername, navigate, toast);
+        await getUser(setUsername, setTours, navigate, toast);
     };
     useEffect(() => {
         getCurrentUser(); // Wywołaj funkcję getCurrentUser za każdym razem, gdy komponent jest renderowany
@@ -84,6 +85,7 @@ export default function SidebarOverlayWithMap() {
                 isSideFormOpen={isSideFormOpen}
                 onSideFormOpen={onSideFormOpen}
                 username={username}
+                tours={tours}
             />
             <SideMenu
                 isSideMenuOpen={isSideMenuOpen}

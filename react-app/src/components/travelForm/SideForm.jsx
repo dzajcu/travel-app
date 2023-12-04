@@ -20,17 +20,17 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
     const [selectedDate, setSelectedDate] = useState([null, null]);
     const [description, setDescription] = useState("");
     const [place, setPlace] = useState("");
-    const [placeCoordinates, setPlaceCoordinates] = useState([0, 0]);
+    const [coordinates, setCoordinates] = useState([0, 0]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         await handleSubmitForm(
             place,
-            placeCoordinates,
+            coordinates,
             uploadedFiles,
             selectedDate,
             description,
             // toast,
-            onSideFormClose,
+            onSideFormClose
         );
     };
     return (
@@ -87,7 +87,10 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
                         fontWeight={300}
                     />
                 </FormControl> */}
-                <SearchBarControl setPlace={setPlace} setPlaceCoordinates={setPlaceCoordinates}/>
+                <SearchBarControl
+                    setPlace={setPlace}
+                    setCoordinates={setCoordinates}
+                />
                 <DateRangePicker setSelectedDate={setSelectedDate} />
                 <Textarea
                     onChange={(e) => setDescription(e.target.value)}

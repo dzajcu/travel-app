@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import "@maptiler/geocoding-control/style.css";
+import "@maptiler/geocoding-control/style.css";  
 import { Box } from "@chakra-ui/react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ExploreCard from "./components/ExploreCard";
@@ -26,7 +26,7 @@ export default function Explore() {
                         key={tour._id}
                         username={tour.user.username}
                         place={tour.place}
-                        images={Object.values(tour.images)} // Convert object values to an array
+                        images={Object.values(tour.images)}
                         photos={tour.photo}
                     />
                 ))}
