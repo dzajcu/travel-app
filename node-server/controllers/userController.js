@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
+import Tour from "../models/tourModel.js";
 import catchAsync from "../utils/catchAsync.js";
-
 export const updateUserTours = catchAsync(async (userId, tourId) => {
     const updatedUser = await User.findByIdAndUpdate(
         userId,
@@ -57,11 +57,19 @@ export const getAllUsers = catchAsync(async (req, res) => {
 });
 
 export const getUser = catchAsync(async (req, res) => {
-    const user = await User.findById(req.params.id); // User.findOne({ _id: req.params.id })
+    const user = await User.findById(req.params.id);
+
+    const userTours = await Tour.find({ _id: { $in: user.tours } }).select(
+        "-_id -user -startDate -endDate -description -__v -createdAt"
+    );
+
     res.status(200).json({
         status: "success",
         data: {
-            user,
+            user: {
+                ...user.toObject(),
+                tours: userTours,
+            },
         },
     });
 });

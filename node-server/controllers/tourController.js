@@ -20,7 +20,7 @@ export const getAllTours = catchAsync(async (req, res) => {
     res.status(200).json({
         status: "success",
         data: {
-            tours: toursWithUser,
+            tours: toursWithUser.reverse(),
         },
     });
 });
@@ -44,11 +44,12 @@ export const createTour = catchAsync(async (req, res) => {
     const startDate = new Date(startDateStr);
     const endDate = new Date(endDateStr);
     const imageUrls = req.files.map((file) => file.location);
-
+    const coordinates = req.body.coordinates.split(",").map((coord) => Number(coord));
+    
     const newTour = await Tour.create({
         user: req.user._id,
         place: req.body.place,
-        coordinates: req.body.coordinates,
+        coordinates: coordinates,
         startDate: startDate,
         endDate: endDate,
         description: req.body.description,
