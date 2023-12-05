@@ -2,14 +2,12 @@ import React, { useRef, useEffect, useState } from "react";
 import * as maptilersdk from "@maptiler/sdk";
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import "./map.css";
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { SideForm } from "../travelForm/SideForm";
 import { GeocodingControl } from "@maptiler/geocoding-control/react";
 import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
 import maplibregl from "maplibre-gl";
 import { renderToString } from "react-dom/server";
-
-// import "maplibre-gl/dist/maplibre-gl.css";
 
 export const MapTiler = ({
     isSideFormOpen,
@@ -21,7 +19,6 @@ export const MapTiler = ({
     const mapContainer = useRef(null);
     const map = useRef(null);
     const center = { lng: 0.09, lat: 15.505 };
-    // const [zoom] = useState(1.85);
     const [zoom] = useState(3);
     const [pitch] = useState(30);
     maptilersdk.config.apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
@@ -42,8 +39,8 @@ export const MapTiler = ({
         const baseUrl = "https://api.maptiler.com/geocoding/";
         const searchTerm = encodeURIComponent("berlin");
         const apiKey = import.meta.env.VITE_MAPTILER_API_KEY;
-        const languageParam = "en"; // Specify the language parameter as "en" for English
-        const placeTypesParam = ["country", "region", "subregion", "county"]; // Specify the place types to search for
+        const languageParam = "en";
+        const placeTypesParam = ["country", "region", "subregion", "county"];
 
         const url = `${baseUrl}${searchTerm}.json?key=${apiKey}&language=${languageParam}&types=${placeTypesParam.join(
             ","
@@ -90,80 +87,73 @@ export const MapTiler = ({
     }, [center.lng, center.lat, zoom]);
 
     useEffect(() => {
-        // Check if the map is initialized before adding markers
         if (map.current) {
-            // Usuń wszystkie istniejące markery z mapy przed dodaniem nowych
             if (map.current.getLayer("markers")) {
                 map.current.removeLayer("markers");
             }
 
-            // Dodaj nowe markery do mapy
             markers.forEach((markerData) => {
-                const marker = new maptilersdk.Marker({ color: "#FF0000" })
+                const el = document.createElement("div");
+                const areImages = markerData.imageUrl !== undefined;
+                el.className = "marker";
+                el.style.backgroundImage = areImages
+                    ? `url(${markerData.imageUrl})`
+                    : "url(https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701731171881-no-image.png)";
+                el.style.backgroundSize = "cover";
+                el.style.backgroundPosition = "50% 50%"; // Dodaj tę linię dla centrowania obrazu
+
+                el.style.width = areImages ? "64px" : "48px";
+                el.style.height = areImages ? "64px" : "48px";
+                el.style.border = "2px solid #000";
+                el.style.borderRadius = "50%";
+                el.style.cursor = "pointer";
+                // el.style.boxShadow = "4px 10px 8px rgba(0, 0, 0, 0.4)"; // Shadow effect
+
+                const shadow = document.createElement("div");
+                shadow.style.position = "absolute";
+                shadow.style.bottom = "0px"; // Adjust the distance of the shadow from the bottom
+                shadow.style.left = "50%";
+                shadow.style.transform = "translateX(-50%)";
+                shadow.style.width = "32px"; // Adjust the width of the shadow
+                shadow.style.height = "8px"; // Adjust the height of the shadow
+                shadow.style.boxShadow = "0 12px 8px rgba(0, 0, 0, 0.8)"; // Shadow effect
+              
+                shadow.style.borderRadius = "50%";
+                el.appendChild(shadow);
+
+                const arrow = document.createElement("div");
+                arrow.style.position = "absolute";
+                arrow.style.bottom = "-16px"; // Adjust the distance of the arrow from the bottom
+                arrow.style.left = "50%";
+                arrow.style.transform = "translateX(-50%)";
+                arrow.style.border = "solid transparent";
+                arrow.style.borderWidth = "8px";
+                arrow.style.borderTopColor = "#000"; // Arrow color
+                el.appendChild(arrow);
+                el.addEventListener("click", () => {
+                    window.alert(`Tour: ${markerData.name}`);
+                });
+
+                new maptilersdk.Marker(el)
                     .setLngLat([markerData.lng, markerData.lat])
                     .addTo(map.current);
-
-                // Dodaj niestandardową ikonę do markera
-                marker.getElement().innerHTML = createCustomMarkerElement(
-                    markerData.imageUrl
-                );
             });
         }
     }, [markers, map.current]);
 
-    // Ensure that handleAddMarker runs whenever the tours prop changes
     useEffect(() => {
         handleAddMarker();
     }, [tours]);
+
     const handleAddMarker = () => {
-        // Dodaj nowy marker do stanu na podstawie danych z tours
-        setMarkers((prevMarkers) => [
-            ...prevMarkers,
-            ...tours.map((tour) => ({
-                lng: tour.coordinates[0], // Assuming coordinates are [lat, lng]
+        setMarkers(
+            tours.map((tour) => ({
+                lng: tour.coordinates[0],
                 lat: tour.coordinates[1],
-                imageUrl:
-                    "https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701634278178-Designer.jpeg",
-            })),
-        ]);
-    };
-
-    const createCustomMarkerElement = (imageUrl) => {
-        const markerStyle = {
-            width: "64px",
-            height: "64px",
-            borderRadius: "full",
-            // backgroundImage: `url(${imageUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            border: "2px solid white",
-            outline: "none",
-            cursor: "pointer",
-            transition: "transform 0.3s ease",
-        };
-
-        const markerHtml = renderToString(
-            <div
-                as="button"
-                style={markerStyle}
-                onMouseEnter={() => {
-                    document.getElementById("custom-marker").style.transform =
-                        "translate(15px)";
-                    document.getElementById("custom-marker").style.boxShadow = "sm";
-                    document.getElementById("custom-marker").style.zIndex = 2;
-                }}
-                onMouseLeave={() => {
-                    document.getElementById("custom-marker").style.transform =
-                        "translate(0)";
-                    document.getElementById("custom-marker").style.boxShadow =
-                        "none";
-                    document.getElementById("custom-marker").style.zIndex = 1;
-                }}
-                id="custom-marker"
-            />
+                imageUrl: tour.images[0],
+                name: tour.name,
+            }))
         );
-
-        return markerHtml;
     };
 
     // const handleGeocodingResultSelected = (result) => {

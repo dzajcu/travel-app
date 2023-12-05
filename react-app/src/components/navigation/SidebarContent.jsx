@@ -55,11 +55,13 @@ export const SidebarContent = ({
         >
             <Flex
                 h="20"
+                ml="5%"
+                mt="2"
                 alignItems="center"
                 // mx="8"
                 justifyContent="space-between"
             >
-                <Image src="../../public/Logo.png" />
+                <Image src="../../public/Logo2.png" />
 
                 <CloseButton
                     display={{ base: "flex", md: "none" }}
