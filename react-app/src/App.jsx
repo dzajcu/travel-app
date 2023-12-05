@@ -6,6 +6,7 @@ import ForgotPassword from "./components/auth/ForgotPassword";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme, { toastOptions } from "./theme";
 import { NavRoutes } from "./components/routes/NavRoutes";
+import LandingPage from "./components/navigation/LandingPage";
 
 // import {  extendBaseTheme, Button } from "@chakra-ui/react";
 
@@ -42,7 +43,7 @@ import { NavRoutes } from "./components/routes/NavRoutes";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <SignInScreen />,
+        element: <LandingPage />,
     },
     {
         path: "/menu",

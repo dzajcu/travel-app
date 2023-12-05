@@ -28,10 +28,9 @@ function AuthIllustration(props) {
                 ps={{ xl: "70px" }}
                 justifyContent="start"
                 direction="column"
-                
             >
                 <NavLink
-                    to="/menu/map"
+                    to="/"
                     style={() => ({
                         width: "fit-content",
                         marginTop: "40px",
@@ -89,7 +88,7 @@ function AuthIllustration(props) {
                             right: 0,
                             bottom: 0,
                             left: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.55)",
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
                             borderBottomLeftRadius: {
                                 lg: "120px",
                                 xl: "200px",

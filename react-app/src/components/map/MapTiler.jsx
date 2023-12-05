@@ -107,7 +107,8 @@ export const MapTiler = ({
                 el.style.border = "2px solid #000";
                 el.style.borderRadius = "50%";
                 el.style.cursor = "pointer";
-                // el.style.boxShadow = "4px 10px 8px rgba(0, 0, 0, 0.4)"; // Shadow effect
+                el.style.marginTop = areImages ? "-40px" : "-32px";
+
 
                 const shadow = document.createElement("div");
                 shadow.style.position = "absolute";
