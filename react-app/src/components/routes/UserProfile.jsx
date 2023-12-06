@@ -227,7 +227,7 @@ export default function UserProfile() {
                     color={textColorDetails}
                     display="flex"
                 >
-                    New Password Confirm<Text color={brandStars}>*</Text>
+                    Confirm New Password<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <InputGroup size="md">
                     <Input

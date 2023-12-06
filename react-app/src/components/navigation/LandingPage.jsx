@@ -34,7 +34,7 @@ const features = [
 const LandingPage = () => {
     return (
         <Fragment>
-            <Container maxW="6xl" px={{ base: 6, md: 10 }} py={14} mt="120">
+            <Container maxW="6xl" px={{ base: 6, md: 10 }} py={14} mt="50">
                 <Stack direction={{ base: "column", md: "row" }}>
                     <Stack direction="column" spacing={10} justifyContent="center">
                         <chakra.h1

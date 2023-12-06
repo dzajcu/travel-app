@@ -74,7 +74,7 @@ function AuthIllustration(props) {
                     <Flex
                         bg={`url(${illustrationBackground})`}
                         justify="center"
-                        align="end"
+                        align="start"
                         w="100%"
                         h="100%"
                         bgSize="cover"
@@ -88,7 +88,7 @@ function AuthIllustration(props) {
                             right: 0,
                             bottom: 0,
                             left: 0,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            backgroundColor: "rgba(0, 0, 0, 0.6)",
                             borderBottomLeftRadius: {
                                 lg: "120px",
                                 xl: "200px",

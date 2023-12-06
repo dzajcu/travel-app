@@ -7,7 +7,6 @@ import { SideForm } from "../travelForm/SideForm";
 import { GeocodingControl } from "@maptiler/geocoding-control/react";
 import { createMapLibreGlMapController } from "@maptiler/geocoding-control/maplibregl-controller";
 import maplibregl from "maplibre-gl";
-import { renderToString } from "react-dom/server";
 
 export const MapTiler = ({
     isSideFormOpen,
@@ -91,10 +90,35 @@ export const MapTiler = ({
             if (map.current.getLayer("markers")) {
                 map.current.removeLayer("markers");
             }
+            const popup = new maptilersdk.Popup({
+                closeButton: false,
+                closeOnClick: false,
+                className: "custom-popup mapboxgl-popup-dark", // Add the MapTiler popup class
 
+            });
+            
             markers.forEach((markerData) => {
                 const el = document.createElement("div");
                 const areImages = markerData.imageUrl !== undefined;
+
+                el.addEventListener("mouseenter", () => {
+                    const popupContent = `<p>${markerData.name}</p>`; // Use a default value if name is undefined
+
+                    const markerHeight = areImages ? 64 : 48; // Adjust based on your marker height
+                    const popupOffset = 10; // Adjust the offset as needed
+
+                    popup
+                        .setLngLat([markerData.lng, markerData.lat])
+                        .setHTML(popupContent)
+                        .setOffset([0, -markerHeight - popupOffset]) // Adjust the offset to position above the marker
+                        .addTo(map.current);
+                });
+
+                el.addEventListener("mouseleave", () => {
+                    map.current.getCanvas().style.cursor = "";
+                    popup.remove();
+                });
+
                 el.className = "marker";
                 el.style.backgroundImage = areImages
                     ? `url(${markerData.imageUrl})`
@@ -104,11 +128,11 @@ export const MapTiler = ({
 
                 el.style.width = areImages ? "64px" : "48px";
                 el.style.height = areImages ? "64px" : "48px";
-                el.style.border = "2px solid #000";
+                el.style.border = "2px solid #222222";
                 el.style.borderRadius = "50%";
                 el.style.cursor = "pointer";
                 el.style.marginTop = areImages ? "-40px" : "-32px";
-
+                el.style.boxShadow = "10px 10px 8px rgba(0, 0, 0, 0.4)"; // Shadow effect
 
                 const shadow = document.createElement("div");
                 shadow.style.position = "absolute";
@@ -118,7 +142,6 @@ export const MapTiler = ({
                 shadow.style.width = "32px"; // Adjust the width of the shadow
                 shadow.style.height = "8px"; // Adjust the height of the shadow
                 shadow.style.boxShadow = "0 12px 8px rgba(0, 0, 0, 0.8)"; // Shadow effect
-              
                 shadow.style.borderRadius = "50%";
                 el.appendChild(shadow);
 
@@ -130,6 +153,7 @@ export const MapTiler = ({
                 arrow.style.border = "solid transparent";
                 arrow.style.borderWidth = "8px";
                 arrow.style.borderTopColor = "#000"; // Arrow color
+                arrow.style.zIndex = "-1";
                 el.appendChild(arrow);
                 el.addEventListener("click", () => {
                     window.alert(`Tour: ${markerData.name}`);
@@ -152,7 +176,7 @@ export const MapTiler = ({
                 lng: tour.coordinates[0],
                 lat: tour.coordinates[1],
                 imageUrl: tour.images[0],
-                name: tour.name,
+                name: tour.place,
             }))
         );
     };

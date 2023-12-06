@@ -8,6 +8,7 @@ import {
     CloseButton,
     Textarea,
     useToast,
+    Box,
 } from "@chakra-ui/react";
 import { DropZone } from "./components/FileDropZone";
 import { DateRangePicker } from "./components/DatePicker";
@@ -21,15 +22,18 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
     const [description, setDescription] = useState("");
     const [place, setPlace] = useState("");
     const [coordinates, setCoordinates] = useState([0, 0]);
+    const [isLoading, setIsLoading] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await handleSubmitForm(
             place,
             coordinates,
             uploadedFiles,
             selectedDate,
             description,
-            // toast,
+            toast,
+            setIsLoading,
             onSideFormClose
         );
     };
@@ -112,24 +116,13 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
                     bgColor="#808000"
                     color="white"
                     _hover={{ bg: "green.600" }}
+                    isLoading={isLoading}
                 >
                     Add to Map
                 </Button>
             </Flex>
-            {/* 
-            <Box
-                onClick={onSideFormClose}
-                opacity={isSideFormOpen ? 1 : 0}
-                transition={"0.3s ease-in-out"}
-                position="fixed"
-                top={{ base: 20, md: 0 }}
-                left="0"
-                width="100%"
-                height="100%"
-                background="rgba(0, 0, 0, 0.3)"
-                zIndex={isSideFormOpen ? 9998 : -1}
-                backdropFilter="blur(5px)"
-            /> */}
+            
+        
         </>
     );
 };
