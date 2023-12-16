@@ -1,11 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const tourSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "A tour must be associated with a user"],
-    },
     place: {
         type: String,
         required: [true, "A tour must have a place"],
@@ -28,6 +23,11 @@ const tourSchema = new Schema({
         ],
     },
     images: [String],
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "A tour must be associated with a user"],
+    },
     createdAt: {
         type: Date,
         default: Date.now(),
