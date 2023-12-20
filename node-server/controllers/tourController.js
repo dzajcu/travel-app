@@ -4,16 +4,13 @@ import { updateUserTours } from "./userController.js";
 import User from "../models/userModel.js";
 
 export const getAllTours = catchAsync(async (req, res) => {
-    // Pobierz wszystkie wycieczki
     const tours = await Tour.find();
 
-    // Przygotuj tablicę, do której dodasz informacje o użytkowniku
     const toursWithUser = [];
 
-    // Iteruj przez każdą wycieczkę i dodaj informacje o użytkowniku
     for (const tour of tours) {
-        const user = await User.findById(tour.user).select("-_id username photo") // Zakładam, że wycieczka ma pole userId
-        const tourWithUser = { ...tour.toObject(), user }; // Dodaj informacje o użytkowniku do wycieczki
+        const user = await User.findById(tour.user).select("_id username photo") 
+        const tourWithUser = { ...tour.toObject(), user };
         toursWithUser.push(tourWithUser);
     }
 
@@ -27,8 +24,9 @@ export const getAllTours = catchAsync(async (req, res) => {
 
 
 export const getTour = catchAsync(async (req, res) => {
-    const tour = await Tour.findById(req.params.id); // Tour.findOne({ _id: req.params.id })
-
+    console.log(req.params.id)
+    const tour = await Tour.findById(req.params.id).populate('user', 'username'); // Tour.findOne({ _id: req.params.id })
+    console.log(tour)
     if (!tour) return new AppError("No tour found with that ID", 404);
 
     res.status(200).json({

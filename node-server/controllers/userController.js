@@ -61,7 +61,7 @@ export const getUser = catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     const userTours = await Tour.find({ _id: { $in: user.tours } }).select(
-        "-_id -user -startDate -endDate -description -__v -createdAt"
+        "-user -startDate -endDate -description -__v -createdAt"
     );
 
     res.status(200).json({
