@@ -15,7 +15,7 @@ import { DateRangePicker } from "./components/DatePicker";
 import { SearchBarControl } from "../map/SearchBarControl";
 import handleSubmitForm from "./components/handleSubmitForm";
 
-export const SideForm = ({ isSideFormOpen, onSideFormClose, username }) => {
+export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     const toast = useToast();
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [selectedDate, setSelectedDate] = useState([null, null]);

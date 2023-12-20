@@ -58,7 +58,7 @@ export const DropZone = ({ setUploadedFiles }) => {
     const fileRejectionItems = fileRejections.map(({ file, errors }) => {
         return (
             <li key={file.path}>
-                {file.path} - {file.size} bytes
+                {file.path} - {file.size} 
                 <ul>
                     {errors.map((e) => (
                         <li key={e.code}>{e.message}</li>
@@ -84,12 +84,12 @@ export const DropZone = ({ setUploadedFiles }) => {
                 <p>Drag 'n' drop some files here, or click to select files</p>
                 <em>(Max 5 files *.jpeg i *.png)</em>
             </div>
-            {/* <aside>
+            <aside>
                 <h4>Accepted files</h4>
                 <ul>{acceptedFileItems}</ul>
-                <h4>Rejected files</h4>
-                <ul>{fileRejectionItems}</ul>
-            </aside> */}
+                {/* <h4>Rejected files</h4>
+                <ul>{fileRejectionItems}</ul> */}
+            </aside>
         </Box>
     );
 };

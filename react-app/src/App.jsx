@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         element: <LandingPage />,
     },
     {
-        path: "/menu",
+        path: "/menu/*",
         element: <SidebarOverlayWithMap />,
         children: [
             { path: "/menu/*", element: <NavRoutes /> },

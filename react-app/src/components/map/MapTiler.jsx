@@ -12,7 +12,7 @@ export const MapTiler = ({
     isSideFormOpen,
     onSideFormOpen,
     onSideFormClose,
-    username,
+    setTours,
     tours,
 }) => {
     const mapContainer = useRef(null);
@@ -55,7 +55,6 @@ export const MapTiler = ({
                     name: feature.place_name,
                 }));
                 console.log(results);
-                // Your code continues here
             })
             .catch((error) => {
                 console.error("Error fetching results:", error);
@@ -87,30 +86,28 @@ export const MapTiler = ({
 
     useEffect(() => {
         if (map.current) {
-            if (map.current.getLayer("markers")) {
-                map.current.removeLayer("markers");
-            }
+
+
             const popup = new maptilersdk.Popup({
                 closeButton: false,
                 closeOnClick: false,
-                className: "custom-popup mapboxgl-popup-dark", // Add the MapTiler popup class
-
+                className: "custom-popup mapboxgl-popup-dark",
             });
-            
+
             markers.forEach((markerData) => {
                 const el = document.createElement("div");
                 const areImages = markerData.imageUrl !== undefined;
 
                 el.addEventListener("mouseenter", () => {
-                    const popupContent = `<p>${markerData.name}</p>`; // Use a default value if name is undefined
+                    const popupContent = `<p>${markerData.name}</p>`;
 
-                    const markerHeight = areImages ? 64 : 48; // Adjust based on your marker height
-                    const popupOffset = 10; // Adjust the offset as needed
+                    const markerHeight = areImages ? 64 : 48;
+                    const popupOffset = 10;
 
                     popup
                         .setLngLat([markerData.lng, markerData.lat])
                         .setHTML(popupContent)
-                        .setOffset([0, -markerHeight - popupOffset]) // Adjust the offset to position above the marker
+                        .setOffset([0, -markerHeight - popupOffset])
                         .addTo(map.current);
                 });
 
@@ -124,7 +121,7 @@ export const MapTiler = ({
                     ? `url(${markerData.imageUrl})`
                     : "url(https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701731171881-no-image.png)";
                 el.style.backgroundSize = "cover";
-                el.style.backgroundPosition = "50% 50%"; // Dodaj tę linię dla centrowania obrazu
+                el.style.backgroundPosition = "50% 50%";
 
                 el.style.width = areImages ? "64px" : "48px";
                 el.style.height = areImages ? "64px" : "48px";
@@ -132,27 +129,27 @@ export const MapTiler = ({
                 el.style.borderRadius = "50%";
                 el.style.cursor = "pointer";
                 el.style.marginTop = areImages ? "-40px" : "-32px";
-                el.style.boxShadow = "10px 10px 8px rgba(0, 0, 0, 0.4)"; // Shadow effect
+                el.style.boxShadow = "10px 10px 8px rgba(0, 0, 0, 0.4)";
 
                 const shadow = document.createElement("div");
                 shadow.style.position = "absolute";
-                shadow.style.bottom = "0px"; // Adjust the distance of the shadow from the bottom
+                shadow.style.bottom = "0px";
                 shadow.style.left = "50%";
                 shadow.style.transform = "translateX(-50%)";
-                shadow.style.width = "32px"; // Adjust the width of the shadow
-                shadow.style.height = "8px"; // Adjust the height of the shadow
-                shadow.style.boxShadow = "0 12px 8px rgba(0, 0, 0, 0.8)"; // Shadow effect
+                shadow.style.width = "32px";
+                shadow.style.height = "8px";
+                shadow.style.boxShadow = "0 12px 8px rgba(0, 0, 0, 0.8)";
                 shadow.style.borderRadius = "50%";
                 el.appendChild(shadow);
 
                 const arrow = document.createElement("div");
                 arrow.style.position = "absolute";
-                arrow.style.bottom = "-16px"; // Adjust the distance of the arrow from the bottom
+                arrow.style.bottom = "-16px";
                 arrow.style.left = "50%";
                 arrow.style.transform = "translateX(-50%)";
                 arrow.style.border = "solid transparent";
                 arrow.style.borderWidth = "8px";
-                arrow.style.borderTopColor = "#000"; // Arrow color
+                arrow.style.borderTopColor = "#000";
                 arrow.style.zIndex = "-1";
                 el.appendChild(arrow);
                 el.addEventListener("click", () => {
@@ -171,14 +168,15 @@ export const MapTiler = ({
     }, [tours]);
 
     const handleAddMarker = () => {
-        setMarkers(
-            tours.map((tour) => ({
+        setMarkers((prevMarkers) => [
+            ...prevMarkers,
+            ...tours.map((tour) => ({
                 lng: tour.coordinates[0],
                 lat: tour.coordinates[1],
                 imageUrl: tour.images[0],
                 name: tour.place,
-            }))
-        );
+            })),
+        ]);
     };
 
     // const handleGeocodingResultSelected = (result) => {
@@ -207,7 +205,7 @@ export const MapTiler = ({
                     ]}
                     placeholder="Search for a place..."
                     // onPick={handleGeocodingResultSelected}
-                    // iconsBaseUrl="/icons" // Ustawienie ścieżki do lokalnych ikon
+                    // iconsBaseUrl="/icons"
                 />
             </Box>
             <div ref={mapContainer} className="map" />
@@ -215,7 +213,7 @@ export const MapTiler = ({
                 isSideFormOpen={isSideFormOpen}
                 onSideFormClose={onSideFormClose}
                 mapController={mapController}
-                username={username}
+                setTours={setTours}
             />
         </Box>
     );

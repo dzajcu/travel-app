@@ -1,4 +1,4 @@
-const getUser = async (setUsername,  setTours, navigate, toast) => {
+const getUser = async (setUsername, setTours, navigate, toast) => {
     try {
         const response = await fetch("http://localhost:8000/api/v1/users/me", {
             method: "GET",

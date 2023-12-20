@@ -16,7 +16,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 import { useState } from "react";
 
-export default function ExploreCard({ username, place, images, photo }) {
+export default function ExploreCard({ id, username, place, images, photo }) {
     const [randomImage, setRandomImage] = useState("");
     const areImages = images.length > 0;
     // Funkcja pobierająca losowe zdjęcie z Unsplash
@@ -56,6 +56,9 @@ export default function ExploreCard({ username, place, images, photo }) {
             }}
             transition={"transform 0.3s ease"}
             cursor={"pointer"}
+            onClick={() => {
+                console.log(id);
+            }}
         >
             <Box
                 backgroundImage={`linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0) 100%);
