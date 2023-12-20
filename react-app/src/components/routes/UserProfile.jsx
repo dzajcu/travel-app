@@ -59,7 +59,6 @@ export default function UserProfile() {
             toast
         );
     };
-
     return (
         <Box width="400px" mt="12px" mx="10px">
             <Flex align="center" gap="30px">

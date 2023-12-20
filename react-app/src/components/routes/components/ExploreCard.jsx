@@ -13,28 +13,13 @@ import {
     HStack,
 } from "@chakra-ui/react";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export default function ExploreCard({ id, username, place, images, photo }) {
     const [randomImage, setRandomImage] = useState("");
     const areImages = images.length > 0;
-    // Funkcja pobierająca losowe zdjęcie z Unsplash
-    // const fetchRandomImage = async () => {
-    //     try {
-    //         const response = await fetch(
-    //             "https://source.unsplash.com/random/300x300" // Ustaw rozmiar zdjęcia
-    //         );
-    //         setRandomImage(response.url);
-    //     } catch (error) {
-    //         console.error("Error fetching random image:", error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchRandomImage();
-    // }, []); // Uruchom tylko raz po zamontowaniu komponentu
-
+    const navigate = useNavigate();
     return (
         <Card
             display="inline-block"
@@ -57,7 +42,7 @@ export default function ExploreCard({ id, username, place, images, photo }) {
             transition={"transform 0.3s ease"}
             cursor={"pointer"}
             onClick={() => {
-                console.log(id);
+                navigate(`/menu/explore/${id}`);
             }}
         >
             <Box

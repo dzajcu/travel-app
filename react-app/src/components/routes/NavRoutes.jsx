@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Explore from "./Explore";
+import ExploreDetails from "./ExploreDetails";
 import UserProfile from "./UserProfile";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,6 +22,7 @@ export const NavRoutes = () => {
         >
             <Routes>
                 <Route path="/explore" element={<Explore />} />
+                <Route path="/explore/:id" element={<ExploreDetails />} />
                 <Route path="/profile" element={<UserProfile />} />
             </Routes>
         </Box>

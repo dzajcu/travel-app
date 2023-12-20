@@ -14,7 +14,6 @@ export default function Explore() {
     useEffect(() => {
         getAllTours();
     }, []);
-    console.log(tours);
     return (
         <Box width="95%">
             <ResponsiveMasonry columnsCountBreakPoints={{ 900: 1, 1200: 2 }}>
