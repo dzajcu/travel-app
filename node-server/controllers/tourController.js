@@ -24,9 +24,7 @@ export const getAllTours = catchAsync(async (req, res) => {
 
 
 export const getTour = catchAsync(async (req, res) => {
-    console.log(req.params.id)
     const tour = await Tour.findById(req.params.id).populate('user', 'username'); // Tour.findOne({ _id: req.params.id })
-    console.log(tour)
     if (!tour) return new AppError("No tour found with that ID", 404);
 
     res.status(200).json({

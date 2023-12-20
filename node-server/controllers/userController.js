@@ -18,7 +18,6 @@ export const getMe = (req, res, next) => {
 };
 
 export const updateMe = catchAsync(async (req, res) => {
-    console.log(req.user._id);
     const updatedUser = await User.findByIdAndUpdate(
         req.user._id,
         {
@@ -27,7 +26,6 @@ export const updateMe = catchAsync(async (req, res) => {
         },
         { new: true, runValidators: true }
     );
-
     res.status(200).json({
         status: "success",
         data: {
