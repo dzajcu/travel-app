@@ -20,12 +20,12 @@ import {
     Flex,
     Switch,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Form } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import handleUpdateUser from "./handleUpdateUser.jsx";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoMdEyeOff, IoMdClose } from "react-icons/io";
 
-export default function UserProfile() {
+export default function UserProfile({ setSidebarUsername }) {
     const textColor = useColorModeValue("#808000", "white");
     const textColorSecondary = "gray.400";
     const textColorDetails = useColorModeValue("gray.700", "gray.600");
@@ -49,16 +49,37 @@ export default function UserProfile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        await handleEditProfile(
+        await handleUpdateUser(
             email,
             username,
             password,
-            passwordConfirm,
+            newPassword,
+            newPasswordConfirm,
             setIsLoading,
-            navigate,
-            toast
+            toast,
+            setSidebarUsername
         );
     };
+
+    const getCurrentUser = async () => {
+        const response = await fetch("http://localhost:8000/api/v1/users/me", {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            setEmail(userData.data.user.email);
+            setUsername(userData.data.user.username);
+        }
+    };
+    useEffect(() => {
+        getCurrentUser();
+    }, []);
+
     return (
         <Box width="400px" mt="12px" mx="10px">
             <Flex align="center" gap="30px">
@@ -88,7 +109,6 @@ export default function UserProfile() {
                     color="gray.700"
                     _hover={{ bg: "gray.400", color: "white" }}
                     type="submit"
-                    isLoading={isLoading}
                 >
                     Change Icon
                 </Button>
@@ -106,6 +126,7 @@ export default function UserProfile() {
                 </FormLabel>
                 <Input
                     onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     isRequired={true}
                     id="email"
                     fontSize="sm"
@@ -132,6 +153,7 @@ export default function UserProfile() {
                 <Input
                     onChange={(e) => setUsername(e.target.value)}
                     isRequired={true}
+                    value={username}
                     id="username"
                     fontSize="sm"
                     ms={{ base: "0px", md: "0px" }}
@@ -143,7 +165,24 @@ export default function UserProfile() {
                     borderRadius="2xl"
                     backgroundColor="white"
                 />
-
+                <Flex justify="flex-end">
+                    <Button
+                        mt="10px"
+                        fontSize="sm"
+                        fontWeight="500"
+                        w="35%"
+                        h="40px"
+                        borderRadius="2xl"
+                        bgColor={textColorBrand}
+                        color="white"
+                        _hover={{ bg: "green.600" }}
+                        type="submit"
+                        isLoading={isLoading}
+                        onClick={handleSubmit}
+                    >
+                        Save Changes
+                    </Button>
+                </Flex>
                 <FormLabel
                     ms="4px"
                     fontSize="sm"
@@ -159,12 +198,13 @@ export default function UserProfile() {
                     <Input
                         onChange={(e) => setPassword(e.target.value)}
                         id="password"
+                        value={password}
                         isRequired={true}
                         fontSize="sm"
                         placeholder="*************"
                         size="md"
                         type={show ? "text" : "password"}
-                        autoComplete="off"
+                        autoComplete="new-password"
                         borderRadius="2xl"
                         backgroundColor="white"
                     />
@@ -260,7 +300,7 @@ export default function UserProfile() {
                     </InputRightElement>
                 </InputGroup>
 
-                <Stack direction="row" mt="10px">
+                {/* <Stack direction="row" mt="10px">
                     <FormLabel
                         ms="4px"
                         fontSize="sm"
@@ -272,10 +312,10 @@ export default function UserProfile() {
                         <Text color={brandStars}>*</Text>
                     </FormLabel>
                     <Switch size="md" colorScheme="teal" />
-                </Stack>
+                </Stack> */}
                 <Flex justify="flex-end">
                     <Button
-                        mt="50px"
+                        mt="10px"
                         fontSize="sm"
                         fontWeight="500"
                         w="35%"
@@ -286,8 +326,9 @@ export default function UserProfile() {
                         _hover={{ bg: "green.600" }}
                         type="submit"
                         isLoading={isLoading}
+                        onClick={handleSubmit}
                     >
-                        Save Changes
+                        Update Password
                     </Button>
                 </Flex>
             </FormControl>

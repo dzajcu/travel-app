@@ -34,16 +34,15 @@ export default function SidebarOverlayWithMap() {
     } = useDisclosure();
 
     const [activeNavItem, setActiveNavItem] = useState(0);
-    const [username, setUsername] = useState("");
+    const [username, setSidebarUsername] = useState("");
     const [tours, setTours] = useState([]);
     const navigate = useNavigate();
     const getCurrentUser = async () => {
-        await getUser(setUsername, setTours, navigate, toast);
+        await getUser(setSidebarUsername, setTours, navigate, toast);
     };
     useEffect(() => {
         getCurrentUser(); // Wywołaj funkcję getCurrentUser za każdym razem, gdy komponent jest renderowany
     }, []); // Dodaj username do zależności useEffect
-
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
             <SidebarContent
@@ -92,6 +91,7 @@ export default function SidebarOverlayWithMap() {
                 onSideMenuOpen={onSideMenuOpen}
                 onSideMenuClose={onSideMenuClose}
                 setActiveNavItem={setActiveNavItem}
+                setSidebarUsername={setSidebarUsername}
             />
         </Box>
     );

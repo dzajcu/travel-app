@@ -5,7 +5,8 @@ import ExploreDetails from "./ExploreDetails";
 import UserProfile from "./UserProfile";
 import { Route, Routes } from "react-router-dom";
 
-export const NavRoutes = () => {
+export const NavRoutes = ({ setSidebarUsername }) => {
+    
     return (
         <Box
             ml={"60px"}
@@ -23,7 +24,10 @@ export const NavRoutes = () => {
             <Routes>
                 <Route path="/explore" element={<Explore />} />
                 <Route path="/explore/:id" element={<ExploreDetails />} />
-                <Route path="/profile" element={<UserProfile />} />
+                <Route
+                    path="/profile"
+                    element={<UserProfile setSidebarUsername={setSidebarUsername} />}
+                />
             </Routes>
         </Box>
     );

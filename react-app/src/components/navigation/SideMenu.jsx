@@ -4,7 +4,7 @@ import { NavRoutes } from "../routes/NavRoutes";
 import { useColorModeValue, CloseButton } from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) => {
+export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem, setSidebarUsername }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const isProfile = "/menu/profile" === location.pathname;
@@ -40,7 +40,7 @@ export const SideMenu = ({ isSideMenuOpen, onSideMenuClose, setActiveNavItem }) 
                     },
                 }}
             >
-                <NavRoutes />
+                <NavRoutes setSidebarUsername={setSidebarUsername}/>
                 <CloseButton
                     onClick={handleSideMenuClose}
                     pos={"absolute"}
