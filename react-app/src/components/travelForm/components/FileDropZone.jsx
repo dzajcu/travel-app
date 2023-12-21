@@ -52,7 +52,7 @@ export const DropZone = ({ setUploadedFiles }) => {
 
     const acceptedFileItems = acceptedFiles.map((file) => (
         <li key={file.path}>
-            {file.path} - {file.size} bytes
+            {file.path}
         </li>
     ));
     const fileRejectionItems = fileRejections.map(({ file, errors }) => {
@@ -82,10 +82,10 @@ export const DropZone = ({ setUploadedFiles }) => {
                 <input {...getInputProps({ name: "images" })} />
                 <Icon as={IoCloudUploadSharp} fontSize="2xl" marginBottom={"10px"} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
-                <em>(Max 5 files *.jpeg i *.png)</em>
+                {/* <em>(Max 5 files *.jpeg i *.png)</em> */}
             </div>
             <aside>
-                <h4>Accepted files</h4>
+                <h4>Your images:</h4>
                 <ul>{acceptedFileItems}</ul>
                 {/* <h4>Rejected files</h4>
                 <ul>{fileRejectionItems}</ul> */}

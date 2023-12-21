@@ -88,3 +88,21 @@ a {
 .css-1sibkpi[data-checked] {
     --switch-bg: #808000 !important;
 }
+
+.file-label {
+    font-family: "DM Sans", sans-serif;
+    /* padding: ; */
+    color: #4a5568;
+    width: 40%;
+    min-height: 50px;
+    background-color: #fafafa;
+    border-radius: 16px;
+    border: 2px dashed #e8e7e7;
+    cursor: pointer;
+    color: rgb(189, 189, 189);
+    margin-left: 2px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+}
