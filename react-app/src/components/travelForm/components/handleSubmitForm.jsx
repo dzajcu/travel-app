@@ -1,29 +1,29 @@
-const handleAddTrip = async (
-    place,
-    coordinates,
-    uploadedFiles,
-    selectedDate,
-    description,
-    toast,
-    setIsLoading,
-    onSideFormClose
-) => {
+const handleAddTrip = async (formData, toast, setIsLoading, onSideFormClose) => {
     try {
-        const formData = new FormData();
-        formData.append("date", selectedDate);
-        formData.append("place", place);
-        formData.append("coordinates", coordinates);
-        formData.append("description", description);
-        uploadedFiles.forEach((file) => {
-            formData.append(`images`, file);
+        const formDataBody = new FormData();
+
+        formDataBody.append("albumName", formData.albumName);
+        formDataBody.append("albumFile", formData.albumFile);
+        formDataBody.append("description", formData.description);
+        formDataBody.append("date", formData.selectedDate);
+
+        formData.places.forEach((place, index) => {
+            formDataBody.append(`places[${index}][placeName]`, place.placeName);
+            formDataBody.append(`places[${index}][coordinates]`, place.coordinates);
+
+            place.uploadedFiles.forEach((file, fileIndex) => {
+                formDataBody.append(`places[${index}]images[${fileIndex}]`, file);
+            });
         });
+        console.log("formDataBody", formDataBody);
+
         const response = await fetch(
             "http://localhost:8000/api/v1/tours/createTour",
             {
                 method: "POST",
                 credentials: "include",
                 mode: "cors",
-                body: formData,
+                body: formDataBody,
             }
         );
 

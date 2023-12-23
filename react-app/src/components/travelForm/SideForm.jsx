@@ -33,7 +33,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 
 export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     const toast = useToast();
-    const [formData, setFormData] = useState([]);
+
     const [uploadedFiles, setUploadedFiles] = useState([]);
     const [albumFile, setAlbumFile] = useState(null);
     const [albumName, setAlbumName] = useState("");
@@ -41,42 +41,46 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
     const [description, setDescription] = useState("");
     const [placeName, setPlaceName] = useState("");
     const [coordinates, setCoordinates] = useState([0, 0]);
+    const [placesData, setPlacesData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        albumFile: albumFile,
+        albumName: albumName,
+        selectedDate: selectedDate,
+        description: description,
+        places: [],
+    });
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        await handleSubmitForm(
-            placeName,
-            coordinates,
-            uploadedFiles,
-            selectedDate,
-            description,
-            toast,
-            setIsLoading,
-            onSideFormClose
-        );
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            albumName: albumName,
+            albumFile: albumFile,
+            selectedDate: selectedDate,
+            description: description,
+            places: placesData,
+        }));
+        await handleSubmitForm(formData, toast, setIsLoading, onSideFormClose);
     };
 
     const { activeStep, setActiveStep } = useSteps({
-        index: 1,
+        index: 0,
         count: formData.length,
     });
     const handleAddPlace = () => {
-        console.log(placeName, albumName);
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
         if (placeName === "") return;
-        formData.push({
-            albumFile: albumFile,
-            albumName: albumName,
-            selectedDate: selectedDate,
-            description: description,
-            place: {
-                placeName: placeName,
-                coordinates: coordinates,
-                uploadedFiles: uploadedFiles,
-            },
-        });
-        console.log(formData);
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        const newPlace = {
+            placeName: placeName,
+            coordinates: coordinates,
+            uploadedFiles: uploadedFiles,
+        };
+
+        setPlacesData((prevPlacesData) => [...prevPlacesData, newPlace]);
+
+        console.log(placesData);
+
         setPlaceName("");
         setUploadedFiles([]);
     };
@@ -210,7 +214,7 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                         height="100%"
                         colorScheme="gray"
                     >
-                        {formData.map((step, index) => (
+                        {placesData.map((step, index) => (
                             <Step key={index}>
                                 <StepIndicator>
                                     <StepStatus
@@ -225,18 +229,17 @@ export const SideForm = ({ isSideFormOpen, onSideFormClose }) => {
                                         <Flex alignItems="center" gap="1">
                                             <FaMapMarkerAlt />
                                             <Text>
-                                                {formData[index]?.place.placeName}
+                                                {placesData[index].placeName}
                                             </Text>
-                                        </Flex>{" "}
+                                        </Flex>
                                     </StepTitle>
                                     <StepDescription>
                                         <Flex alignItems="center" gap="1">
                                             <Text>
                                                 Images:{" "}
                                                 {
-                                                    formData[index]?.place
-                                                        .uploadedFiles?.length
-                                                }{" "}
+                                                    placesData[index].uploadedFiles.length
+                                                }{" "}  
                                             </Text>
                                         </Flex>
                                     </StepDescription>
