@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-import Tour from "../models/tourModel.js";
+import { Tour } from "../models/tourModel.js";
 import catchAsync from "../utils/catchAsync.js";
 
 export const updateUserTours = catchAsync(async (userId, tourId) => {

@@ -1,4 +1,4 @@
-import Tour from "../models/tourModel.js";
+import { Tour, Place } from "../models/tourModel.js";
 import catchAsync from "../utils/catchAsync.js";
 import { updateUserTours } from "./userController.js";
 import User from "../models/userModel.js";
@@ -9,7 +9,7 @@ export const getAllTours = catchAsync(async (req, res) => {
     const toursWithUser = [];
 
     for (const tour of tours) {
-        const user = await User.findById(tour.user).select("_id username photo") 
+        const user = await User.findById(tour.user).select("_id username photo");
         const tourWithUser = { ...tour.toObject(), user };
         toursWithUser.push(tourWithUser);
     }
@@ -22,9 +22,8 @@ export const getAllTours = catchAsync(async (req, res) => {
     });
 });
 
-
 export const getTour = catchAsync(async (req, res) => {
-    const tour = await Tour.findById(req.params.id).populate('user', 'username'); // Tour.findOne({ _id: req.params.id })
+    const tour = await Tour.findById(req.params.id).populate("user", "username"); // Tour.findOne({ _id: req.params.id })
     if (!tour) return new AppError("No tour found with that ID", 404);
 
     res.status(200).json({
@@ -36,25 +35,47 @@ export const getTour = catchAsync(async (req, res) => {
 });
 
 export const createTour = catchAsync(async (req, res) => {
+    console.log(req.body, req.files);
+
     const [startDateStr, endDateStr] = req.body.date.split(",");
+    const albumName = req.body.albumName;
+    const description = req.body.description;
     const startDate = new Date(startDateStr);
     const endDate = new Date(endDateStr);
-    const imageUrls = req.files.map((file) => file.location);
-    const coordinates = req.body.coordinates.split(",").map((coord) => Number(coord));
-    
+
+    const newPlaces = await Promise.all(
+        req.body.places.map(async (place, index) => {
+            const placeImages = req.files
+                .filter((file) =>
+                    file.fieldname.startsWith(`places[${index}]images`)
+                )
+                .map((file) => file.location);
+
+            const newPlace = await Place.create({
+                placeName: place.placeName,
+                coordinates: place.coordinates
+                    .split(",")
+                    .map((coord) => Number(coord)),
+                images: placeImages,
+            });
+            return newPlace._id;
+        })
+    );
+
+    const albumImage =
+        req.files[0].fieldname === "albumImage" ? req.files[0].location : "";
     const newTour = await Tour.create({
+        albumName,
+        albumImage,
+        startDate,
+        endDate,
+        description,
         user: req.user._id,
-        place: req.body.place,
-        coordinates: coordinates,
-        startDate: startDate,
-        endDate: endDate,
-        description: req.body.description,
-        images: imageUrls,
+        places: newPlaces,
     });
-    // Update user tours
+
     updateUserTours(req.user._id, newTour._id);
 
-    // Respond with the created tour and updated user
     res.status(201).json({
         status: "success",
         data: {

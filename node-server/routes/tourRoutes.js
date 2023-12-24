@@ -39,8 +39,7 @@ const upload = multer({
 router.use(protect);
 
 // Apply the multer middleware before the createTour route
-router.post("/createTour", upload.array("images", 5), getMe, createTour);
-
+router.post("/createTour", upload.any(), getMe, createTour);
 router.route("/").get(getAllTours);
 router.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 
