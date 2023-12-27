@@ -14,19 +14,20 @@ export default function Explore() {
     useEffect(() => {
         getAllTours();
     }, []);
+        
     return (
         <Box width="95%">
             <ResponsiveMasonry columnsCountBreakPoints={{ 900: 1, 1200: 2 }}>
                 <Masonry gutter="10px">
                     {tours.map((tour) => (
                         <ExploreCard
-                            id={tour._id}
                             key={tour._id}
+                            id={tour._id}
+                            name={tour.albumName}
                             username={tour.user.username}
-                            place={tour.place}
-                            images={Object.values(tour.images)}
-                            photos={tour.photo}
-
+                            places={tour.places.length}
+                            image={tour.albumImage}
+                            date={[tour.startDate, tour.endDate]}
                         />
                     ))}
                 </Masonry>

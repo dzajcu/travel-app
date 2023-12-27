@@ -11,7 +11,7 @@ const getUser = async (setUsername, setTours, navigate, toast) => {
         if (response.ok) {
             const userData = await response.json();
             setUsername(userData.data.user.username);
-            setTours(userData.data.user.tours)
+            setTours(userData.data.places)
             console.log("User data fetched successfully:", userData);
         } else {
             console.error("Error during user data fetch:", await response.json());

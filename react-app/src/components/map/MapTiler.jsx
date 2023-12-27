@@ -85,41 +85,43 @@ export const MapTiler = ({
     }, [center.lng, center.lat, zoom]);
 
     useEffect(() => {
-        if (map.current) {
-
-
+        const currentMap = map.current;
+    
+        if (currentMap && markers) {
             const popup = new maptilersdk.Popup({
                 closeButton: false,
                 closeOnClick: false,
                 className: "custom-popup mapboxgl-popup-dark",
             });
-
+    
             markers.forEach((markerData) => {
                 const el = document.createElement("div");
                 const areImages = markerData.imageUrl !== undefined;
+    const isValidLngLat = !isNaN(parseFloat(markerData.lng)) && !isNaN(parseFloat(markerData.lat));
 
+            if (isValidLngLat) {
                 el.addEventListener("mouseenter", () => {
                     const popupContent = `<p>${markerData.name}</p>`;
-
+    
                     const markerHeight = areImages ? 64 : 48;
                     const popupOffset = 10;
-
+                    
                     popup
                         .setLngLat([markerData.lng, markerData.lat])
                         .setHTML(popupContent)
                         .setOffset([0, -markerHeight - popupOffset])
-                        .addTo(map.current);
+                        .addTo(currentMap);
                 });
-
+    
                 el.addEventListener("mouseleave", () => {
-                    map.current.getCanvas().style.cursor = "";
+                    currentMap.getCanvas().style.cursor = "";
                     popup.remove();
                 });
 
                 el.className = "marker";
                 el.style.backgroundImage = areImages
                     ? `url(${markerData.imageUrl})`
-                    : "url(https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701731171881-no-image.png)";
+                    : `linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6))`;
                 el.style.backgroundSize = "cover";
                 el.style.backgroundPosition = "50% 50%";
 
@@ -150,16 +152,15 @@ export const MapTiler = ({
                 arrow.style.border = "solid transparent";
                 arrow.style.borderWidth = "8px";
                 arrow.style.borderTopColor = "#000";
-                arrow.style.zIndex = "-1";
+                arrow.style.zIndex = "-50";
                 el.appendChild(arrow);
                 el.addEventListener("click", () => {
                     window.alert(`Tour: ${markerData.name}`);
                 });
-
                 new maptilersdk.Marker(el)
                     .setLngLat([markerData.lng, markerData.lat])
                     .addTo(map.current);
-            });
+            }});
         }
     }, [markers, map.current]);
 
@@ -168,14 +169,15 @@ export const MapTiler = ({
     }, [tours]);
 
     const handleAddMarker = () => {
+        if (!tours) return;
         setMarkers((prevMarkers) => [
             ...prevMarkers,
-            ...tours.map((tour) => ({
-                lng: tour.coordinates[0],
-                lat: tour.coordinates[1],
-                imageUrl: tour.images[0],
-                name: tour.place,
-            })),
+            ...(tours?.map((tour) => ({
+                lng: tour?.coordinates?.[0],
+                lat: tour?.coordinates?.[1],
+                imageUrl: tour?.images?.[0],
+                name: tour?.placeName,
+            })) || []),
         ]);
     };
 

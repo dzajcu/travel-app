@@ -14,7 +14,8 @@ const handleGetAllTours = async (setTours) => {
         if (response.ok) {
             const tours = await response.json();
             //console.log("Tours fetched successfully!", tours.data.tours);
-            setTours(tours.data.tours);
+            setTours(tours.data.tours, tours.data.places);
+            console.log("Tours fetched successfully!", tours.data.tours);
         } else {
             console.error("Failed to add trip:", await response.json());
         }

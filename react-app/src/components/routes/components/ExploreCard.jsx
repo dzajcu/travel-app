@@ -5,6 +5,8 @@ import {
     Box,
     Card,
     CardFooter,
+    CardBody,
+    Stack,
     Flex,
     Heading,
     IconButton,
@@ -12,25 +14,33 @@ import {
     Icon,
     HStack,
 } from "@chakra-ui/react";
+import { format } from "date-fns";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export default function ExploreCard({ id, username, place, images, photo }) {
-    const [randomImage, setRandomImage] = useState("");
-    const areImages = images.length > 0;
+export default function ExploreCard({ id, name, username, places, image, date }) {
+    const isImage = image.length > 0;
     const navigate = useNavigate();
+    const startDateFormatted = format(
+        new Date("2023-12-13T00:00:00.000Z"),
+        "dd.MM.yyyy"
+    );
+    const endDateFormatted = format(
+        new Date("2023-12-14T00:00:00.000Z"),
+        "dd.MM.yyyy"
+    );
     return (
         <Card
             display="inline-block"
-            h={areImages ? "350px" : "100px"}
+            h={isImage ? "350px" : "100px"}
             w={"100%"}
             overflow="hidden"
             // backgroundImage={`url(${randomImage})`}
             backgroundImage={
-                areImages
-                    ? `url(${images[0]})`
-                    : `https://travel-map-bucket.s3.eu-north-1.amazonaws.com/1701634278178-Designer.jpeg`
+                isImage
+                    ? `url(${image})`
+                    : `radial-gradient(circle at 50% 50%, #f3f3f3 0%, #e0e0e0 100%)`
             }
             backgroundSize="cover"
             borderRadius="xl"
@@ -55,25 +65,47 @@ export default function ExploreCard({ id, username, place, images, photo }) {
                 h="100%"
                 zIndex={1}
             />
-            <CardFooter color="white" pos="absolute" bottom="0" zIndex={2}>
-                <Flex spacing="4">
-                    <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-                        <Avatar name={username} src={photo} size="sm" />
+            <Stack>
+                <CardBody
+                    pos="absolute"
+                    left="50%"
+                    top="50%"
+                    transform="translate(-50%, -70%)"
+                    zIndex={2}
+                    textAlign="center"
+                    width="100%"
+                >
+                    <Heading
+                        size="md"
+                        color="rgba(255, 255, 255, 0.7)"
+                        letterSpacing="1rem"
+                    >
+                        {name.toUpperCase()}
+                    </Heading>
+                    <Text py="2" color="rgba(255, 255, 255, 0.4)" letterSpacing=".2rem">
+                        {startDateFormatted} - {endDateFormatted}
+                    </Text>
+                </CardBody>
+                <CardFooter color="white" pos="absolute" bottom="0" zIndex={2}>
+                    <Flex spacing="4">
+                        <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                            <Avatar name={username} size="sm" />
 
-                        <Box>
-                            <Heading ml={0} size="sm" fontWeight="400">
-                                {username}
-                            </Heading>
-                            <HStack>
-                                <Icon as={FaMapMarkerAlt} boxSize={3} />
-                                <Text fontSize="sm" color="gray.400">
-                                    {place}
-                                </Text>
-                            </HStack>
-                        </Box>
+                            <Box>
+                                <Heading ml={0} size="sm" fontWeight="400">
+                                    {username}
+                                </Heading>
+                                <HStack>
+                                    <Icon as={FaMapMarkerAlt} boxSize={3} />
+                                    <Text fontSize="sm" color="gray.400">
+                                        {places} places
+                                    </Text>
+                                </HStack>
+                            </Box>
+                        </Flex>
                     </Flex>
-                </Flex>
-            </CardFooter>
+                </CardFooter>
+            </Stack>
             {/* <CardBody>
                 <Text>
                     With Chakra UI, I wanted to sync the speed of development with
