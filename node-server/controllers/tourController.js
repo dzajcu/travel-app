@@ -23,7 +23,7 @@ export const getAllTours = catchAsync(async (req, res) => {
 });
 
 export const getTour = catchAsync(async (req, res) => {
-    const tour = await Tour.findById(req.params.id).populate("user", "username"); // Tour.findOne({ _id: req.params.id })
+    const tour = await Tour.findById(req.params.id).populate("user", "username").populate("places"); // Tour.findOne({ _id: req.params.id })
     if (!tour) return new AppError("No tour found with that ID", 404);
 
     res.status(200).json({
@@ -35,8 +35,6 @@ export const getTour = catchAsync(async (req, res) => {
 });
 
 export const createTour = catchAsync(async (req, res) => {
-    console.log(req.body, req.files);
-
     const [startDateStr, endDateStr] = req.body.date.split(",");
     const albumName = req.body.albumName;
     const description = req.body.description;
@@ -63,7 +61,7 @@ export const createTour = catchAsync(async (req, res) => {
     );
 
     const albumImage =
-        req.files[0].fieldname === "albumImage" ? req.files[0].location : "";
+        req.files[0].fieldname === "albumFile" ? req.files[0].location : "";
     const newTour = await Tour.create({
         albumName,
         albumImage,

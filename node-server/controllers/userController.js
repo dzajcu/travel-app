@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-import { Tour } from "../models/tourModel.js";
+import { Tour, Place } from "../models/tourModel.js";
 import catchAsync from "../utils/catchAsync.js";
 
 export const updateUserTours = catchAsync(async (userId, tourId) => {
@@ -59,16 +59,18 @@ export const getUser = catchAsync(async (req, res) => {
     const user = await User.findById(req.params.id);
 
     const userTours = await Tour.find({ _id: { $in: user.tours } }).select(
-        "-user -startDate -endDate -description -__v -createdAt"
+        "-user -__v"
     );
 
+    const placeIds = userTours.flatMap((tour) => tour.places);
+
+    const userPlaces = await Place.find({ _id: { $in: placeIds } });
     res.status(200).json({
         status: "success",
         data: {
-            user: {
-                ...user.toObject(),
-                tours: userTours,
-            },
+            user,
+            tours: userTours,
+            places: userPlaces,
         },
     });
 });
