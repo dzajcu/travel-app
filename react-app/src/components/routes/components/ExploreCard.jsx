@@ -18,18 +18,20 @@ import { format } from "date-fns";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
-export default function ExploreCard({ id, name, username, places, image, date }) {
+import moment from "moment";
+export default function ExploreCard({
+    id,
+    name,
+    username,
+    places,
+    image,
+    date,
+    createdAt,
+}) {
     const isImage = image.length > 0;
     const navigate = useNavigate();
-    const startDateFormatted = format(
-        new Date("2023-12-13T00:00:00.000Z"),
-        "dd.MM.yyyy"
-    );
-    const endDateFormatted = format(
-        new Date("2023-12-14T00:00:00.000Z"),
-        "dd.MM.yyyy"
-    );
+    const startDateFormatted = format(new Date(date[0]), "dd.MM.yyyy");
+    const endDateFormatted = format(new Date(date[1]), "dd.MM.yyyy");
     return (
         <Card
             display="inline-block"
@@ -82,28 +84,44 @@ export default function ExploreCard({ id, name, username, places, image, date })
                     >
                         {name.toUpperCase()}
                     </Heading>
-                    <Text py="2" color="rgba(255, 255, 255, 0.4)" letterSpacing=".2rem">
+                    <Text
+                        py="2"
+                        color="rgba(255, 255, 255, 0.4)"
+                        letterSpacing=".2rem"
+                    >
                         {startDateFormatted} - {endDateFormatted}
                     </Text>
                 </CardBody>
-                <CardFooter color="white" pos="absolute" bottom="0" zIndex={2}>
-                    <Flex spacing="4">
-                        <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                <CardFooter
+                    color="white"
+                    pos="absolute"
+                    bottom="0"
+                    zIndex={2}
+                    width="100%"
+                >
+                    <HStack
+                        justifyContent="space-between"
+                        alignItems="center"
+                        width="100%"
+                    >
+                        <Flex gap="4" alignItems="center">
                             <Avatar name={username} size="sm" />
-
                             <Box>
                                 <Heading ml={0} size="sm" fontWeight="400">
                                     {username}
                                 </Heading>
-                                <HStack>
-                                    <Icon as={FaMapMarkerAlt} boxSize={3} />
-                                    <Text fontSize="sm" color="gray.400">
-                                        {places} places
-                                    </Text>
-                                </HStack>
+                                <Text fontSize="sm" color="gray.400">
+                                    {moment(createdAt).fromNow()}
+                                </Text>
                             </Box>
                         </Flex>
-                    </Flex>
+                        <HStack spacing="2" alignItems="center">
+                            <Icon as={FaMapMarkerAlt} boxSize={3} />
+                            <Text fontSize="sm" color="gray.400">
+                                {places} {places === 1 ? "place" : "places"}
+                            </Text>
+                        </HStack>
+                    </HStack>
                 </CardFooter>
             </Stack>
             {/* <CardBody>

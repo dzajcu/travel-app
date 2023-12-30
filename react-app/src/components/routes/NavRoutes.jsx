@@ -17,7 +17,14 @@ export const NavRoutes = ({ setSidebarUsername }) => {
             overflowY="auto"
             css={{
                 "&::-webkit-scrollbar": {
-                    width: "0.4em",
+                    width: "4px",
+                },
+                "&::-webkit-scrollbar-track": {
+                    width: "6px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                    background: "#808000",
+                    borderRadius: "24px",
                 },
             }}
         >

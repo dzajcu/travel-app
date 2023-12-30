@@ -28,6 +28,7 @@ export default function Explore() {
                             places={tour.places.length}
                             image={tour.albumImage}
                             date={[tour.startDate, tour.endDate]}
+                            createdAt={tour.createdAt}
                         />
                     ))}
                 </Masonry>
